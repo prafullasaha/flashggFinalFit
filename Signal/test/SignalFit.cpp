@@ -892,7 +892,7 @@ int main(int argc, char *argv[]){
         LinearInterp linInterpRV(MH,mhLow_,mhHigh_,fitParamsRV,doSecondaryModels_,skipMasses_);
         linInterpRV.setVerbosity(verbose_);
         linInterpRV.setSecondaryModelVars(MH_SM,DeltaM,MH_2,higgsDecayWidth);
-        linInterpRV.interpolate(nGaussiansRV);
+        linInterpRV.interpolate(nGaussiansRV); // seg fault here for scenario C. TODO: debug
         splinesRV = linInterpRV.getSplines();
 
         // wrong vertex

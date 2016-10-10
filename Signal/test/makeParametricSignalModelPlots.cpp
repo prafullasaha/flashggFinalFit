@@ -51,7 +51,8 @@ namespace po = boost::program_options;
 string filename_;
 string outfilename_;
 string datfilename_;
-int m_hyp_;
+//int m_hyp_;
+double m_hyp_;
 string procString_;
 int ncats_;
 int binning_;
@@ -64,6 +65,7 @@ int sqrts_;
 bool doTable_;
 bool verbose_;
 bool doCrossCheck_;
+bool skipMerged_;
 bool markNegativeBins_;
 
 void OptionParser(int argc, char *argv[]){
@@ -72,7 +74,8 @@ void OptionParser(int argc, char *argv[]){
     ("help,h",                                                                                "Show help")
     ("infilename,i", po::value<string>(&filename_),                                           "Input file name")
     ("outfilename,o", po::value<string>(&outfilename_),                                           "Output file name")
-    ("mass,m", po::value<int>(&m_hyp_)->default_value(125),                                    "Mass to run at")
+    //("mass,m", po::value<int>(&m_hyp_)->default_value(125),                                    "Mass to run at")
+    ("mass,m", po::value<double>(&m_hyp_)->default_value(125),                                    "Mass to run at")
     ("sqrts", po::value<int>(&sqrts_)->default_value(13),                                    "CoM energy")
     ("binning", po::value<int>(&binning_)->default_value(70),                                    "CoM energy")
     ("procs,p", po::value<string>(&procString_)->default_value("ggh,vbf,wh,zh,tth"),          "Processes")
@@ -80,6 +83,7 @@ void OptionParser(int argc, char *argv[]){
     ("blind",  po::value<bool>(&blind_)->default_value(true),                          "blind analysis")
     ("doTable",  po::value<bool>(&doTable_)->default_value(false),                          "doTable analysis")
     ("doCrossCheck",  po::value<bool>(&doCrossCheck_)->default_value(false),                          "output additional details")
+    ("skipMerged",  po::value<bool>(&skipMerged_)->default_value(false),                          "skip the merged dataset")
     ("verbose",  po::value<bool>(&verbose_)->default_value(false),                          "output additional details")
     ("markNegativeBins",  po::value<bool>(&markNegativeBins_)->default_value(false),                          " show with red arrow if a bin has a negative total value")
     ("flashggCats,f", po::value<string>(&flashggCatsStr_)->default_value("DiPhotonUntaggedCategory_0,DiPhotonUntaggedCategory_1,DiPhotonUntaggedCategory_2,DiPhotonUntaggedCategory_3,DiPhotonUntaggedCategory_4,VBFTag_0,VBFTag_1,VBFTag_2"),       "Flashgg category names to consider")
@@ -358,6 +362,8 @@ vector<double> getFWHM(RooRealVar *mass, RooAbsPdf *pdf, RooDataSet *data, doubl
   double hm = h->GetMaximum()*0.5;
   double low = h->GetBinCenter(h->FindFirstBinAbove(hm));
   double high = h->GetBinCenter(h->FindLastBinAbove(hm));
+  double mpeak = h->GetBinCenter( h->GetMaximumBin() );
+  double mmean = h->GetMean();
 
   cout << "FWHM: [" << low << "-" << high << "] Max = " << hm << endl;
   vector<double> result;
@@ -365,6 +371,8 @@ vector<double> getFWHM(RooRealVar *mass, RooAbsPdf *pdf, RooDataSet *data, doubl
   result.push_back(high);
   result.push_back(hm);
   result.push_back(h->GetBinWidth(1));
+  result.push_back(mpeak);
+  result.push_back(mmean);
 
   delete h;
   return result;
@@ -433,6 +441,10 @@ void Plot(RooRealVar *mass, RooDataSet *data, RooAbsPdf *pdf, pair<double,double
   double fwmax=fwhmRange[1];
   double halfmax=fwhmRange[2];
   double binwidth=fwhmRange[3];
+  double mpeak=fwhmRange[4];
+  double mmean=fwhmRange[5];
+  //double mpeak=125.09;
+  double mnom=m_hyp_;
   vector<double> negWeightBins;
   vector<double> negWeightBinsValues;
   RooPlot *plot = mass->frame(Bins(binning_),Range("higgsRange"));
@@ -470,11 +482,14 @@ void Plot(RooRealVar *mass, RooDataSet *data, RooAbsPdf *pdf, pair<double,double
   halfmax*=(plot->getFitRangeBinW()/binwidth);
   TArrow *fwhmArrow = new TArrow(fwmin,halfmax,fwmax,halfmax,0.02,"<>");
   fwhmArrow->SetLineWidth(2.);
-  TPaveText *fwhmText = new TPaveText(0.17+offset,0.3,0.45+offset,0.40,"brNDC");
+  TPaveText *fwhmText = new TPaveText(0.17+offset,0.22,0.45+offset,0.37,"brNDC");
   fwhmText->SetFillColor(0);
   fwhmText->SetLineColor(kWhite);
   fwhmText->SetTextSize(0.037);
-  fwhmText->AddText(Form("FWHM = %1.2f GeV",(fwmax-fwmin)));
+  //fwhmText->AddText(Form("FWHM = %1.2f GeV",(fwmax-fwmin)));
+  fwhmText->AddText(Form("m_{peak}= %1.4f GeV",(mpeak)));
+  fwhmText->AddText(Form("m_{mean}= %1.4f GeV",(mmean)));
+  fwhmText->AddText(Form("m_{nom.}= %1.4f GeV",(mnom)));
   std::cout << " [FOR TABLE] Tag " << data->GetName() << "=, Mass " << mass->getVal() << " sigmaEff=" << 0.5*(semax-semin) << "= , FWMH=" << (fwmax-fwmin)/2.35 << "=" << std::endl;
   //std::cout << " [RESOLUTION CHECK] Ta/Procg " << data->GetName() << ", Mass " << mass->getVal() << " sigmaEff=" << 0.5*(semax-semin) << " , FWMH=" << (fwmax-fwmin)/2.35 << "" << std::endl;
 
@@ -601,6 +616,7 @@ int main(int argc, char *argv[]){
 
 
   for (map<string,RooDataSet*>::iterator dataIt=dataSets.begin(); dataIt!=dataSets.end(); dataIt++){
+    if( skipMerged_ && dataIt->first.compare("all")==0 ) continue;
     pair<double,double> thisSigRange = getEffSigma(mass,pdfs[dataIt->first],m_hyp_-10.,m_hyp_+10.);
     //pair<double,double> thisSigRange = getEffSigBinned(mass,pdf[dataIt->first],m_hyp_-10.,m_hyp_+10);
     RooDataHist *binned = new RooDataHist("test","test",*mass, (dataIt->second)->createHistogram("test",*mass,RooFit::Binning(1000,m_hyp_-10.,m_hyp_+10.)));
