@@ -51,7 +51,8 @@ void Packager::packageOutput(bool split, string process , string tag){
   vector<string> expectedObjectsNotFound;
    bool split_=split;
 	// sum datasets first
-	for (int mh=mhLow_; mh<=mhHigh_; mh+=5){
+	//for (int mh=mhLow_; mh<=mhHigh_; mh+=5){
+	for (int mh=mhLow_; mh<=mhHigh_; mh+=1){
 		if (skipMass(mh)) continue;
 		RooDataSet *allDataThisMass = 0;
 		for (int cat=0; cat<nCats_; cat++) {
@@ -122,7 +123,8 @@ void Packager::packageOutput(bool split, string process , string tag){
 			if (!split_)	cerr << "[WARNING] -- ea: " << Form("hggpdfsmrel_%dTeV_%s_%s_norm",sqrts_,proc->c_str(),catname.c_str()) << " not found. It will be skipped" << endl;
 			}
 			else {
-        for (int m =120; m<131; m=m+5){
+        //for (int m =120; m<131; m=m+5){
+	for (int m=mhLow_; m<=mhHigh_; m+=1){
 				MH->setVal(m);norm->getVal(); 
         }
 				runningNormSum->add(*norm);
@@ -179,7 +181,9 @@ void Packager::packageOutput(bool split, string process , string tag){
 			TGraph *effAccGraph = new TGraph();
 			TGraph *expEventsGraph = new TGraph();
 			int p=0;
-			for (double mh=mhLow_; mh<mhHigh_+0.5; mh+=1){
+			//for (double mh=mhLow_; mh<mhHigh_+0.5; mh+=1){
+			for (double mh=123.; mh<127.01; mh+=0.1){
+			//for (double mh=mhLow_; mh<mhHigh_+0.05; mh+=0.1){
 				double intLumiVal = 0.;
 				if (intLumi){
 					intLumiVal = intLumi->getVal();//FIXME
@@ -250,7 +254,8 @@ void Packager::makePlots(){
 	RooRealVar *MH = (RooRealVar*)saveWS->var("MH");
 	RooAddPdf *sumPdfsAllCats = (RooAddPdf*)saveWS->pdf("sigpdfrelAllCats_allProcs");
 	map<int,RooDataSet*> dataSets;
-	for (int m=mhLow_; m<=mhHigh_; m+=5){
+	//for (int m=mhLow_; m<=mhHigh_; m+=5){
+	for (int m=mhLow_; m<=mhHigh_; m+=1){
 		if (skipMass(m)) continue;
 		RooDataSet *data = (RooDataSet*)saveWS->data(Form("sig_mass_m%d_AllCats",m));
 		if (data) {
@@ -273,7 +278,8 @@ void Packager::makePlots(){
 		RooAddPdf *sumPdfsCat = (RooAddPdf*)saveWS->pdf(Form("sigpdfrel%s_allProcs",catname.c_str()));
 
 		map<int,RooDataSet*> dataSetsCat;
-		for (int m=mhLow_; m<=mhHigh_; m+=5){
+		//for (int m=mhLow_; m<=mhHigh_; m+=5){
+	        for (int m=mhLow_; m<=mhHigh_; m+=1){
 			if (skipMass(m)) continue;
 			RooDataSet *data = (RooDataSet*)saveWS->data(Form("sig_mass_m%d_%s",m,catname.c_str()));
 			if (data) {

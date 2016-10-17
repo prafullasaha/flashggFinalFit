@@ -29,8 +29,11 @@ bool LinearInterp::skipMass(int mh){
 
 vector<int> LinearInterp::getAllMH(){
   vector<int> result;
-  for (int m=mhLow_; m<=mhHigh_; m+=5){
-		if (skipMass(m)) continue;
+  //for (int m=mhLow_; m<=mhHigh_; m+=5){ // TODO: clarify what is going on here... Loks mighty suspicious
+  //for (int m=mhLow_; m<=mhHigh_; m+=2){ // TODO: clarify what is going on here... Loks mighty suspicious
+  for (int m=mhLow_; m<=mhHigh_; m+=1){ // TODO: clarify what is going on here... Loks mighty suspicious
+		//if (skipMass(m)) continue;
+    if (skipMass(m)) continue;
     if (verbosity_>=1) cout << "[INFO] LinearInterp - Adding mass: " << m << endl;
     result.push_back(m);
   }
@@ -54,7 +57,11 @@ void LinearInterp::interpolate(int nGaussians){
     for (unsigned int i=0; i<allMH_.size(); i++){
       int mh = allMH_[i];
       xValues.push_back(double(mh));
-      dmValues.push_back(fitParams[mh][Form("dm_mh%d_g%d",mh,g)]->getVal());
+      cout << "size of fitParams is " << fitParams.size() << endl;
+      cout << "fitParams[" << mh << "] = " << fitParams[mh][Form("dm_mh%d_g%d",mh,g)] << endl;
+      cout << "fitParams[" << mh << "] = " << fitParams[mh][Form("dm_mh%d_g%d",mh,g)] << endl;
+      cout << "fitParams[" << mh << "] = " << fitParams[mh][Form("dm_mh%d_g%d",mh,g)] << endl;
+      dmValues.push_back(fitParams[mh][Form("dm_mh%d_g%d",mh,g)]->getVal()); // TODO: understand the seg fault here for scenario C
       sigmaValues.push_back(fitParams[mh][Form("sigma_mh%d_g%d",mh,g)]->getVal());
     }
     assert(xValues.size()==dmValues.size());
