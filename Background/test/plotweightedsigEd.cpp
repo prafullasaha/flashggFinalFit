@@ -35,13 +35,16 @@
 #include "TEnv.h"
 #include "TLine.h"
 #include "TColor.h"
+#include "TPaveText.h"
+#include "TArrow.h"
 #include "RooHist.h"
 
 #include "boost/program_options.hpp"
 #include "boost/algorithm/string/split.hpp"
 #include "boost/algorithm/string/classification.hpp"
 #include "boost/algorithm/string/predicate.hpp"
-
+ 
+#include "../../tdrStyle/CMS_lumi.C"
 
 using namespace RooFit;
 using namespace std;
@@ -110,20 +113,25 @@ Double_t fwhm(TH1 * hist, double ratio=2*sqrt(2.0*log(2.0))) {
 
 
 //effsigma function from Chris
-Double_t effSigma(TH1 * hist, double quantile=TMath::Erf(1.0/sqrt(2.0)))
+//Double_t effSigma(TH1 * hist, double quantile=TMath::Erf(1.0/sqrt(2.0)))
+vector<float> effSigma(TH1 * hist, double quantile=TMath::Erf(1.0/sqrt(2.0)))
 {
+
+  vector<float> retvec(2,-1.);
 
   TAxis *xaxis = hist->GetXaxis();
   Int_t nb = xaxis->GetNbins();
   if(nb < 10) {
     cout << "effsigma: Not a valid histo. nbins = " << nb << endl;
-    return 0.;
+    //return 0.;
+    return retvec;
   }
   
   Double_t bwid = xaxis->GetBinWidth(1);
   if(bwid == 0) {
     cout << "effsigma: Not a valid histo. bwid = " << bwid << endl;
-    return 0.;
+    //return 0.;
+    return retvec;
   }
   Double_t xmax = xaxis->GetXmax();
   Double_t xmin = xaxis->GetXmin();
@@ -146,6 +154,8 @@ Double_t effSigma(TH1 * hist, double quantile=TMath::Erf(1.0/sqrt(2.0)))
   if(nrms > nb/10) nrms=nb/10; // Could be tuned...
 
   Double_t widmin=9999999.;
+  float sigeffmin=-1.;
+  float sigeffmax=-1.;
   for(Int_t iscan=-nrms;iscan<nrms+1;iscan++) { // Scan window centre
     Int_t ibm=(ave-xmin)/bwid+1+iscan;
     Double_t x=(ibm-0.5)*bwid+xmin;
@@ -178,13 +188,17 @@ Double_t effSigma(TH1 * hist, double quantile=TMath::Erf(1.0/sqrt(2.0)))
     if(wid < widmin) {
       widmin=wid;
       ismin=iscan;
+      sigeffmin = xk+dxf;
+      sigeffmax = xj+bwid;
     }   
   }
   if(ismin == nrms || ismin == -nrms) ierr=3;
   if(ierr != 0) cout << "effsigma: Error of type " << ierr << endl;
   
-  return widmin;
-  
+  //return widmin;
+  retvec[0] = sigeffmin;
+  retvec[1] = sigeffmax;
+  return retvec;
 }
 
 
@@ -203,7 +217,6 @@ int ReturnColor(int pos, int max)
     }
     return colour;
 }
-
 template<class T>
 void SetColor(T * obj, int pos, int max)
 {
@@ -374,7 +387,9 @@ int main(int argc, char *argv[]) {
       
 
       //get the effective sigma
-      double sigeffval = effSigma(hstmp);
+      //double sigeffval = effSigma(hstmp);
+      vector<float> vecsigeffval = effSigma(hstmp);
+      double sigeffval = 0.5*(vecsigeffval[1]-vecsigeffval[0]);
       std::cout << "[INFO] got effsigma for hstmp " << sigeffval << std::endl;
       sigmaeffs.push_back(sigeffval);
       if (sigeffval<sigeffmin) sigeffmin = sigeffval;
@@ -548,8 +563,8 @@ int main(int argc, char *argv[]) {
     
 
     // get sigma_eff for direct sum and weighted sum
-    double sigmaeffall = effSigma(hsig);
-    double sigmaeffw = effSigma(hwsig);
+    //double sigmaeffall = effSigma(hsig);
+    //double sigmaeffw = effSigma(hwsig);
 
     // get number of cats in this file
     const int ncats = chan->numTypes();
@@ -610,74 +625,112 @@ int main(int argc, char *argv[]) {
   histogramVector.push_back(histogramMap);
   catdescVector.push_back(catdesc);
   catnamesVector.push_back(catnames);
-  }
+  } // end of loop over files
 
   
-  TCanvas *ccat = new TCanvas;
   //gStyle->SetPalette(57);
   for (int iCat=0 ; iCat < catnamesVector[0].size(); iCat++){
     TString thisCatName =catnamesVector[0][iCat] ; 
     TString thisCatDesc =catdescVector[0][iCat] ; 
     std::cout << "now considering category " <<thisCatName <<std::endl;  
     //make a dummy histogram for plotting
-    double lowedge = 100.;
-    double highedge = 180;
-    int nbins = 80;
+    double lowedge = 105.;
+    double highedge = 140;
+    int nbins = 35;
     double deflinewidth = 3.0;
     double defmarkersize = 0.8;
     int defmarkerstyle = 20;
     double errlinewidth = 1.0;
+    double offset=0.05;
     TH1F *hdummy = new TH1F("hdummy","",nbins,lowedge,highedge);
-    hdummy->GetYaxis()->SetTitleOffset(0.5*hdummy->GetYaxis()->GetTitleOffset());
-    hdummy->GetXaxis()->SetTitleSize(0.03);
-    hdummy->GetXaxis()->SetLabelSize(0.03);
-    hdummy->GetYaxis()->SetTitleSize(0.03);
-    hdummy->GetYaxis()->SetLabelSize(0.03);
-     
-
-
-    hdummy->SetMaximum(1.2*(histogramVector[0][thisCatName]->GetMaximum()/histogramVector[0][thisCatName]->Integral()));
-    hdummy->SetMinimum(0);
+    //hdummy->SetMaximum(1.2*(histogramVector[0][thisCatName]->GetMaximum()/histogramVector[0][thisCatName]->Integral()));
+    hdummy->SetMaximum(1.1*(histogramVector[0][thisCatName]->GetMaximum()/histogramVector[0][thisCatName]->Integral()));
+    hdummy->SetMinimum(0.);
     hdummy->GetXaxis()->SetTitle("m_{#gamma#gamma} (GeV)");
-    hdummy->GetXaxis()->SetTitleSize(0.04);
-    hdummy->GetXaxis()->SetTitleOffset(1.2);
-    hdummy->GetXaxis()->SetLabelSize(0.03);
-    //hdummy->GetXaxis()->SetLabelOffset(-999);
-    //hdummy->GetYaxis()->SetTitle("arbitrary units");
+    hdummy->GetXaxis()->SetTitleSize(0.05);
+    //hdummy->GetYaxis()->SetLabelSize(0.03);
     hdummy->GetYaxis()->SetTitle("a.u.");
-    hdummy->GetYaxis()->SetTitleSize(0.04);
-    hdummy->GetYaxis()->SetLabelSize(0.03);
-    hdummy->GetYaxis()->SetTitleOffset(1.2);
-
-    hdummy->Draw("HIST");
+    hdummy->GetYaxis()->SetTitleSize(0.05);
+    //hdummy->GetYaxis()->SetLabelSize(0.03);
+    hdummy->GetYaxis()->SetTitleOffset(1.5);
     hdummy->SetLineColor(kWhite);
     hdummy->GetYaxis()->SetNdivisions(808);
-    TLatex *lat4 = new TLatex();
-    lat4->SetNDC();
-    lat4->SetTextSize(0.04);
-    lat4->DrawLatex(0.535,0.8,TString::Format("#scale[1.0]{%s}",thisCatDesc.Data()));
-    lat4->DrawLatex(0.13,0.93,"#bf{CMS} #it{Simulation Preliminary}");
-    lat4->DrawLatex(0.8,0.93,"13#scale[0.5]{ }TeV");
-    lat4->DrawLatex(0.17,0.85,"H#rightarrow#gamma#gamma");
-    ccat->cd();
-    double offset=0.0;
-    for (int iFile=0; iFile < filename_.size(); iFile++){
 
-      //lat4->DrawLatex(0.535,0.7-offset,TString::Format("#color[%d]{#scale[1.0]{%s}}",iFile,filelabels_[iFile].c_str()));
+    TLatex  lat1(.129+0.03+offset,0.85,"H#rightarrow#gamma#gamma");
+    lat1.SetNDC(1);
+    lat1.SetTextSize(0.047);
+    //TLatex lat2(0.93,0.88,catLabel_humanReadable);
+    TLatex lat2(0.93,0.88,TString::Format("#scale[1.0]{%s}",thisCatDesc.Data()));
+    lat2.SetTextAlign(33);
+    lat2.SetNDC(1);
+    lat2.SetTextSize(0.045);
+    //lat2.SetTextSize(0.03);
+
+    TLegend *leg = new TLegend(0.15+offset,0.40,0.5+offset,0.82);
+    leg->SetFillStyle(0);
+    leg->SetLineColor(0);
+    leg->SetTextSize(0.037);
+
+    TCanvas *ccat = new TCanvas("canv","canv",650,600);
+    ccat->SetLeftMargin(0.16);
+    ccat->SetTickx();
+    ccat->SetTicky();
+    hdummy->Draw("HIST");
+
+    float fwmin  = 0.;
+    float fwmax = 0.;
+    float halfmax = 0.;
+    for (int iFile=0; iFile < filename_.size(); iFile++)
+    {
       TH1D *hsigplotfine = histogramVector[iFile][thisCatName];
-      lat4->DrawLatex(0.535,0.7-offset,TString::Format("#color[%d]{#splitline{%s}{#sigma_{eff}=%.2f}}",colorVector[iFile],filelabels_[iFile].c_str(),effSigma(hsigplotfine)));
-      hsigplotfine->SetLineColor(colorVector[iFile]);
-      //lat4->DrawLatex(0.535,0.7-offset,TString::Format("#color[%d]{#splitline{%s}{#sigma_{eff}=%.2f}}",ReturnColor(iFile,filename_.size()),filelabels_[iFile].c_str(),effSigma(hsigplotfine)));
-      //SetColor(hsigplotfine,iFile,filename_.size());
-      hsigplotfine->SetLineWidth(deflinewidth);
+      //hsigplotfine->SetLineColor(colorVector[iFile]);
+      hsigplotfine->SetLineColor(kBlue);
+      hsigplotfine->SetLineWidth(2);
+      TH1 *hsigplotfinesigmaeff = hsigplotfine->DrawNormalized("HISTSAME");
+      vector<float> vecsigmaeff = effSigma( hsigplotfine );
+      //hsigplotfinesigmaeff->GetXaxis()->SetLimits(vecsigmaeff[0],vecsigmaeff[1]);
+      hsigplotfinesigmaeff->GetXaxis()->SetRangeUser(vecsigmaeff[0],vecsigmaeff[1]);
+      hsigplotfinesigmaeff->SetLineColor(15);
+      hsigplotfinesigmaeff->SetLineWidth(2);
+      hsigplotfinesigmaeff->SetFillColor(19);
+      hsigplotfinesigmaeff->SetFillStyle(1001);
+      hsigplotfinesigmaeff->DrawNormalized("HISTSAME,F");
       hsigplotfine->DrawNormalized("HISTSAME");
 
-      offset=offset+0.11;
+      leg->AddEntry(hsigplotfine,"#splitline{Parametric}{model}","l");
+      leg->AddEntry(hsigplotfinesigmaeff,Form("#sigma_{eff} = %1.2f GeV",0.5*(vecsigmaeff[1]-vecsigmaeff[0])),"fl");
+      halfmax = 0.5*hsigplotfine->GetMaximum();
+      fwmin  = hsigplotfine->GetBinCenter(hsigplotfine->FindFirstBinAbove(halfmax));
+      fwmax = hsigplotfine->GetBinCenter(hsigplotfine->FindLastBinAbove(halfmax));
+      cout << "ED DEBUG:: halfmax = " << halfmax << endl;
+      cout << "ED DEBUG:: fwmin   = " << fwmin   << endl;
+      cout << "ED DEBUG:: fwmax   = " << fwmax   << endl;
+      halfmax = halfmax / hsigplotfine->Integral();
+
+      //offset=offset+0.11;
     }
-      ccat->SaveAs(prefix+thisCatName+".pdf");
-      ccat->SaveAs(prefix+thisCatName+".png");
-      ccat->SaveAs(prefix+thisCatName+".C");
-      //ccat->SaveAs(catna
-      ccat->SaveAs(prefix+thisCatName+".root");
+
+    TArrow *fwhmArrow = new TArrow(fwmin,halfmax,fwmax,halfmax,0.02,"<>");
+    fwhmArrow->SetLineWidth(2.);
+    TPaveText *fwhmText = new TPaveText(0.17+offset,0.3,0.45+offset,0.40,"brNDC");
+    fwhmText->SetFillColor(0);
+    fwhmText->SetLineColor(kWhite);
+    fwhmText->SetTextSize(0.037);
+    fwhmText->AddText(Form("FWHM = %1.2f GeV",(fwmax-fwmin)));
+
+    //if (data) leg->AddEntry(dataLeg,"#bf{Simulation}","lep");
+    fwhmArrow->Draw("same <>");
+    fwhmText->Draw("same");
+    lat2.Draw("same");
+    lat1.Draw("same");
+    leg->Draw("same");
+    string sim="Simulation Preliminary";
+    CMS_lumi(ccat,0,0,sim);
+    ccat->SaveAs(prefix+thisCatName+".pdf");
+    ccat->SaveAs(prefix+thisCatName+".png");
+    ccat->SaveAs(prefix+thisCatName+".C");
+    ccat->SaveAs(prefix+thisCatName+".root");
+    delete ccat;
+    delete hdummy;
   }
 }
