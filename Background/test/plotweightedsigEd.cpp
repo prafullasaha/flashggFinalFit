@@ -45,6 +45,7 @@
 #include "boost/algorithm/string/predicate.hpp"
  
 #include "../../tdrStyle/CMS_lumi.C"
+#include "../../tdrStyle/tdrstyle.C"
 
 using namespace RooFit;
 using namespace std;
@@ -232,6 +233,7 @@ int main(int argc, char *argv[]) {
    
   //load style
   gROOT->Macro("$CMSSW_BASE/src/flashggFinalFit/tdrStyle/hggPaperStyle.C");
+  //gROOT->Macro("$CMSSW_BASE/src/flashggFinalFit/tdrStyle/tdrstyle.C");
   OptionParser(argc,argv);
   gStyle->SetOptStat(0);
   gStyle->SetPadTickX(1);  
@@ -700,7 +702,7 @@ int main(int argc, char *argv[]) {
       leg->AddEntry(hsigplotfine,"#splitline{Parametric}{model}","l");
       leg->AddEntry(hsigplotfinesigmaeff,Form("#sigma_{eff} = %1.2f GeV",0.5*(vecsigmaeff[1]-vecsigmaeff[0])),"fl");
       halfmax = 0.5*hsigplotfine->GetMaximum();
-      fwmin  = hsigplotfine->GetBinCenter(hsigplotfine->FindFirstBinAbove(halfmax));
+      fwmin = hsigplotfine->GetBinCenter(hsigplotfine->FindFirstBinAbove(halfmax));
       fwmax = hsigplotfine->GetBinCenter(hsigplotfine->FindLastBinAbove(halfmax));
       cout << "ED DEBUG:: halfmax = " << halfmax << endl;
       cout << "ED DEBUG:: fwmin   = " << fwmin   << endl;
