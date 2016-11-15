@@ -7,6 +7,7 @@
 #include "RooAbsData.h"
 #include "RooCategory.h"
 #include "RooAbsPdf.h"
+#include "RooAddPdf.h"
 #include "RooSimultaneous.h"
 #include "RooDataSet.h"
 #include "TCanvas.h"
@@ -197,9 +198,51 @@ vector<float> effSigma(TH1 * hist, double quantile=TMath::Erf(1.0/sqrt(2.0)))
   if(ierr != 0) cout << "effsigma: Error of type " << ierr << endl;
   
   //return widmin;
+  //cout << "ED DEBUG:: widmin   = " << widmin << endl;;
   retvec[0] = sigeffmin;
   retvec[1] = sigeffmax;
+  //cout << "ED DEBUG:: sigmaeff = " << 0.5*(retvec[1]-retvec[0]) << endl;;
   return retvec;
+}
+
+//from original signal script
+pair<double,double> getEffSigma(RooRealVar *mass, RooAbsPdf *pdf, double wmin=110., double wmax=130., double step=0.002, double epsilon=1.e-4){
+
+  RooAbsReal *cdf = pdf->createCdf(RooArgList(*mass));
+  cout << "Computing effSigma...." << endl;
+  TStopwatch sw;
+  sw.Start();
+  double point=wmin;
+  vector<pair<double,double> > points;
+
+  while (point <= wmax){
+    mass->setVal(point);
+    if (pdf->getVal() > epsilon){
+      points.push_back(pair<double,double>(point,cdf->getVal())); 
+    }
+    point+=step;
+  }
+  double low = wmin;
+  double high = wmax;
+  double width = wmax-wmin;
+  for (unsigned int i=0; i<points.size(); i++){
+    for (unsigned int j=i; j<points.size(); j++){
+      double wy = points[j].second - points[i].second;
+      if (TMath::Abs(wy-0.683) < epsilon){
+        double wx = points[j].first - points[i].first;
+        if (wx < width){
+          low = points[i].first;
+          high = points[j].first;
+          width=wx;
+        }
+      }
+    }
+  }
+  sw.Stop();
+  cout << "effSigma: [" << low << "-" << high << "] = " << width/2. << endl;
+  //cout << "\tTook: "; sw.Print();
+  pair<double,double> result(low,high);
+  return result;
 }
 
 
@@ -379,6 +422,14 @@ int main(int argc, char *argv[]) {
       double bevents = bcatpdf->expectedEvents(*mass);
       double sevents = sbevents - bevents;
       std::cout << "[INFO] number of events  sbevents  " << sbevents << " bevents " << bevents << " sevents " << std::endl;
+
+
+      //make new signal only pdf
+      RooArgList *pdfsForTheAddPdf = new RooArgList( *sbcatpdf, *bcatpdf );
+      RooRealVar *sbvalForTheAddPdf = new RooRealVar("sbvalForTheAddPdf","sbvalForTheAddPdf",sbevents);
+      RooRealVar *bvalForTheAddPdf = new RooRealVar("bvalForTheAddPdf","bvalForTheAddPdf",-1.*bevents);
+      RooArgList *coeffsForTheAddPdf = new RooArgList( *sbvalForTheAddPdf, *bvalForTheAddPdf );
+      RooAddPdf *scatpdf = new RooAddPdf( "scatpdf", "scatpdf", *pdfsForTheAddPdf, *coeffsForTheAddPdf );
       
 
       //make fine-binned histpograms from the PDFs, with the correct number of ecents
@@ -392,7 +443,19 @@ int main(int argc, char *argv[]) {
       //double sigeffval = effSigma(hstmp);
       vector<float> vecsigeffval = effSigma(hstmp);
       double sigeffval = 0.5*(vecsigeffval[1]-vecsigeffval[0]);
-      std::cout << "[INFO] got effsigma for hstmp " << sigeffval << std::endl;
+      cout << endl;
+      cout << endl;
+      cout << endl;
+      cout << endl;
+      cout << endl;
+      std::pair<double,double> tempSigPair = getEffSigma(mass,scatpdf,115,135);
+      std::cout << "[INFO] got effsigma for hstmp                   " << sigeffval << std::endl;
+      std::cout << "[INFO] got second opinion on effsigma for hstmp " << -0.5*(tempSigPair.first-tempSigPair.second) << std::endl;
+      cout << endl;
+      cout << endl;
+      cout << endl;
+      cout << endl;
+      cout << endl;
       sigmaeffs.push_back(sigeffval);
       if (sigeffval<sigeffmin) sigeffmin = sigeffval;
 
@@ -438,6 +501,7 @@ int main(int argc, char *argv[]) {
     double lowedge = 100.;
     double highedge = 180;
     int nbins = 80;
+    //int nbins = 3200;
     std::cout << "[INFO] weightscale " << weightscale << std::endl; 
 
     // holder histograms for sum and weighted sum 
@@ -450,6 +514,7 @@ int main(int argc, char *argv[]) {
     TH1D *hsigbkg = new TH1D("hsigbkg","",3200,100.,180.);
     TH1D *hwsigbkg = new TH1D("hwsigbkg","",3200,100.,180.);   
     int nbinsfine = 40*(highedge-lowedge);
+    //int nbinsfine = 3200;
     TH1D *hbkgplotfine = new TH1D("hbkgplotfine","",nbinsfine,lowedge,highedge);
     TH1D *hwbkgplotfine = new TH1D("hwbkgplotfine","",nbinsfine,lowedge,highedge);
     TH1D *hsigbkgplotfine = new TH1D("hsigbkgplotfine","",nbinsfine,lowedge,highedge);
