@@ -270,6 +270,23 @@ void SetColor(T * obj, int pos, int max)
 }
 
 
+// to get the MC data sets
+map<string,RooDataSet*> getFlashggData(RooWorkspace *work, std::vector<TString> catNames, int m_hyp){
+  map<string,RooDataSet*> result;
+
+  for (int cat=0; cat<catNames.size(); cat++){
+    catNames[cat].ReplaceAll("_13TeV","");
+    if( catNames[cat].Contains("combcat") ) continue;
+    cout << "ED DEBUG:: " << catNames[cat].Data() << endl;
+    result.insert(pair<string,RooDataSet*>(Form("%s",catNames[cat].Data()),(RooDataSet*)work->data(Form("sig_mass_m%3d_%s",m_hyp,catNames[cat].Data()))));
+    cout << "ED DEBUG:: " << result[catNames[cat].Data()] << endl;
+  }
+  result.insert(pair<string,RooDataSet*>("all",(RooDataSet*)work->data(Form("sig_mass_m%3d_AllCats",m_hyp))));
+
+  return result;
+}
+
+
 int main(int argc, char *argv[]) {
    
   vector<int> colorVector ={2,4,3,6,7,9};
@@ -298,6 +315,7 @@ int main(int argc, char *argv[]) {
   std::vector<std::vector<TString> > catnamesVector; //first vector is for files, second is for cats
   //std::vector<TString> catdesc;
   //std::vector<TString> catnames;  
+  std::vector<double> catweightsFinal;
 
   // now loop through the input files
 
@@ -335,7 +353,7 @@ int main(int argc, char *argv[]) {
     }
     
     //load sig/bkg pdf params from fit, and get PDFs
-    win->loadSnapshot("MultiDimFit"); 
+    //win->loadSnapshot("MultiDimFit"); 
     RooFitResult *fit_s = 0;
     RooSimultaneous *sbpdf = (RooSimultaneous*)win->pdf("model_s");
     RooSimultaneous *bpdf = (RooSimultaneous*)win->pdf("model_b");
@@ -433,8 +451,8 @@ int main(int argc, char *argv[]) {
       
 
       //make fine-binned histpograms from the PDFs, with the correct number of ecents
-      TH1D *hsbtmp = (TH1D*)sbcatpdf->createHistogram("hsbtmp",*mass,Binning(3200));
-      TH1D *hbtmp = (TH1D*) bcatpdf->createHistogram("hbtmp",*mass,Binning(3200));
+      TH1D *hsbtmp = (TH1D*)sbcatpdf->createHistogram("hsbtmp",*mass,Binning(200000));
+      TH1D *hbtmp = (TH1D*) bcatpdf->createHistogram("hbtmp",*mass,Binning(200000));
       TH1 *hstmp = new TH1D ( sbevents*(*hsbtmp) - bevents*(*hbtmp) );    
       std::cout << "[INFO] create correct histograms hsbtmp " << hsbtmp->Integral() << " hbtmp " << hbtmp->Integral() << " hstmp " << hstmp->Integral() << std::endl;
       
@@ -448,9 +466,9 @@ int main(int argc, char *argv[]) {
       cout << endl;
       cout << endl;
       cout << endl;
-      std::pair<double,double> tempSigPair = getEffSigma(mass,scatpdf,115,135);
+      //std::pair<double,double> tempSigPair = getEffSigma(mass,scatpdf,115,135);
       std::cout << "[INFO] got effsigma for hstmp                   " << sigeffval << std::endl;
-      std::cout << "[INFO] got second opinion on effsigma for hstmp " << -0.5*(tempSigPair.first-tempSigPair.second) << std::endl;
+      //std::cout << "[INFO] got second opinion on effsigma for hstmp " << -0.5*(tempSigPair.first-tempSigPair.second) << std::endl;
       cout << endl;
       cout << endl;
       cout << endl;
@@ -488,6 +506,7 @@ int main(int argc, char *argv[]) {
       std::cout << "[INFO] Running totals nbweight   " << nbweight  << " nsbweight " << nsbweight << "  nsweight " << nsweight << " stotal " << stotal<< " btotal " << btotal << " sbtotal " << sbtotal <<  std::endl;
 
     }
+    catweightsFinal = catweights;
     
 
     // defined total weighted signal and bkg
@@ -500,21 +519,21 @@ int main(int argc, char *argv[]) {
     // binning
     double lowedge = 100.;
     double highedge = 180;
-    int nbins = 80;
-    //int nbins = 3200;
+    //int nbins = 80;
+    int nbins = 200000;
     std::cout << "[INFO] weightscale " << weightscale << std::endl; 
 
     // holder histograms for sum and weighted sum 
-    TH1D *hsig = new TH1D("hsig","",3200,100.,180.);
-    TH1D *hwsig = new TH1D("hwsig","",3200,100.,180.);
-    TH1D *hbkg = new TH1D("hbkg","",3200,100.,180.);
-    TH1D *hwbkg = new TH1D("hwbkg","",3200,100.,180.);
+    TH1D *hsig = new TH1D("hsig","",200000,100.,180.);
+    TH1D *hwsig = new TH1D("hwsig","",200000,100.,180.);
+    TH1D *hbkg = new TH1D("hbkg","",200000,100.,180.);
+    TH1D *hwbkg = new TH1D("hwbkg","",200000,100.,180.);
     TH1D *hbkgplot = new TH1D("hbkgplot","",nbins,lowedge,highedge);
     TH1D *hwbkgplot = new TH1D("hwbkgplot","",nbins,lowedge,highedge);
-    TH1D *hsigbkg = new TH1D("hsigbkg","",3200,100.,180.);
-    TH1D *hwsigbkg = new TH1D("hwsigbkg","",3200,100.,180.);   
-    int nbinsfine = 40*(highedge-lowedge);
-    //int nbinsfine = 3200;
+    TH1D *hsigbkg = new TH1D("hsigbkg","",200000,100.,180.);
+    TH1D *hwsigbkg = new TH1D("hwsigbkg","",200000,100.,180.);   
+    //int nbinsfine = 40*(highedge-lowedge);
+    int nbinsfine = 200000;
     TH1D *hbkgplotfine = new TH1D("hbkgplotfine","",nbinsfine,lowedge,highedge);
     TH1D *hwbkgplotfine = new TH1D("hwbkgplotfine","",nbinsfine,lowedge,highedge);
     TH1D *hsigbkgplotfine = new TH1D("hsigbkgplotfine","",nbinsfine,lowedge,highedge);
@@ -553,8 +572,8 @@ int main(int argc, char *argv[]) {
       double sevents = sbevents - bevents;
 
       //temp histograms for s+B, S and B, normalized
-      TH1D *hsbtmp = (TH1D*)sbcatpdf->createHistogram("hsbtmp",*mass,Binning(3200));
-      TH1D *hbtmp = (TH1D*) bcatpdf->createHistogram("hbtmp",*mass,Binning(3200));
+      TH1D *hsbtmp = (TH1D*)sbcatpdf->createHistogram("hsbtmp",*mass,Binning(200000));
+      TH1D *hbtmp = (TH1D*) bcatpdf->createHistogram("hbtmp",*mass,Binning(200000));
       TH1D *hbplottmp = (TH1D*) bcatpdf->createHistogram("hbplottmp",*mass,Binning(nbins,lowedge,highedge));
       hsbtmp->Scale(1/hsbtmp->Integral());
       hbtmp->Scale(1/hbtmp->Integral());
@@ -584,10 +603,10 @@ int main(int argc, char *argv[]) {
       TH1D *hbkgplot_cat = new TH1D(TString::Format("hbkgplot_%s",catnames[i].Data()),"",nbins,lowedge,highedge);
       hbkgplot_cat->Add(hbplottmp,bevents);
       hbkgplots.push_back(hbkgplot_cat);
-      TH1D *hsigplot_cat = new TH1D(TString::Format("hsigplot_cat%s",catnames[i].Data()),"",3200,100.,180.);
+      TH1D *hsigplot_cat = new TH1D(TString::Format("hsigplot_cat%s",catnames[i].Data()),"",200000,100.,180.);
       hsigplot_cat->Add(hstmp);
       hsigplotsfine.push_back(hsigplot_cat);
-      histogramMap[catnames[i].Data()]=hsig;
+      histogramMap[catnames[i].Data()]=hsigplot_cat;
 
       delete hsbtmp;
       delete hbtmp;
@@ -694,7 +713,42 @@ int main(int argc, char *argv[]) {
   catnamesVector.push_back(catnames);
   } // end of loop over files
 
-  
+
+  //get MC datasets 
+  TFile *hggFile = TFile::Open("../../Signal/outdir_EdWeightTest/CMS-HGG_sigfit_EdWeightTest.root");
+  cout << "hggFile = " << hggFile << endl;
+  RooWorkspace *hggWS;
+  int sqrts_ = 13;
+  hggWS = (RooWorkspace*)hggFile->Get(Form("wsig_%dTeV",sqrts_));
+  if (!hggWS) {
+    cerr << "Workspace is null" << endl;
+    exit(1);
+  }
+  cout << "hggWS = " << hggWS << endl;
+  RooRealVar *mcMass= (RooRealVar*)hggWS->var("CMS_hgg_mass");
+  cout << "mcMass = " << mcMass << endl;
+  RooRealVar *mcMh = (RooRealVar*)hggWS->var("MH");
+  cout << "mcMh = " << mcMh << endl;
+  mcMh->setVal(125);
+  mcMass->setRange("higgsRange",105.,140.);
+  map<string,RooDataSet*> dataSets;
+  dataSets = getFlashggData( hggWS, catnamesVector[0], 125 );
+  cout << "dataSets.size() = " << dataSets.size() << endl;
+  TH1* hWeightedMC =  new TH1F("hWeightedMC","desc",70,105.,140.);
+  vector<TString> mcCatNames = catnamesVector[0];
+  vector<TH1*> vecMChists;
+  for( int icat=0; icat<mcCatNames.size(); icat++ ) {
+    if( mcCatNames[icat].Contains("combcat") ) continue;
+    mcCatNames[icat].ReplaceAll("_13TeV","");
+    vecMChists.push_back( dataSets[mcCatNames[icat].Data()]->createHistogram(Form("hTempMC%i",icat), *mcMass, Binning(70,105.,140.)) );
+    hWeightedMC->Add(vecMChists[icat],catweightsFinal[icat]);
+  }
+  vecMChists.push_back( dataSets["all"]->createHistogram("hAllUnweighted", *mcMass, Binning(70,105.,140.)) );
+  cout << "hWeightedMC entries = " << hWeightedMC->GetEntries() << endl;
+  vecMChists.push_back( hWeightedMC );
+  cout << "vecMChists.size() = " << vecMChists.size() << endl;
+
+
   //gStyle->SetPalette(57);
   for (int iCat=0 ; iCat < catnamesVector[0].size(); iCat++){
     TString thisCatName =catnamesVector[0][iCat] ; 
@@ -711,7 +765,8 @@ int main(int argc, char *argv[]) {
     double offset=0.05;
     TH1F *hdummy = new TH1F("hdummy","",nbins,lowedge,highedge);
     //hdummy->SetMaximum(1.2*(histogramVector[0][thisCatName]->GetMaximum()/histogramVector[0][thisCatName]->Integral()));
-    hdummy->SetMaximum(1.1*(histogramVector[0][thisCatName]->GetMaximum()/histogramVector[0][thisCatName]->Integral()));
+    //hdummy->SetMaximum(1.1*(histogramVector[0][thisCatName]->GetMaximum()/histogramVector[0][thisCatName]->Integral()));
+    hdummy->SetMaximum(1.15*(histogramVector[0][thisCatName]->GetMaximum()));
     hdummy->SetMinimum(0.);
     hdummy->GetXaxis()->SetTitle("m_{#gamma#gamma} (GeV)");
     hdummy->GetXaxis()->SetTitleSize(0.05);
@@ -727,10 +782,10 @@ int main(int argc, char *argv[]) {
     lat1.SetNDC(1);
     lat1.SetTextSize(0.047);
     //TLatex lat2(0.93,0.88,catLabel_humanReadable);
-    TLatex lat2(0.93,0.88,TString::Format("#scale[1.0]{%s}",thisCatDesc.Data()));
+    TLatex lat2(0.85,0.88,TString::Format("#scale[1.0]{%s}",thisCatDesc.Data()));
     lat2.SetTextAlign(33);
     lat2.SetNDC(1);
-    lat2.SetTextSize(0.045);
+    lat2.SetTextSize(0.037);
     //lat2.SetTextSize(0.03);
 
     TLegend *leg = new TLegend(0.15+offset,0.40,0.5+offset,0.82);
@@ -744,6 +799,10 @@ int main(int argc, char *argv[]) {
     ccat->SetTicky();
     hdummy->Draw("HIST");
 
+    TH1* hMChist = vecMChists[iCat];
+    cout << "hMChist = " << hMChist << endl;
+    cout << "hMChist entries = " << hMChist->GetEntries() << endl;
+
     float fwmin  = 0.;
     float fwmax = 0.;
     float halfmax = 0.;
@@ -753,17 +812,25 @@ int main(int argc, char *argv[]) {
       //hsigplotfine->SetLineColor(colorVector[iFile]);
       hsigplotfine->SetLineColor(kBlue);
       hsigplotfine->SetLineWidth(2);
-      TH1 *hsigplotfinesigmaeff = hsigplotfine->DrawNormalized("HISTSAME");
+      TH1D *hsigplotfinesigmaeff = (TH1D*)hsigplotfine->Clone("hsigplotfinesigmaeff");
       vector<float> vecsigmaeff = effSigma( hsigplotfine );
-      //hsigplotfinesigmaeff->GetXaxis()->SetLimits(vecsigmaeff[0],vecsigmaeff[1]);
       hsigplotfinesigmaeff->GetXaxis()->SetRangeUser(vecsigmaeff[0],vecsigmaeff[1]);
       hsigplotfinesigmaeff->SetLineColor(15);
       hsigplotfinesigmaeff->SetLineWidth(2);
       hsigplotfinesigmaeff->SetFillColor(19);
       hsigplotfinesigmaeff->SetFillStyle(1001);
-      hsigplotfinesigmaeff->DrawNormalized("HISTSAME,F");
-      hsigplotfine->DrawNormalized("HISTSAME");
+      hsigplotfinesigmaeff->Draw("HISTSAME,F");
+      cout << "hsigplotfinesigmaeff = " << hsigplotfinesigmaeff->Integral( hsigplotfinesigmaeff->FindBin(105.),hsigplotfinesigmaeff->FindBin(140.) ) << endl;
+      hsigplotfine->Draw("HISTSAME");
+      cout << "hsigplotfinesigmaeff = " << hsigplotfine->Integral( hsigplotfine->FindBin(105.),hsigplotfine->FindBin(140.) ) << endl;
+      hMChist->SetMarkerStyle(kOpenSquare);
+      float tempScale = hsigplotfine->Integral("width");
+      float tempNorm  = hMChist->Integral("width");
+      hMChist->Scale(tempScale/tempNorm);
+      hMChist->Draw("SAME");
+      cout << "hMChist = " << hMChist->Integral() << endl;
 
+      leg->AddEntry(hMChist,"Simulation","lep");
       leg->AddEntry(hsigplotfine,"#splitline{Parametric}{model}","l");
       leg->AddEntry(hsigplotfinesigmaeff,Form("#sigma_{eff} = %1.2f GeV",0.5*(vecsigmaeff[1]-vecsigmaeff[0])),"fl");
       halfmax = 0.5*hsigplotfine->GetMaximum();
@@ -772,7 +839,9 @@ int main(int argc, char *argv[]) {
       cout << "ED DEBUG:: halfmax = " << halfmax << endl;
       cout << "ED DEBUG:: fwmin   = " << fwmin   << endl;
       cout << "ED DEBUG:: fwmax   = " << fwmax   << endl;
-      halfmax = halfmax / hsigplotfine->Integral();
+      cout << "ED DEBUG:: fwhm   = " << fwmax-fwmin   << endl;
+      cout << "ED DEBUG:: sigma_eff   = " << 0.5*(vecsigmaeff[1]-vecsigmaeff[0]) << endl;
+      //halfmax = halfmax / hsigplotfine->Integral();
 
       //offset=offset+0.11;
     }
