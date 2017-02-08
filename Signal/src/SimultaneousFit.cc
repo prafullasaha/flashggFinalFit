@@ -353,7 +353,7 @@ void SimultaneousFit::buildSumOfGaussians(string name, int nGaussians, bool recu
     RooFormulaVar *mean_order0 = new RooFormulaVar(Form("mean_g%d_order0",g),Form("mean_g%d_order0",g),"((@0+@1))",RooArgList(*MH,*dm_order0));
     RooFormulaVar *mean_order1 = new RooFormulaVar(Form("mean_g%d_order1",g),Form("mean_g%d_order1",g),"((@0+@1))",RooArgList(*MH,*dm_order1));
     RooFormulaVar *mean_order2 = new RooFormulaVar(Form("mean_g%d_order2",g),Form("mean_g%d_order2",g),"((@0+@1))",RooArgList(*MH,*dm_order2));
-    RooRealVar *sigma_p0 = new RooRealVar(Form("sigma_g%d_p0",g),Form("sigma_g%d_p0",g),1.6,0.5,10);
+    RooRealVar *sigma_p0 = new RooRealVar(Form("sigma_g%d_p0",g),Form("sigma_g%d_p0",g),(g+1)*1.0,0.5,10);
     RooRealVar *sigma_p1 = new RooRealVar(Form("sigma_g%d_p1",g),Form("sigma_g%d_p1",g),0.01,-0.01,0.01);
     RooRealVar *sigma_p2 = new RooRealVar(Form("sigma_g%d_p2",g),Form("sigma_g%d_p2",g),0.01,-0.01,0.01);
     RooPolyVar *sigma_order0 = new RooPolyVar(Form("sigma_g%d_order0",g),Form("sigma_g%d_order0",g),*dMH,RooArgList(*sigma_p0));
@@ -902,12 +902,12 @@ int SimultaneousFit::isDCBsafe(RooDoubleCBFast* dcb){
       MH->setVal(mh_var);
       mass->setVal(mgg_var);
       
-       double val = ((RooDoubleCBFast*)dcb)->evaluate(); // for some reason this is a private member in the RooDoubleCBFast implementation. If one wants to use this feature it is just a case of moving the evaluate() function from private to public in HiggsAnalysis/GBRLikelihood/inteface/RooDoubleCBFast.h
+       /*double val = ((RooDoubleCBFast*)dcb)->evaluate(); // for some reason this is a private member in the RooDoubleCBFast implementation. If one wants to use this feature it is just a case of moving the evaluate() function from private to public in HiggsAnalysis/GBRLikelihood/inteface/RooDoubleCBFast.h
       if( !(fabs(val)<999)){ // 999 is "some reasonable value"
         std::cout << " ERROR, this pdf  has a NaN or 0 value " << val  << " at MH =" << mh_var << " mgg= " << mgg_var <<  " EXIT" << std::endl;
         listOfPolyVars_->Print("V");
         return 0;
-      }
+      }*/
     }
   }
   return 1;
