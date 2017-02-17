@@ -558,7 +558,8 @@ def getFlashggLineTheoryEnvelope(proc,cat,name,details):
 brSyst = [0.0206,-0.0208] #13TeV Values, from YR4 taking  in quadrature THU (+1.73 -1.72), PU(mq) (+0.93,-0.99) , PU(as) (+0.61 -0.62)
 # lumi syst
 ####lumiSyst = 0.026 #8TeV Values
-lumiSyst=0.062  #Correct for ICHEP 
+#lumiSyst=0.062  #Correct for ICHEP 
+lumiSyst=0.025  #Correct for ICHEP 
 
 ##Printing Functions
 def printBRSyst():
