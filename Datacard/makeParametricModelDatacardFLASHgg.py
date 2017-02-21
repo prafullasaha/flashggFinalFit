@@ -559,7 +559,7 @@ brSyst = [0.0206,-0.0208] #13TeV Values, from YR4 taking  in quadrature THU (+1.
 # lumi syst
 ####lumiSyst = 0.026 #8TeV Values
 #lumiSyst=0.062  #Correct for ICHEP 
-lumiSyst=0.025  #Correct for ICHEP 
+lumiSyst=0.025  #Correct for Moriond17
 
 ##Printing Functions
 def printBRSyst():
