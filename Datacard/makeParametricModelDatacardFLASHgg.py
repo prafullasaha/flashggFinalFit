@@ -811,15 +811,15 @@ vbfSysts['JEC'] = []
 vbfSysts['JER'] = [] 
 vbfSysts['JetVeto'] =[]
 #vbfSysts['UEPS'] =[] #superseded by new method, no longer a bin migration
-vbfSysts['RMSShift'] =[]
-#vbfSysts['PUJIDShift'] =[]
+#vbfSysts['RMSShift'] =[]
+vbfSysts['PUJIDShift'] =[]
 for dijetCat in dijetCats: #each entry will represent a different migration
    vbfSysts['JER'].append([1.,1.,1.])  #value of 1 given gor both ggh and qqh, since vairations are taken from histograms directly
    vbfSysts['JEC'].append([1.,1.,1.]) #value of 1 given gor both ggh and qqh, since vairations are taken from histograms directly
 #vbfSysts['UnmatchedPUWeight'].append([1.,1.]) #should only apply to ggh<->vbf
 #vbfSysts['UnmatchedPUWeight'].append([1.,1.]) #should only apply to ggh<->vbf
-vbfSysts['RMSShift'].append([1.,1.]) #should only apply to ggh<->vbf
-#vbfSysts['PUJIDShift'].append([1.,1.]) #should only apply to ggh<->vbf
+#vbfSysts['RMSShift'].append([1.,1.]) #should only apply to ggh<->vbf
+vbfSysts['PUJIDShift'].append([1.,1.]) #should only apply to ggh<->vbf
 #UEPS method no longer needs these
 #vbfSysts['UEPS'].append([0.077,0.071]) # adhoc for ggh<->vbf # UPDATED FOR ICHEP16
 #vbfSysts['UEPS'].append([0.042,0.092]) # adhoc for vbf0<->vbf1# UPDATED FOR ICHEP16
