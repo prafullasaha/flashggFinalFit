@@ -909,8 +909,10 @@ def writeMultiDimFit(method=None,wsOnly=False):
                           if pars != "": pars+=","
                           pars += "%s=%4.2f" % ( poi, opts.expectSignal )
                       if pars != "":
-                          if not "--setPhysicsModelParameters" in opts.additionalOptions:
-                             opts.additionalOptions += " --setPhysicsModelParameters %s" %pars
+                          #if not "--setPhysicsModelParameters" in opts.additionalOptions:
+                          #   opts.additionalOptions += " --setPhysicsModelParameters %s" %pars
+                          if not "--setParameters" in opts.additionalOptions:
+                             opts.additionalOptions += " --setParameters %s" %pars
       
         else:
           opts.datacard = opts.datacard.replace('.txt',method+'.root')
@@ -923,7 +925,8 @@ def writeMultiDimFit(method=None,wsOnly=False):
           writePreamble(file)
           exec_line = 'combine %s  -M MultiDimFit --cminDefaultMinimizerType Minuit2 --cminDefaultMinimizerAlgo migrad --algo=grid  %s --points=%d --firstPoint=%d --lastPoint=%d -n %sJob%d -L $CMSSW_BASE/lib/$SCRAM_ARCH/libHiggsAnalysisGBRLikelihood.so'%(opts.datacard,combine_args[method],opts.pointsperjob*opts.jobs,i*opts.pointsperjob,(i+1)*opts.pointsperjob-1,method,i)
           if ("FloatMH" in opts.outDir) : exec_line += " --saveSpecifiedNuis MH" 
-          if method in par_ranges.keys(): exec_line+=" --setPhysicsModelParameterRanges %s "%(par_ranges[method])
+          #if method in par_ranges.keys(): exec_line+=" --setPhysicsModelParameterRanges %s "%(par_ranges[method])
+          if method in par_ranges.keys(): exec_line+=" --setParameterRanges %s "%(par_ranges[method])
           if getattr(opts,"mh",None): exec_line += ' -m %6.2f'%opts.mh
           #if opts.expected: exec_line += ' -t -1 --freezeNuisances=JetVeto_migration0,JetVeto_migration1,pdfindex_UntaggedTag_0_13TeV,pdfindex_UntaggedTag_1_13TeV,pdfindex_UntaggedTag_2_13TeV,pdfindex_UntaggedTag_3_13TeV,pdfindex_VBFTag_0_13TeV,pdfindex_VBFTag_1_13TeV'
           if opts.expected: exec_line += ' -t -1 '
@@ -1069,7 +1072,8 @@ def configure(config_line):
     if option == "profileMH": opts.profileMH = True
   if opts.postFitAll: opts.postFit = True
   if opts.wspace : opts.skipWorkspace=True
-  if "-P" in opts.poix and (opts.muLow!=None or opts.muHigh!=None): sys.exit("Cannot specify muLow/muHigh with >1 POI. Remove the muLow/muHigh option and add use --setPhysicsModelParameterRanges in opts keyword") 
+  #if "-P" in opts.poix and (opts.muLow!=None or opts.muHigh!=None): sys.exit("Cannot specify muLow/muHigh with >1 POI. Remove the muLow/muHigh option and add use --setPhysicsModelParameterRanges in opts keyword") 
+  if "-P" in opts.poix and (opts.muLow!=None or opts.muHigh!=None): sys.exit("Cannot specify muLow/muHigh with >1 POI. Remove the muLow/muHigh option and add use --setParameterRanges in opts keyword") 
   if opts.verbose: print opts
   run()
 
