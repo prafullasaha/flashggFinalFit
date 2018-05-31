@@ -1,0 +1,21 @@
+#proc cat nGausRV nGausWV
+GG2H TTHHadronicTag -1 -1 TTH TTHHadronicTag
+GG2H TTHLeptonicTag -1 -1 TTH TTHHadronicTag
+QQ2HLL TTHHadronicTag -1 -1 TTH TTHHadronicTag
+QQ2HLL TTHLeptonicTag 3 3
+QQ2HLNU TTHHadronicTag -1 -1 TTH TTHHadronicTag
+QQ2HLNU TTHLeptonicTag 3 1
+TTH TTHHadronicTag 4 3
+TTH TTHLeptonicTag 4 3
+VBF TTHHadronicTag 3 3
+VBF TTHLeptonicTag -1 -1 TTH TTHLeptonicTag
+WH2HQQ TTHHadronicTag 3 1
+WH2HQQ TTHLeptonicTag 3 1
+ZH2HQQ TTHHadronicTag -1 -1 TTH TTHHadronicTag
+ZH2HQQ TTHLeptonicTag -1 -1 TTH TTHLeptonicTag
+testBBH TTHHadronicTag -1 -1 TTH TTHHadronicTag
+testBBH TTHLeptonicTag -1 -1 TTH TTHHadronicTag
+testTHQ TTHHadronicTag -1 -1 TTH TTHHadronicTag
+testTHQ TTHLeptonicTag -1 -1 TTH TTHHadronicTag
+testTHW TTHHadronicTag -1 -1 TTH TTHHadronicTag
+testTHW TTHLeptonicTag -1 -1 TTH TTHHadronicTag
