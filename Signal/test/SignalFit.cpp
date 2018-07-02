@@ -109,8 +109,8 @@ string referenceProc_="TTH";
 string referenceProcWV_="TTH";
 //string referenceProcTTH_="tth";
 string referenceProcTTH_="TTH";
-string referenceTagWV_="TTHHadronicTag";
-string referenceTagRV_="TTHHadronicTag";
+string referenceTagWV_="TTHHadronicTag_1";
+string referenceTagRV_="TTHHadronicTag_1";
 vector<string> map_proc_;
 vector<string> map_cat_;
 vector<string> map_replacement_proc_RV_;
@@ -450,8 +450,8 @@ int main(int argc, char *argv[]){
   referenceProc_="TTH";
   //referenceProcTTH_="tth";
   referenceProcTTH_="TTH";
-  referenceTagWV_="TTHHadronicTag"; // histest stats WV is ggh Untagged 3. 
-  referenceTagRV_="TTHHadronicTag"; // fairly low resolution tag even for ggh, more approprioate as te default than re-using the original tag.
+  referenceTagWV_="TTHHadronicTag_1"; // histest stats WV is ggh Untagged 3. 
+  referenceTagRV_="TTHHadronicTag_1"; // fairly low resolution tag even for ggh, more approprioate as te default than re-using the original tag.
   // are WV which needs to borrow should be taken from here
   
   // isFlashgg should now be the only option.

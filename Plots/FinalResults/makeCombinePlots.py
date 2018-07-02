@@ -71,8 +71,8 @@ parser.add_option("-b","--batch",dest="batch",default=False,action="store_true")
 parser.add_option("--it",dest="it",type="string",help="if using superloop, index of iteration")
 parser.add_option("--itLedger",dest="itLedger",type="string",help="ledger to keep track of values of each iteration if using superloop")
 parser.add_option("--specifyX",dest="specifyX",type="string",help="use a specific variable name in mu plots (eg r_Untagged_Tag_0)")
-#parser.add_option("--paperStyle",dest="paperStyle",default=False,action="store_true",help="Make plots in paper style (without preliminary etc)")
-parser.add_option("--paperStyle",dest="paperStyle",default=True,action="store_false",help="Make plots in paper style (without preliminary etc)")
+parser.add_option("--paperStyle",dest="paperStyle",default=False,action="store_true",help="Make plots in paper style (without preliminary etc)")
+#parser.add_option("--paperStyle",dest="paperStyle",default=True,action="store_false",help="Make plots in paper style (without preliminary etc)")
 (options,args)=parser.parse_args()
 
 print "[INFO] Processing Files :"

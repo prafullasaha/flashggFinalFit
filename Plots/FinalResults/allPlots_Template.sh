@@ -2,6 +2,11 @@
 EXT=!EXT!
 INTLUMI=!INTLUMI!
 ##########################################
+
+#ttH only extraction
+#./makeCombinePlots.py -f combineJobs13TeV_$EXT/ExpPerProcessMuTTHOnly_constrainTHU/r_ttH/r_ttH.root,combineJobs13TeV_$EXT/ExpPerTagChannelCompatibilityProfileMH/r_TTHLeptonicTag_1_13TeV/r_TTHLeptonicTag_1_13TeV.root,combineJobs13TeV_$EXT/ExpPerTagChannelCompatibilityProfileMH/r_TTHLeptonicTag_0_13TeV/r_TTHLeptonicTag_0_13TeV.root,combineJobs13TeV_$EXT/ExpPerTagChannelCompatibilityProfileMH/r_TTHHadronicTag_2_13TeV/r_TTHHadronicTag_2_13TeV.root,combineJobs13TeV_$EXT/ExpPerTagChannelCompatibilityProfileMH/r_TTHHadronicTag_1_13TeV/r_TTHHadronicTag_1_13TeV.root,combineJobs13TeV_$EXT/ExpPerTagChannelCompatibilityProfileMH/r_TTHHadronicTag_0_13TeV/r_TTHHadronicTag_0_13TeV.root --perprocchcomp -x -3,10 -o ExpPerTagChannelCompatibilityProfileMH --do1sig  -l 0.55,0.65,0.85,0.9 --text="  ${INTLUMI} fb^{-1} (13#scale[0.5]{ }TeV)" --mhval "profiled"  -b --percatchcomp
+
+
 # plots I'm actually using 
 
 # expected

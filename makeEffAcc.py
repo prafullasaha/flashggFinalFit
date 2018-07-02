@@ -230,9 +230,12 @@ Masses = range(120,135,5)
 # -------------------------------------------------------------
 
 #procs=["ggh","vbf","wh","zh","tth"]
-procs=["GG2H","VBF","TTH","QQ2HLNU","QQ2HLL","WH2HQQ","ZH2HQQ"]
+#procs=["GG2H","VBF","TTH","QQ2HLNU","QQ2HLL","WH2HQQ","ZH2HQQ"]
+procs=["TTH"]
 masses=[120.,125.,130.]
-cats=["UntaggedTag_0","UntaggedTag_1","UntaggedTag_2","UntaggedTag_3","VBFTag_0","VBFTag_1","VBFTag_2","TTHLeptonicTag","TTHHadronicTag","ZHLeptonicTag","WHLeptonicTag","VHLeptonicLooseTag","VHHadronicTag","VHMetTag"]
+#cats=["UntaggedTag_0","UntaggedTag_1","UntaggedTag_2","UntaggedTag_3","VBFTag_0","VBFTag_1","VBFTag_2","TTHLeptonicTag","TTHHadronicTag","ZHLeptonicTag","WHLeptonicTag","VHLeptonicLooseTag","VHHadronicTag","VHMetTag"]
+cats = sys.argv[4]
+cats = cats.split(',')
 sqrts = 13
 print "guessing breaks here"
 ws = WSTFileWrapper(sys.argv[1],"tagsDumper/cms_hgg_%sTeV"%sqrts)
@@ -426,7 +429,9 @@ MG.GetXaxis().SetRangeUser(120.1,129.9)
 #MG.GetXaxis().SetRangeUser(120.0,130)
 MG.GetYaxis().SetTitle("Efficiency #times Acceptance (%)")
 #MG.GetYaxis().SetRangeUser(35.1,45.9)
-MG.GetYaxis().SetRangeUser(36.6,45.4)
+#MG.GetYaxis().SetRangeUser(36.6,45.4)
+#FIXME
+#MG.GetYaxis().SetRangeUser(24.6,30.4)
 #MG.GetYaxis().SetTitleSize(0.055)
 MG.GetYaxis().SetTitleSize(0.045)
 MG.GetYaxis().SetTitleOffset(0.9)

@@ -8,7 +8,7 @@ import ROOT as r
 import math
 
 sqrts=13
-lumi=35.9
+lumi=41.5
 
 from optparse import OptionParser
 parser = OptionParser()
@@ -90,6 +90,7 @@ with open(options.input) as i:
     #line=line.replace("VH","VH ")
     line=line.replace("TTHL","TTH L")
     line=line.replace("TTHH","TTH H")
+    line=line.replace("TTHD","TTH D")
     line=line.replace("WHL","WH L")
     line=line.replace("ZHL","ZH L")
     line=line.replace("VH","VH ")
@@ -575,9 +576,10 @@ for t in tagList :
     print bkgYield
     exit(1)
   bkgy=bkgYield[t]
-  naiveExp=(0.68*Arr[t]["Total"])/(2*float(effSigma[t])*bkgy)**(0.5) #think should be s/sqrt(s+b), rather than s/sqrt(b)
+  #FIXME
+  #naiveExp=(0.68*Arr[t]["Total"])/(2*float(effSigma[t])*bkgy)**(0.5) #think should be s/sqrt(s+b), rather than s/sqrt(b)
   oldNaiveExp=(0.68*Arr[t]["Total"])/(2*float(effSigma[t])*bkgy)**(0.5)
-  #naiveExp=(0.68*Arr[t]["Total"])/((2*float(effSigma[t])*bkgy) + 0.68*Arr[t]["Total"])**(0.5)
+  naiveExp=(0.68*Arr[t]["Total"])/((2*float(effSigma[t])*bkgy) + 0.68*Arr[t]["Total"])**(0.5)
   vbfNaiveExp=(0.68*Arr[t]["VBF"])/((2*float(effSigma[t])*bkgy) + 0.68*Arr[t]["GG2H"] + 0.68*Arr[t]["VBF"])**(0.5)
   fancyExp=(2*( (0.68*Arr[t]["Total"]+2*float(effSigma[t])*bkgy) * math.log(1 + 0.68*Arr[t]["Total"]/(2*float(effSigma[t])*bkgy)) - 0.68*Arr[t]["Total"] ))**0.5 #2*((s+b)ln(1+s/b)-s)
   vbfFancyExp=(2*( (0.68*Arr[t]["VBF"]+2*float(effSigma[t])*bkgy+0.68*Arr[t]["GG2H"]) * math.log(1 + 0.68*Arr[t]["VBF"]/(2*float(effSigma[t])*bkgy+0.68*Arr[t]["GG2H"])) - 0.68*Arr[t]["VBF"] ))**0.5
@@ -797,8 +799,8 @@ lat.DrawLatex(0.95,0.02,"S/(S+B) in #pm #sigma_{eff}")
 lat.SetTextSize(0.05)
 #lat.SetTextSize(0.07)
 lat.SetTextAlign(11)
-#lat.DrawLatex(0.05,0.95,"#bf{CMS} #it{Preliminary}   H#rightarrow#gamma#gamma")
-lat.DrawLatex(0.05,0.95,"#bf{CMS} #it{Simulation}     H#rightarrow#gamma#gamma")
+lat.DrawLatex(0.05,0.95,"#bf{CMS} #it{Simulation Preliminary}   H#rightarrow#gamma#gamma")
+#lat.DrawLatex(0.05,0.95,"#bf{CMS} #it{Simulation}     H#rightarrow#gamma#gamma")
 lat.SetTextAlign(31)
 #lat.SetTextSize(0.05)
 lat.SetTextSize(0.045)

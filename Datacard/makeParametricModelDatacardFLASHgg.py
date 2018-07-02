@@ -134,7 +134,7 @@ if options.doSTXS:
 flashggProc = {'ggH_hgg':'ggh','qqH_hgg':'vbf','VH':'wzh','WH_hgg':'wh','ZH_hgg':'zh','ttH_hgg':'tth','bkg_mass':'bkg_mass','ggH_hgg_ALT':'gg_grav','qqbarH_ALT':'qq_grav'}
 if options.doSTXS: 
   flashggProc = {'ggH_hgg':'GG2H','qqH_hgg':'VBF','ttH_hgg':'TTH','WH_lep_hgg':'QQ2HLNU','ZH_lep_hgg':'QQ2HLL','WH_had_hgg':'WH2HQQ','ZH_had_hgg':'ZH2HQQ','bbH_hgg':'testBBH','tHq_hgg':'testTHQ','tHW_hgg':'testTHW','bkg_mass':'bkg_mass'}
-procId = {'ggH_hgg':0,'qqH_hgg':-1,'ttH_hgg':-2,'WH_lep_hgg':-2,'ZH_lep_hgg':-3,'WH_had_hgg':-4,'ZH_had_hgg':-5,'bbH_hgg':-6,'tHq_hgg':-7,'tHW_hgg':-8,'bkg_mass':1}
+procId = {'ggH_hgg':0,'qqH_hgg':-1,'ttH_hgg':-2,'WH_lep_hgg':-3,'ZH_lep_hgg':-4,'WH_had_hgg':-5,'ZH_had_hgg':-6,'bbH_hgg':-7,'tHq_hgg':-8,'tHW_hgg':-9,'bkg_mass':1}
 #CHANGED FOR TTH only: including all but ttH as a background
 bkgProcs = ['bkg_mass','bbH_hgg','tHq_hgg','tHW_hgg','ggH_hgg','qqH_hgg','WH_lep_hgg','ZH_lep_hgg','WH_had_hgg','ZH_had_hgg'] #what to treat as background
 #Determine if VH or WZH_hgg
@@ -464,8 +464,15 @@ def getFlashggLineTheoryWeights(proc,cat,name,i,asymmetric,j=0,factor=1):
     "SINCE WE are looking at syst ", name , " we apply an ad-hoc factor of ", factor
     ad_hoc_factor=factor
     m = j
-  theoryNormFactor_n= 1/theoryNormFactors["%s_%s"%(combProc[proc],name)][n] #up
-  theoryNormFactor_m= 1/theoryNormFactors["%s_%s"%(combProc[proc],name)][m] #up
+  #FIXME temp workaround
+  if theoryNormFactors["%s_%s"%(combProc[proc],name)][n] > 0.:
+    theoryNormFactor_n= 1/theoryNormFactors["%s_%s"%(combProc[proc],name)][n] #up
+  else: 
+    theoryNormFactor_n = 1.
+  if theoryNormFactors["%s_%s"%(combProc[proc],name)][m] > 0.:
+    theoryNormFactor_m= 1/theoryNormFactors["%s_%s"%(combProc[proc],name)][m] #up
+  else: 
+    theoryNormFactor_m = 1.
   
   mass = inWS.var("CMS_hgg_mass")
   weight = r.RooRealVar("weight","weight",0)
@@ -796,8 +803,10 @@ flashggSysts['PreselSF']    =  'PreselSF'
 flashggSysts['SigmaEOverEShift'] = 'SigmaEOverEShift'
 flashggSysts['ElectronWeight'] = 'eff_e'
 flashggSysts['electronVetoSF'] = 'electronVetoSF'
-flashggSysts['MuonWeight'] = 'eff_m'
-flashggSysts['MuonMiniIsoWeight'] = 'eff_m_MiniIso'
+#flashggSysts['MuonWeight'] = 'eff_m'
+flashggSysts['MuonIDWeight'] = 'eff_m'
+#flashggSysts['MuonMiniIsoWeight'] = 'eff_m_MiniIso'
+flashggSysts['MuonIsoWeight'] = 'eff_m_MiniIso'
 flashggSysts['TriggerWeight'] = 'TriggerWeight'
 #flashggSysts['JetBTagWeight'] = 'eff_b'
 flashggSysts['JetBTagCutWeight'] = 'eff_b'
@@ -811,15 +820,17 @@ flashggSysts['metJerUncertainty'] = 'MET_JER'
 
 #new ggH uncert prescription (replaces theory, JetVeto)
 if options.newGghScheme:
-  flashggSysts['THU_ggH_Mu'] = 'THU_ggH_Mu'
-  flashggSysts['THU_ggH_Res'] = 'THU_ggH_Res'
-  flashggSysts['THU_ggH_Mig01'] = 'THU_ggH_Mig01'
-  flashggSysts['THU_ggH_Mig12'] = 'THU_ggH_Mig12'
-  flashggSysts['THU_ggH_VBF2j'] = 'THU_ggH_VBF2j'
-  flashggSysts['THU_ggH_VBF3j'] = 'THU_ggH_VBF3j'
-  flashggSysts['THU_ggH_PT60'] = 'THU_ggH_PT60'
-  flashggSysts['THU_ggH_PT120'] = 'THU_ggH_PT120'
-  flashggSysts['THU_ggH_qmtop'] = 'THU_ggH_qmtop'
+  pass
+  #FIXME
+  #flashggSysts['THU_ggH_Mu'] = 'THU_ggH_Mu'
+  #flashggSysts['THU_ggH_Res'] = 'THU_ggH_Res'
+  #flashggSysts['THU_ggH_Mig01'] = 'THU_ggH_Mig01'
+  #flashggSysts['THU_ggH_Mig12'] = 'THU_ggH_Mig12'
+  #flashggSysts['THU_ggH_VBF2j'] = 'THU_ggH_VBF2j'
+  #flashggSysts['THU_ggH_VBF3j'] = 'THU_ggH_VBF3j'
+  #flashggSysts['THU_ggH_PT60'] = 'THU_ggH_PT60'
+  #flashggSysts['THU_ggH_PT120'] = 'THU_ggH_PT120'
+  #flashggSysts['THU_ggH_qmtop'] = 'THU_ggH_qmtop'
 
 #tth Tags
 tthSysts={}
@@ -1113,6 +1124,7 @@ def getFlashggLine(proc,cat,syst):
     mass = inWS.var("CMS_hgg_mass")
     weight = r.RooRealVar("weight","weight",0)
     weight_up = inWS.var("%sUp01sigma"%syst)
+    if not weight_up: print 'ED DEBUG: looking for var %sUp01sigma for proc, cat = %s, %s'%(syst, proc, cat)
     #weight_down = inWS.var("%sDown01sigma"%sys)
     weight_down = r.RooRealVar("%sDown01sigma"%syst,"%sDown01sigma"%syst,-1.)
     weight_central = inWS.var("centralObjectWeight")
