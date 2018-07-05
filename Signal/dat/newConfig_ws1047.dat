@@ -1,0 +1,51 @@
+#proc cat nGausRV nGausWV
+GG2H TTHHadronicTag_0 -1 -1 TTH TTHHadronicTag_0
+GG2H TTHHadronicTag_1 -1 -1 TTH TTHHadronicTag_1
+GG2H TTHHadronicTag_2 -1 -1 TTH TTHHadronicTag_2
+GG2H TTHLeptonicTag_0 -1 -1 TTH TTHLeptonicTag_0
+GG2H TTHLeptonicTag_1 -1 -1 TTH TTHLeptonicTag_1
+QQ2HLL TTHHadronicTag_0 -1 -1 TTH TTHHadronicTag_0
+QQ2HLL TTHHadronicTag_1 -1 -1 TTH TTHHadronicTag_1
+QQ2HLL TTHHadronicTag_2 -1 -1 TTH TTHHadronicTag_2
+QQ2HLL TTHLeptonicTag_0 -1 -1 TTH TTHLeptonicTag_0
+QQ2HLL TTHLeptonicTag_1 3 1
+QQ2HLNU TTHHadronicTag_0 -1 -1 TTH TTHHadronicTag_0
+QQ2HLNU TTHHadronicTag_1 -1 -1 TTH TTHHadronicTag_1
+QQ2HLNU TTHHadronicTag_2 -1 -1 TTH TTHHadronicTag_2
+QQ2HLNU TTHLeptonicTag_0 -1 -1 TTH TTHLeptonicTag_0
+QQ2HLNU TTHLeptonicTag_1 3 1
+TTH TTHHadronicTag_0 4 3
+TTH TTHHadronicTag_1 4 3
+TTH TTHHadronicTag_2 4 3
+TTH TTHLeptonicTag_0 4 3
+TTH TTHLeptonicTag_1 4 3
+VBF TTHHadronicTag_0 3 3
+VBF TTHHadronicTag_1 3 3
+VBF TTHHadronicTag_2 3 3
+VBF TTHLeptonicTag_0 -1 -1 TTH TTHLeptonicTag_0
+VBF TTHLeptonicTag_1 -1 -1 TTH TTHLeptonicTag_1
+WH2HQQ TTHHadronicTag_0 -1 -1 TTH TTHHadronicTag_0
+WH2HQQ TTHHadronicTag_1 -1 -1 TTH TTHHadronicTag_1
+WH2HQQ TTHHadronicTag_2 -1 -1 TTH TTHHadronicTag_2
+WH2HQQ TTHLeptonicTag_0 3 1
+WH2HQQ TTHLeptonicTag_1 3 1
+ZH2HQQ TTHHadronicTag_0 -1 -1 TTH TTHHadronicTag_0
+ZH2HQQ TTHHadronicTag_1 -1 -1 TTH TTHHadronicTag_1
+ZH2HQQ TTHHadronicTag_2 -1 -1 TTH TTHHadronicTag_2
+ZH2HQQ TTHLeptonicTag_0 -1 -1 TTH TTHLeptonicTag_0
+ZH2HQQ TTHLeptonicTag_1 -1 -1 TTH TTHLeptonicTag_1
+testBBH TTHHadronicTag_0 -1 -1 TTH TTHHadronicTag_0
+testBBH TTHHadronicTag_1 -1 -1 TTH TTHHadronicTag_1
+testBBH TTHHadronicTag_2 -1 -1 TTH TTHHadronicTag_2
+testBBH TTHLeptonicTag_0 -1 -1 TTH TTHLeptonicTag_0
+testBBH TTHLeptonicTag_1 -1 -1 TTH TTHLeptonicTag_1
+testTHQ TTHHadronicTag_0 -1 -1 TTH TTHHadronicTag_0
+testTHQ TTHHadronicTag_1 -1 -1 TTH TTHHadronicTag_1
+testTHQ TTHHadronicTag_2 -1 -1 TTH TTHHadronicTag_2
+testTHQ TTHLeptonicTag_0 -1 -1 TTH TTHLeptonicTag_0
+testTHQ TTHLeptonicTag_1 -1 -1 TTH TTHLeptonicTag_1
+testTHW TTHHadronicTag_0 -1 -1 TTH TTHHadronicTag_0
+testTHW TTHHadronicTag_1 -1 -1 TTH TTHHadronicTag_1
+testTHW TTHHadronicTag_2 -1 -1 TTH TTHHadronicTag_2
+testTHW TTHLeptonicTag_0 -1 -1 TTH TTHLeptonicTag_0
+testTHW TTHLeptonicTag_1 -1 -1 TTH TTHLeptonicTag_1
