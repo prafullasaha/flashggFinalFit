@@ -415,10 +415,14 @@ central.SetLineWidth(2)
 #central.SetMarkerSize(2)
 central.SetMarkerColor(r.kBlack)
 central.SetMarkerStyle(22)
-#MG.Add(efficiency)
-MG.Add(efficiencyPAS)
-#MG.Add(central)
-MG.Add(graph)
+
+#FIXME trying this change for ttH-only analysis
+MG.Add(efficiency)
+MG.Add(central)
+#was the two lines below previously
+#MG.Add(efficiencyPAS)
+#MG.Add(graph)
+
 leg.AddEntry(graph,"Signal model #varepsilon #times A","l")
 leg.AddEntry(efficiencyPAS,"#pm 1 #sigma syst. uncertainty","F")
 MG.Draw("APL3")
@@ -431,7 +435,7 @@ MG.GetYaxis().SetTitle("Efficiency #times Acceptance (%)")
 #MG.GetYaxis().SetRangeUser(35.1,45.9)
 #MG.GetYaxis().SetRangeUser(36.6,45.4)
 #FIXME
-#MG.GetYaxis().SetRangeUser(24.6,30.4)
+MG.GetYaxis().SetRangeUser(22,32)
 #MG.GetYaxis().SetTitleSize(0.055)
 MG.GetYaxis().SetTitleSize(0.045)
 MG.GetYaxis().SetTitleOffset(0.9)
