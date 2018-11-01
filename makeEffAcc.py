@@ -412,9 +412,9 @@ efficiencyPAS.SetFillColor(r.kOrange)
 efficiency.SetLineWidth(2)
 efficiencyPAS.SetLineWidth(2)
 central.SetLineWidth(2)
-#central.SetMarkerSize(2)
-central.SetMarkerColor(r.kBlack)
-central.SetMarkerStyle(22)
+central.SetMarkerSize(0)
+#central.SetMarkerColor(r.kBlack)
+#central.SetMarkerStyle(22)
 
 #FIXME trying this change for ttH-only analysis
 MG.Add(efficiency)

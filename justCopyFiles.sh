@@ -1,4 +1,4 @@
-EXT="ws1035"
+EXT="ws1058m"
 OUTDIR="outdir_${EXT}"
 
 if [ ! -d "Signal/$OUTDIR" ]; then

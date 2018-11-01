@@ -1,7 +1,7 @@
 # NOTICE THAT TO PASS AN = SIGN IN A STRING USE \= e.g #sqrt{s}\=13TeV
 
 #ttH only extraction
-#method=mu:files=combineJobs13TeV_!EXT!/ExpPerProcessMuTTHOnly_constrainTHU/r_ttH/r_ttH.root:colors=2:styles=1:widths=2:names=syststat:text=41.5 fb^{-1} (13TeV):outname=expected_mu_ttHOnly_THUconstrained
+method=mu:files=combineJobs13TeV_!EXT!/ExpPerProcessMuTTHOnly_constrainTHU/r_ttH/r_ttH.root:colors=2:styles=1:widths=2:names=syststat:text=41.5 fb^{-1} (13TeV):outname=expected_mu_ttHOnly_THUconstrained
 #method=mu:files=combineJobs13TeV_!EXT!/STXSExpPerProcessMuProfileMH/r_ttH/r_ttH.root:colors=2:styles=1:widths=2:names=syststat:text=41.5 fb^{-1} (13TeV):outname=STXSexpected_mu_ttHOnly
 #method=mu:files=combineJobs13TeV_!EXT!/ExpPerProcessMuTTHOnly_statonly/r_ttH/r_ttH.root,combineJobs13TeV_!EXT!/ExpPerProcessMuTTHOnly_constrainTHU/r_ttH/r_ttH.root:colors=2,4:styles=1,1:widths=2,2:names=stat only,syststat:text=!INTLUMI! fb^{-1} (13TeV):outname=expected_mu_ttHOnly_both
 
