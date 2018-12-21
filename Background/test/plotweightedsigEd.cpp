@@ -58,6 +58,7 @@ namespace po = boost::program_options;
 
 
 string filenameStr_;
+string sigfilenameStr_;
 vector<string> filename_;
 vector<string> filelabels_;
 string name_="default";
@@ -72,6 +73,7 @@ void OptionParser(int argc, char *argv[]){
 	desc1.add_options()
 		("help,h",                                                                                			"Show help")
 		("infilename,i", po::value<string>(&filenameStr_),                                           			"Input file name")
+		("sigfilename,s", po::value<string>(&sigfilenameStr_),                                           			"Signal output file name")
 		("name", po::value<string>(&name_)->default_value("CMS-HGG_hgg_"), 			"Prefix for plots")
 		("labels", po::value<string>(&filelabelsStr_)->default_value("file0,file1,file2"), 			"Labels for the individual files for the legend")
 		("lumi", po::value<float>(&intLumi_)->default_value(12.9), 			"IntLumi")
@@ -716,8 +718,7 @@ int main(int argc, char *argv[]) {
 
 
   //get MC datasets 
-  //TFile *hggFile = TFile::Open("../../Signal/outdir_EdWeightTest/CMS-HGG_sigfit_EdWeightTest.root");
-  TFile *hggFile = TFile::Open("/vols/build/cms/es811/FreshStart/Pass6/CMSSW_7_4_7/src/flashggFinalFit/Signal/outdir_ws919/CMS-HGG_sigfit_ws919.root");
+  TFile *hggFile = TFile::Open(sigfilenameStr_.c_str());
   RooWorkspace *hggWS;
   int sqrts_ = 13;
   hggWS = (RooWorkspace*)hggFile->Get(Form("wsig_%dTeV",sqrts_));
@@ -773,7 +774,10 @@ int main(int argc, char *argv[]) {
     hdummy->SetLineColor(kWhite);
     hdummy->GetYaxis()->SetNdivisions(808);
 
-    TLatex  lat1(.129+0.03+offset,0.85,"H#rightarrow#gamma#gamma");
+    TLatex  lat0(.129+0.03+offset,0.84,"t#bar{t}H"); //FIXME
+    lat0.SetNDC(1);
+    lat0.SetTextSize(0.047);
+    TLatex  lat1(.129+0.03+offset,0.79,"H#rightarrow#gamma#gamma");
     lat1.SetNDC(1);
     lat1.SetTextSize(0.047);
     TLatex lat2(0.88,0.88,thisCatDesc);
@@ -783,12 +787,12 @@ int main(int argc, char *argv[]) {
     //lat2.SetTextSize(0.045);
     lat2.SetTextSize(0.04);
     //lat2.SetTextSize(0.035);
-    //TLatex lat3(0.31,0.93,"#it{Simulation Preliminary}          13 TeV");
-    TLatex lat3(0.31,0.93,"#it{Simulation}                             13 TeV"); // for the paper
+    TLatex lat3(0.31,0.93,"#it{Simulation Preliminary}          13 TeV");
+    //TLatex lat3(0.31,0.93,"#it{Simulation}                             13 TeV"); // for the paper
     lat3.SetNDC(1);
     lat3.SetTextSize(0.045);
 
-    TLegend *leg = new TLegend(0.15+offset,0.40,0.5+offset,0.82);
+    TLegend *leg = new TLegend(0.15+offset,0.40,0.5+offset,0.77);
     leg->SetFillStyle(0);
     leg->SetLineColor(0);
     leg->SetTextSize(0.037);
@@ -850,6 +854,7 @@ int main(int argc, char *argv[]) {
     fwhmArrow->Draw("same <>");
     fwhmText->Draw("same");
     lat2.Draw("same");
+    lat0.Draw("same"); //FIXME
     lat1.Draw("same");
     lat3.Draw("same");
     leg->Draw("same");

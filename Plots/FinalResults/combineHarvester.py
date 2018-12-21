@@ -556,7 +556,8 @@ def writeMultiPdfMuHatvsMH():
   m=mLow
   counter=0;
   while (m < mHigh+0.1 ):
-    opts.method = 'MuScan'
+    #opts.method = 'MuScan'
+    opts.method = 'PerProcessMu'
     opts.mass = m
     backupmass =  getattr(opts,"mh",None)
     backupskipws =  opts.skipWorkspace
@@ -784,14 +785,22 @@ def writeMultiDimFit(method=None,wsOnly=False):
         perTagChCompPOIRanges=""
         for r_tag in perTagChCompPOIs:
           #perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=-2.0,10.0:"%r_tag
-          if "Untagged" in r_tag and "3" not in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,2.0:"%r_tag
-          elif "Untagged" in r_tag and "3" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,3.0:"%r_tag
-          elif "VBF" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,3.0:"%r_tag
-          elif "TTH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,5.0:"%r_tag
-          elif "WH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,5.0:"%r_tag
-          elif "ZH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,10.0:"%r_tag
-          elif "VH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,6.0:"%r_tag
-          else: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,10.0:"%r_tag
+          #if "Untagged" in r_tag and "3" not in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,2.0:"%r_tag
+          #elif "Untagged" in r_tag and "3" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,3.0:"%r_tag
+          #elif "VBF" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,3.0:"%r_tag
+          #elif "TTH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,5.0:"%r_tag
+          #elif "WH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,5.0:"%r_tag
+          #elif "ZH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,10.0:"%r_tag
+          #elif "VH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,6.0:"%r_tag
+          #else: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=0.0,10.0:"%r_tag
+          if "Untagged" in r_tag and "3" not in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=-2.0,2.0:"%r_tag
+          elif "Untagged" in r_tag and "3" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=-2.0,3.0:"%r_tag
+          elif "VBF" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=-2.0,3.0:"%r_tag
+          elif "TTH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=-2.0,5.0:"%r_tag
+          elif "WH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=-2.0,5.0:"%r_tag
+          elif "ZH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=-2.0,10.0:"%r_tag
+          elif "VH" in r_tag: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=-2.0,6.0:"%r_tag
+          else: perTagChCompPOIRanges=perTagChCompPOIRanges+ "%s=-2.0,10.0:"%r_tag
         perTagChCompPOIRanges = perTagChCompPOIRanges[:-1] #remove last character, an extra ":"
         if opts.expected and not opts.doSTXS: par_ranges["PerProcessMu"]  = "r_ggH=%4.2f,%4.2f:r_qqH=%4.2f,%4.2f:r_ttH=%4.2f,%4.2f:r_VH=%4.2f,%4.2f"%(0.0,2.0,0.0,2.0,0.0,2.0,-1.0,3.0)
         elif not opts.expected and not opts.doSTXS: par_ranges["PerProcessMu"]  = "r_ggH=%4.2f,%4.2f:r_qqH=%4.2f,%4.2f:r_ttH=%4.2f,%4.2f:r_VH=%4.2f,%4.2f"%(0.0,2.0,0.0,2.0,0.0,4.0,0.0,4.0)

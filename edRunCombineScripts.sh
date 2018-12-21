@@ -39,6 +39,6 @@ SMEARS="HighR9EBPhi,HighR9EBRho,HighR9EEPhi,HighR9EERho,LowR9EBPhi,LowR9EBRho,Lo
 #./runFinalFitsScripts.sh -i $FILE -p $PROCS -f $CATS --ext $EXT --intLumi $INTLUMI --batch $BATCH --dataFile $DATA --isData --combinePlotsOnly
 
 #./yieldsTableColour.py -w $FILE125 -s Signal/signumbers_${EXT}.txt -u Background/CMS-HGG_multipdf_$EXT.root --factor $INTLUMI -f $CATS --order "Total,GG2H,VBF,TTH,testBBH,testTHQ,testTHW,QQ2HLNU,QQ2HLL,WH2HQQ,ZH2HQQ:TTH Hadronic Tag 0,TTH Hadronic Tag 1,TTH Hadronic Tag 2,TTH Leptonic Tag 0,TTH Leptonic Tag 1, TTH DiLepton Tag, Total"
-#./yieldsTableColour.py -w $FILE125 -s Signal/signumbers_${EXT}.txt -u Background/CMS-HGG_multipdf_$EXT.root --factor $INTLUMI -f $CATS --order "Total,GG2H,VBF,TTH,testBBH,testTHQ,testTHW,QQ2HLNU,QQ2HLL,WH2HQQ,ZH2HQQ:TTH Hadronic Tag 0,TTH Hadronic Tag 1,TTH Hadronic Tag 2,TTH Leptonic Tag 0,TTH Leptonic Tag 1,Total"
+#./yieldsTableColour.py -w $FILE125 -s Signal/signumbers_${EXT}.txt -u Background/CMS-HGG_multipdf_$EXT.root --factor $INTLUMI -f $CATS --order "Total,TTH,testBBH,testTHQ,testTHW,GG2H,VBF,QQ2HLNU,QQ2HLL,WH2HQQ,ZH2HQQ:TTH Hadronic Tag 0,TTH Hadronic Tag 1,TTH Hadronic Tag 2,TTH Leptonic Tag 0,TTH Leptonic Tag 1,Total"
 
 #./makeEffAcc.py $EFFACCFILE Signal/outdir_${EXT}/sigfit/effAccCheck_all.root $INTLUMI $CATS

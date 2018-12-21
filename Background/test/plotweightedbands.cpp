@@ -314,9 +314,11 @@ int main(int argc, char *argv[]) {
   catdesc.push_back("#splitline{All categories}{}");
   
   printf("[INFO] Channel %d  : combcat_weighted",chan->numTypes()+2);
-  std::cout << "[INFO] --> description :" << "#splitline{fiducial phase space}{S/(S+B) weighted}" << std::endl;
+  std::cout << "[INFO] --> description :" << "#splitline{fiducial phase space}{S/(S+B) weighted}" << std::endl; //FIXME
+  //std::cout << "[INFO] --> description :" << "#splitline{fiducial phase space}{ln(1 + S/B) weighted}" << std::endl;
   catnames.push_back("combcat_weighted");
-  catdesc.push_back("#splitline{All categories}{S/(S+B) weighted}");
+  catdesc.push_back("#splitline{All categories}{S/(S+B) weighted}"); //FIXME
+  //catdesc.push_back("#splitline{All categories}{ln(1 + S/B) weighted}");
   
   if (verbose_) std::cout << "[INFO] preparing weights verctor.." << std::endl; 
   std::vector<double> catweights;
@@ -368,7 +370,8 @@ int main(int argc, char *argv[]) {
     double sdiff = TMath::Erf(1.0/sqrt(2.0))*sevents;
     std::cout << "[INFO] Get bdiff  "<< bdiff  << " sdiff " << sdiff << std::endl;
     
-    double catweight = (sdiff)/(sdiff+bdiff);
+    double catweight = (sdiff)/(sdiff+bdiff); //FIXME testing ln(1+s/b)
+    //double catweight = TMath::Log(1. + (sdiff/bdiff));
     catweights.push_back(catweight);
     std::cout << "[INFO] Get catweight " << std::endl;
     
@@ -819,7 +822,10 @@ int main(int argc, char *argv[]) {
       hwsigbkgplotfine->Draw("LSAME");      
     }
     
-    catdatam->plotOn(catplot,XErrorSize(0),MarkerSize(defmarkersize),MarkerStyle(defmarkerstyle),LineWidth(errlinewidth));
+    //catdatam->plotOn(catplot,XErrorSize(0),MarkerSize(defmarkersize),MarkerStyle(defmarkerstyle),LineWidth(errlinewidth));
+    //catdatam->plotOn(catplot,DataError(RooAbsData::SumW2),XErrorSize(0),MarkerSize(defmarkersize),MarkerStyle(defmarkerstyle),LineWidth(errlinewidth));
+    catdatam->plotOn(catplot,DataError(RooAbsData::Poisson),XErrorSize(0),MarkerSize(defmarkersize),MarkerStyle(defmarkerstyle),LineWidth(errlinewidth));
+    // FIXME testin
      
     RooHist *plotdata = (RooHist*)catplot->getObject(catplot->numItems()-1);
 
@@ -834,9 +840,11 @@ int main(int argc, char *argv[]) {
     catplot->SetTitle("");
     
     if (catplot->GetXaxis()->GetBinWidth(1) !=1){
-      if (i==(ncats+1)) catplot->GetYaxis()->SetTitle(TString::Format("S/(S+B) Weighted Events / %.3g GeV",catplot->GetXaxis()->GetBinWidth(1)));
+      if (i==(ncats+1)) catplot->GetYaxis()->SetTitle(TString::Format("S/(S+B) Weighted Events / %.3g GeV",catplot->GetXaxis()->GetBinWidth(1))); //FIXME
+      //if (i==(ncats+1)) catplot->GetYaxis()->SetTitle(TString::Format("ln(1 + S/B) Weighted Events / %.3g GeV",catplot->GetXaxis()->GetBinWidth(1)));
     } else {
-      if (i==(ncats+1)) catplot->GetYaxis()->SetTitle(TString::Format("S/(S+B) Weighted Events / GeV",catplot->GetXaxis()->GetBinWidth(1)));
+      if (i==(ncats+1)) catplot->GetYaxis()->SetTitle(TString::Format("S/(S+B) Weighted Events / GeV",catplot->GetXaxis()->GetBinWidth(1))); //FIXME
+      //if (i==(ncats+1)) catplot->GetYaxis()->SetTitle(TString::Format("ln(1 + S/B) Weighted Events / GeV",catplot->GetXaxis()->GetBinWidth(1)));
     }
     
     float offset =-999;
@@ -851,13 +859,18 @@ int main(int argc, char *argv[]) {
     
     catplot->Draw("SAME");  
     
-    catplot->SetMaximum(1.2*catplot->GetMaximum());
+    //catplot->SetMaximum(1.2*catplot->GetMaximum());
+    catplot->SetMaximum(1.5*catplot->GetMaximum());
     if (!drawZeroBins_) catplot->SetMinimum(1e-5);
     
     TLegend *leg2 = new TLegend(0.529,0.46+offset,0.860,0.749+offset);  
-    leg2->AddEntry(plotdata,"Data","PE");  
-    leg2->AddEntry(hsigbkg,"S+B fit","L");  
-    leg2->AddEntry(hbkg,"B component","L");  
+    //TLegend *leg2 = new TLegend(0.529,0.45+offset,0.860,0.77+offset);  
+    leg2->AddEntry(plotdata,"Data","PE");  // FIXME
+    //leg2->AddEntry((TObject*)0,"S+B fit","");  // FIXME
+    //leg2->AddEntry(hsigbkg,"S+B fit","L");  
+    leg2->AddEntry(hsigbkg,"S+B","L");  
+    //leg2->AddEntry(hbkg,"B component","L");  
+    leg2->AddEntry(hbkg,"Background","L");  
     leg2->AddEntry(onesigma,"#pm1 #sigma","F");  
     leg2->AddEntry(twosigma,"#pm2 #sigma","F"); //FIXME
     //leg2->AddEntry(onesigma,"#pm1 s.d.","F");  
@@ -870,9 +883,16 @@ int main(int argc, char *argv[]) {
     TLatex *lat2 = new TLatex();
     lat2->SetNDC();
     lat2->SetTextSize(0.045);
-    lat2->DrawLatex(0.535,0.800,TString::Format("#scale[1.0]{%s}",catdesc.at(i).Data()));
+    //lat2->DrawLatex(0.535,0.800,TString::Format("#scale[1.0]{%s}",catdesc.at(i).Data()));
+    lat2->DrawLatex(0.535,0.810,TString::Format("#scale[1.0]{%s}",catdesc.at(i).Data()));
     if (quoteMu_){
-    lat2->DrawLatex(0.159,0.8,Form("#hat{m}_{H}=%.1f GeV, #hat{#mu}=%.2f",MH->getVal(),r->getVal()));
+    //lat2->DrawLatex(0.159,0.8,Form("#hat{m}_{H}=%.1f GeV, #hat{#mu}=%.2f",MH->getVal(),r->getVal()));
+    //FIXME
+    //lat2->DrawLatex(0.159,0.78,Form("#hat{#mu}_{t#bar{t}H}=1.4")); 
+    //lat2->DrawLatex(0.159,0.78,Form("#hat{#mu}_{t#bar{t}H}=1.3")); 
+    //lat2->DrawLatex(0.159,0.78,Form("#hat{#mu}_{t#bar{t}H}=1.7")); 
+    lat2->DrawLatex(0.27,0.84,Form("#hat{#mu}_{t#bar{t}H}=1.3")); 
+    //lat2->DrawLatex(0.27,0.84,Form("#hat{#mu}_{t#bar{t}H}=1.7")); 
     } else {
     lat2->DrawLatex(0.159,0.8,Form("#hat{m}_{H}=%.1f GeV",MH->getVal()));
     }
@@ -887,14 +907,16 @@ int main(int argc, char *argv[]) {
     TLatex *lat3 = new TLatex();
     lat3->SetNDC();
     lat3->SetTextSize(0.057);
-    //lat3->DrawLatex(0.13,0.93,"#bf{CMS} #scale[0.75]{#it{Preliminary}}");
-    lat3->DrawLatex(0.13,0.93,"#bf{CMS}"); // for the paper
+    lat3->DrawLatex(0.13,0.93,"#bf{CMS} #scale[0.75]{#it{Preliminary}}");
+    //lat3->DrawLatex(0.13,0.93,"#bf{CMS}"); // for the paper
     
     TLatex *mytext = new TLatex();
     mytext->SetTextSize(0.055);
     mytext->SetNDC();
-    mytext->DrawLatex(0.6,0.93,Form(" %.1f fb^{-1} (13#scale[0.75]{ }TeV)",intLumi_));        
-    mytext->DrawLatex(0.129+0.03,0.85,"H#rightarrow#gamma#gamma");
+    mytext->DrawLatex(0.6,0.93,Form(" %.1f fb^{-1} (13#scale[0.75]{ }TeV)",intLumi_));
+    //mytext->DrawLatex(0.5,0.93,Form(" 35.9 + 41.5 fb^{-1} (13#scale[0.75]{ }TeV)")); //FIXME
+    mytext->DrawLatex(0.129+0.03,0.84,"t#bar{t}H");
+    mytext->DrawLatex(0.129+0.03,0.79,"H#rightarrow#gamma#gamma");
     
     std::cout << "[INFO]  now do lower ratio plot " << std::endl; 
     double xtmp, ytmp;
@@ -964,6 +986,7 @@ int main(int argc, char *argv[]) {
     lat4->SetNDC();
     lat4->SetTextSize(0.1);
     lat4->DrawLatex(0.535,0.90,TString::Format("B component subtracted"));
+    //lat4->DrawLatex(0.535,0.90,TString::Format("Background subtracted")); //FIXME
     
     ccat->cd();
     

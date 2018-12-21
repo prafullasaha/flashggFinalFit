@@ -435,7 +435,7 @@ MG.GetYaxis().SetTitle("Efficiency #times Acceptance (%)")
 #MG.GetYaxis().SetRangeUser(35.1,45.9)
 #MG.GetYaxis().SetRangeUser(36.6,45.4)
 #FIXME
-MG.GetYaxis().SetRangeUser(22,32)
+MG.GetYaxis().SetRangeUser(18,28)
 #MG.GetYaxis().SetTitleSize(0.055)
 MG.GetYaxis().SetTitleSize(0.045)
 MG.GetYaxis().SetTitleOffset(0.9)

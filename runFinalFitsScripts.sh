@@ -244,15 +244,16 @@ fi
 
 cd Plots/FinalResults
 ls ../../Signal/$OUTDIR/CMS-HGG_*sigfit*oot  > tmp.txt
-while read p;
-do
-q=$(basename $p)
-cp $p ${q/$EXT/mva} 
-echo " cp $p ${q/$EXT/mva} "
-done < tmp.txt
-cp ../../Signal/$OUTDIR/CMS-HGG_sigfit_${EXT}.root CMS-HGG_mva_13TeV_sigfit.root
-cp ../../Background/CMS-HGG_multipdf_${EXT}${FAKE}.root CMS-HGG_mva_13TeV_multipdf${FAKE}.root
-cp ../../Datacard/Datacard_13TeV_$EXT.txt CMS-HGG_mva_13TeV_datacard.txt
+#FIXME
+#while read p;
+#do
+#q=$(basename $p)
+#cp $p ${q/$EXT/mva} 
+#echo " cp $p ${q/$EXT/mva} "
+#done < tmp.txt
+#cp ../../Signal/$OUTDIR/CMS-HGG_sigfit_${EXT}.root CMS-HGG_mva_13TeV_sigfit.root
+#cp ../../Background/CMS-HGG_multipdf_${EXT}${FAKE}.root CMS-HGG_mva_13TeV_multipdf${FAKE}.root
+#cp ../../Datacard/Datacard_13TeV_$EXT.txt CMS-HGG_mva_13TeV_datacard.txt
 
 cp combineHarvesterOptions13TeV_Template${FAKE}.dat combineHarvesterOptions13TeV_${EXT}${FAKE}.dat
 cp allPlots_Template${FAKE}.sh allPlots_${EXT}${FAKE}.sh

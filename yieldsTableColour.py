@@ -27,7 +27,8 @@ parser.add_option("--verbose",default=0)
 
 if not (options.workspaces ==""):
   #tpMap = {"GG2H":"ggh","VBF":"vbf","TTH":"tth","QQ2HLNU":"wh","QQ2HLL":"zh","WH2HQQ":"wh","ZH2HQQ":"zh"}
-  tpMap = {"GG2H":"ggh","VBF":"vbf","TTH":"tth","QQ2HLNU":"wh","QQ2HLL":"zh","WH2HQQ":"wh","ZH2HQQ":"zh","testBBH":"bbh","testTHQ":"th","testTHW":"th"}
+  #tpMap = {"GG2H":"ggh","VBF":"vbf","TTH":"tth","QQ2HLNU":"wh","QQ2HLL":"zh","WH2HQQ":"wh","ZH2HQQ":"zh","testBBH":"bbh","testTHQ":"th","testTHW":"th"}
+  tpMap = {"GG2H":"ggh","VBF":"vbf","TTH":"tth","QQ2HLNU":"wh","QQ2HLL":"zh","WH2HQQ":"wh","ZH2HQQ":"zh","testBBH":"bbh","testTHQ":"th","testTHW":"thw"}
   #stage 1 ggH
   #tpMap = {"GG2H_FWDH":"ggh","GG2H_VBFTOPO_JET3VETO":"ggh","GG2H_VBFTOPO_JET3":"ggh","GG2H_0J":"ggh",
   #         "GG2H_1J_PTH_0_60":"ggh","GG2H_1J_PTH_60_120":"ggh","GG2H_1J_PTH_120_200":"ggh","GG2H_1J_PTH_GT200":"ggh",
@@ -663,7 +664,8 @@ r.gROOT.SetBatch()
 r.gStyle.SetOptStat(0)
 hstack = r.THStack("hs","")
 #colorList=[r.kViolet-7, r.kRed+2, r.kSpring, r.kOrange+7, r.kSpring-7, r.kSpring+3, r.kBlue, r.kBlue+3, r.kAzure+10, r.kAzure+7] #set for ggH,VBF,ttH-type,VH-type
-colorList=[r.kBlue, r.kGreen+2, r.kMagenta-7, r.kBlue+3, r.kMagenta-3, r.kMagenta+2, r.kRed, r.kRed+1, r.kOrange+1, r.kOrange+7] #set for ggH,VBF,ttH-type,WH-type,ZH-type (ZZ colors and order)
+#colorList=[r.kBlue, r.kGreen+2, r.kMagenta-7, r.kBlue+3, r.kMagenta-3, r.kMagenta+2, r.kRed, r.kRed+1, r.kOrange+1, r.kOrange+7] #set for ggH,VBF,ttH-type,WH-type,ZH-type (ZZ colors and order)
+colorList=[r.kMagenta-7, r.kBlue+3, r.kMagenta-3, r.kMagenta+2, r.kBlue, r.kGreen+2, r.kRed, r.kRed+1, r.kOrange+1, r.kOrange+7] #set for ggH,VBF,ttH-type,WH-type,ZH-type (ZZ colors and order)
 iColor=0
 #print "content_hists ", content_hists
 numProcs = len(options.order.split(":")[0].split(","))-1
@@ -710,7 +712,8 @@ for ih in options.order.split(":")[0].split(","):
   hstack.Add(h)
   iColor=iColor+1
 l2.AddEntry(sigmaEff_hist," #sigma_{eff}","F")
-l2.AddEntry(sigmaHM_hist," #sigma_{HM}","F")
+#l2.AddEntry(sigmaHM_hist," #sigma_{HM}","F")
+l2.AddEntry(sigmaHM_hist," FWHM","F")
 
 l3.AddEntry(s_sb_hist," S/(S+B)","F")
 
@@ -799,8 +802,9 @@ lat.DrawLatex(0.95,0.02,"S/(S+B) in #pm #sigma_{eff}")
 lat.SetTextSize(0.05)
 #lat.SetTextSize(0.07)
 lat.SetTextAlign(11)
-lat.DrawLatex(0.05,0.95,"#bf{CMS} #it{Simulation Preliminary}   H#rightarrow#gamma#gamma")
+#lat.DrawLatex(0.05,0.95,"#bf{CMS} #it{Simulation Preliminary}   H#rightarrow#gamma#gamma")
 #lat.DrawLatex(0.05,0.95,"#bf{CMS} #it{Simulation}     H#rightarrow#gamma#gamma")
+lat.DrawLatex(0.05,0.95,"#bf{CMS} #it{Preliminary}   H#rightarrow#gamma#gamma")
 lat.SetTextAlign(31)
 #lat.SetTextSize(0.05)
 lat.SetTextSize(0.045)

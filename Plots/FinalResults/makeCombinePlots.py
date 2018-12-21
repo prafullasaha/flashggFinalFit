@@ -267,12 +267,23 @@ def drawGlobals(canv,shifted="False"):
      lat.DrawLatex(0.1,0.92,"#bf{CMS}")
    #lat.DrawLatex(0.129+0.04,0.85,"H#rightarrow#gamma#gamma")
    lat.SetTextSize(0.05)
-   lat.DrawLatex(0.13,0.83,"H#rightarrow#gamma#gamma") #LHCP17
+   #lat.DrawLatex(0.13,0.83,"H#rightarrow#gamma#gamma") #LHCP17
+   #lat.DrawLatex(0.13,0.83,"t#bar{t}H") #FIXME ttH only
+   #lat.DrawLatex(0.13,0.78,"H#rightarrow#gamma#gamma") #FIXME ttH only
+   #lat.DrawLatex(0.2,0.83,"t#bar{t}H") #FIXME ttH only
+   #lat.DrawLatex(0.2,0.78,"H#rightarrow#gamma#gamma") #FIXME ttH only
+   lat.DrawLatex(0.75,0.82,"t#bar{t}H") #FIXME ttH only
+   lat.DrawLatex(0.75,0.77,"H#rightarrow#gamma#gamma") #FIXME ttH only
    #lat.DrawLatex(0.12,0.82,"H#rightarrow#gamma#gamma")
    #lat.DrawLatex(0.77,0.83,"H#rightarrow#gamma#gamma") #used only for new MuScan
    #lat.SetTextSize(0.07)
    lat.SetTextSize(0.045)
-   lat.DrawLatex(0.69,0.92,options.text)
+   #lat.DrawLatex(0.69,0.92,options.text)
+   #FIXME
+   if '+' in options.text:
+     lat.DrawLatex(0.56,0.92,options.text)
+   else:
+     lat.DrawLatex(0.69,0.92,options.text)
 
   for mi,MH in enumerate(MHtexts):
     if mhTextSize[mi]>0:
@@ -627,7 +638,8 @@ def plot1DNLL(returnErrors=False,xvar="", ext=""):
       #xtitle = '#mu_{%s}'%options.specifyX[0]
       print "setting variable name in tree to",options.specifyX
       x = options.specifyX
-      xtitle = '#mu_{%s}'%options.specifyX
+      xtitle = '#mu_{%s}'%options.specifyX.replace('r_','').replace('ttH','t#bar{t}H')
+      #xtitle = '#mu_{%s}'%options.specifyX.replace('r_','').replace('ttH','top')
   elif options.method=='muProc':
     x = xvar
     #xtitle = '#sigma / #sigma_{SM}'
@@ -782,7 +794,9 @@ def plot1DNLL(returnErrors=False,xvar="", ext=""):
   dH = r.TH1D("dH","",1,axmin,axmax)
   dH.GetXaxis().SetTitle(xtitle)
   dH.GetXaxis().SetTitleSize(0.05)
+  dH.GetXaxis().SetTitleOffset(0.75*dH.GetXaxis().GetTitleOffset())
   dH.GetYaxis().SetTitleSize(0.05)
+  dH.GetYaxis().SetTitleOffset(0.75*dH.GetYaxis().GetTitleOffset())
   if options.method=='mh': dH.GetXaxis().SetNdivisions(505)
   dH.GetYaxis().SetTitle('-2 #Delta ln L')
   if not options.yaxis: dH.GetYaxis().SetRangeUser(0.,6)
@@ -819,7 +833,10 @@ def plot1DNLL(returnErrors=False,xvar="", ext=""):
     #lat2.SetTextAlign(11)
     #lat2.DrawLatex(0.17,0.78,"#hat{#mu} = %4.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(fit,eplus0,eminus0))
     #lat2.DrawLatex(0.46,0.84,"#hat{#mu} = %4.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(fit,eplus0,eminus0))
-    lat2.DrawLatex(0.52,0.84,"#hat{#mu} = %4.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(fit,eplus0,eminus0)) #LHCP17
+    #lat2.DrawLatex(0.52,0.84,"#hat{#mu} = %4.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(fit,eplus0,eminus0)) #LHCP17
+    #lat2.DrawLatex(0.52,0.84,"#hat{#mu}_{t#bar{t}H} = %4.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(fit,eplus0,eminus0)) #FIXME ttH only
+    lat2.DrawLatex(0.52,0.84,"#hat{#mu}_{t#bar{t}H} = %4.1f ^{#font[122]{+}%4.1f}_{#font[122]{-}%4.1f}"%(fit,eplus0,eminus0)) #FIXME ttH only
+    #lat2.DrawLatex(0.52,0.84,"#hat{#mu}_{top} = %4.1f ^{#font[122]{+}%4.1f}_{#font[122]{-}%4.1f}"%(fit,eplus0,eminus0)) #FIXME ttH only
     #lat2.DrawLatex(0.47,0.84,"#hat{#mu} = %4.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(fit,eplus0,eminus0))
   elif options.method=='rv': lat2.DrawLatex(0.5,0.85,"#hat{#mu}_{qqH+VH} = %4.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(fit,eplus0,eminus0))
   elif options.method=='rf': lat2.DrawLatex(0.5,0.85,"#hat{#mu}_{ggH+t#bar{t}H} = %4.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(fit,eplus0,eminus0))
@@ -1290,6 +1307,7 @@ def plotMPdfChComp(plottype="perTag"):
       catName=catName.replace("Tag_","Tag ")
       catName=catName.replace("UntaggedTag","Untagged")
       catName=catName.replace("VBFTag ","VBF Tag")
+      catName=catName.replace("_"," ")
       if (catName=="VBF") : catName=catName.replace("VBF","VBF Tags")
       if (catName=="TTH"): catName=catName.replace("TTH","TTH Tags")
 
@@ -1354,6 +1372,7 @@ def plotMPdfChComp(plottype="perTag"):
       catName=catName.replace("Tag_","Tag ")
       catName=catName.replace("UntaggedTag","Untagged")
       catName=catName.replace("VBFTag","VBF Tag")
+      catName=catName.replace("_"," ")
       if (catName=="VBF") : catName=catName.replace("VBF","VBF Tags")
       if (catName=="TTH"): catName=catName.replace("TTH","TTH Tags")
     r.gROOT.SetBatch()
@@ -1623,7 +1642,8 @@ def plotMPdfChComp(plottype="perTag"):
   #doHatching = True
   doHatching = False
   if doStxs or options.percatchcomp:
-    doHatching = True
+    #doHatching = True #FIXME
+    pass
   if doHatching:
     hatchBox = r.TBox(-0.2,0.,0.,len(catFits))
     hatchBox.SetFillStyle(3004)
@@ -1687,10 +1707,13 @@ def plotMPdfChComp(plottype="perTag"):
   #lat2.SetTextSize(0.035)
   lat2.SetTextSize(0.04)
   #FIXME
-  if not doStxs: lat2.DrawLatex(0.57,0.59,"#hat{#mu}_{combined} = %6.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(bestFit[1],bestFit[2],bestFit[3]))
+  #if not doStxs: lat2.DrawLatex(0.57,0.59,"#hat{#mu}_{combined} = %6.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(bestFit[1],bestFit[2],bestFit[3]))
+  if not doStxs: lat2.DrawLatex(0.57,0.59,"#hat{#mu}_{combined} = %6.1f ^{#font[122]{+}%4.1f}_{#font[122]{-}%4.1f}"%(bestFit[1],bestFit[2],bestFit[3])) #FIXME ttH only
   #else: lat2.DrawLatex(0.57,0.59,"#sigma_{combined}/#sigma_{theo} = %6.2f ^{#font[122]{+}%4.2f}_{#font[122]{-}%4.2f}"%(bestFit[1],bestFit[2],bestFit[3]))
   if (options.mhval==None):
     lat2.DrawLatex(0.57,0.50,"m_{H} = 125.09 GeV")
+  elif 'none' in options.mhval:
+    pass
   else:
     if (is_float_try(options.mhval)): 
       lat2.DrawLatex(0.57,0.50,"m_{H} = %s GeV"%options.mhval)
