@@ -303,6 +303,7 @@ double getMeanVar(TH1F* nom, TH1F *up, TH1F* down){
 	}
 	double val = (TMath::Abs(u)+TMath::Abs(d))/2.;
 	if (val!=val) val=0.;
+	val = min(val,0.05);
 	return val;
 }
 
@@ -318,6 +319,7 @@ double getSigmaVar(TH1F* nom, TH1F *up, TH1F* down){
 	}
 	double val = (TMath::Abs(u)+TMath::Abs(d))/2.;
 	if (val!=val) val=0.;
+	val = min(val,0.5);
 	return val;
 }
 
@@ -333,6 +335,7 @@ double getRateVar(TH1F* nom, TH1F *up, TH1F* down){
 	}
 	double val = (TMath::Abs(u)+TMath::Abs(d))/2.;
 	if (val!=val) val=0.;
+	val = min(val,0.05);
 	return val;
 }
 
@@ -549,7 +552,7 @@ int main(int argc, char *argv[]){
             std::cout << "ERROR infinite value!" << Form("%s_cat%s_scale",proc->c_str(),flashggCats_[cat].c_str()) << std::endl;
 						outfile << Form("%1.4g     %1.4g     %1.4g    ",0.,0.,0.) << endl;
             } else {
-						outfile << Form("%1.4g     %1.4g     %1.4g    ",getMeanVar(nominal,scaleUp,scaleDown),getSigmaVar(nominal,scaleUp,scaleDown),getRateVar(nominal,scaleUp,scaleDown)) << endl;
+            outfile << Form("%1.4g     %1.4g     %1.4g    ",getMeanVar(nominal,scaleUp,scaleDown),getSigmaVar(nominal,scaleUp,scaleDown),getRateVar(nominal,scaleUp,scaleDown)) << endl;
             }
 					} else {
 						outfile << Form("%1.4g     %1.4g     %1.4g    ",0.,0.,0.) << endl;

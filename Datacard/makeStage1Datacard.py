@@ -647,7 +647,8 @@ brSyst = [0.0206,-0.0208] #13TeV Values, from YR4 taking  in quadrature THU (+1.
 # lumi syst
 ####lumiSyst = 0.026 #8TeV Values
 #lumiSyst=0.062  #Correct for ICHEP 
-lumiSyst=0.025  #Correct for Moriond17
+#lumiSyst=0.025  #Correct for Moriond17
+lumiSyst=0.023  #Correct for 2017 data
 
 ##Printing Functions
 def printBRSyst():
@@ -778,10 +779,10 @@ flashggSysts['SigmaEOverEShift'] = 'SigmaEOverEShift'
 flashggSysts['ElectronWeight'] = 'eff_e'
 flashggSysts['electronVetoSF'] = 'electronVetoSF'
 #FIXME: add option for 2016 or 2017
-flashggSysts['MuonWeight'] = 'eff_m' #2016 name
-#flashggSysts['MuonIDWeight'] = 'eff_m' #2017 name
-flashggSysts['MuonMiniIsoWeight'] = 'eff_m_MiniIso' #2016 name
-#flashggSysts['MuonIsoWeight'] = 'eff_m_MiniIso' #2017 name
+#flashggSysts['MuonWeight'] = 'eff_m' #2016 name
+flashggSysts['MuonIDWeight'] = 'eff_m' #2017 name
+#flashggSysts['MuonMiniIsoWeight'] = 'eff_m_MiniIso' #2016 name
+flashggSysts['MuonIsoWeight'] = 'eff_m_MiniIso' #2017 name
 flashggSysts['TriggerWeight'] = 'TriggerWeight'
 #flashggSysts['JetBTagWeight'] = 'eff_b'
 flashggSysts['JetBTagCutWeight'] = 'eff_b'
