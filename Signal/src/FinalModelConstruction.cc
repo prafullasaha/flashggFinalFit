@@ -800,8 +800,11 @@ void FinalModelConstruction::buildRvWvPdf(string name, int nGrv, int nGwv, bool 
   wvPdfs = build_DCBpGaus_Pdf(name,nGwv,recursive,wvSplines,Form("_wv_%dTeV",sqrts_)); 
   } else { // sum of N Gaussians
   if(verbosity_>1) std::cout << " [INFO] Doing FinalModelConstruction with nGaussians << recursive " << recursive << std::endl;
-  rvPdfs = buildPdf(name,nGrv,recursive,rvSplines,Form("_rv_%dTeV",sqrts_)); 
-  wvPdfs = buildPdf(name,nGwv,recursive,wvSplines,Form("_wv_%dTeV",sqrts_)); 
+  //rvPdfs = buildPdf(name,nGrv,recursive,rvSplines,Form("_rv_%dTeV",sqrts_)); 
+  //wvPdfs = buildPdf(name,nGwv,recursive,wvSplines,Form("_wv_%dTeV",sqrts_)); 
+  //FIXME trying to remove name duplicatio for 2016+2017 combination
+  rvPdfs = buildPdf(name,nGrv,recursive,rvSplines,Form("_rv_%dTeV_2016",sqrts_)); 
+  wvPdfs = buildPdf(name,nGwv,recursive,wvSplines,Form("_wv_%dTeV_2016",sqrts_)); 
   }
 
   // sum the RV and WV pdfs
