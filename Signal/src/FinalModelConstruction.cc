@@ -42,7 +42,7 @@ template<class ResultT, class SourceT, class PredicateT> typename ResultT::itera
 }
 
 // the FinalModelConstruction class takes the fits from the fitting/interpolation classes and adds the systematic nuisances and figures out the normalisation.
-FinalModelConstruction::FinalModelConstruction( std::vector<int> massList, RooRealVar *massVar, RooRealVar *MHvar, RooRealVar *intL,int mhLow, int mhHigh, string proc, string cat, bool doSecMods, string systematicsFileName, vector<int> skipMasses, int verbosity,std::vector<std::string> procList, std::vector<std::string> flashggCats , string outDir, bool isProblemCategory ,bool isCB, int sqrts, bool quadraticSigmaSum)	:
+FinalModelConstruction::FinalModelConstruction( std::vector<int> massList, RooRealVar *massVar, RooRealVar *MHvar, RooRealVar *intL,int mhLow, int mhHigh, string proc, string cat, bool doSecMods, string systematicsFileName, vector<int> skipMasses, int verbosity,std::vector<std::string> procList, std::vector<std::string> flashggCats , string outDir, bool isProblemCategory ,bool isCB, int sqrts, int year, bool quadraticSigmaSum)	:
   mass(massVar),
   MH(MHvar),
   intLumi(intL),
@@ -55,6 +55,7 @@ FinalModelConstruction::FinalModelConstruction( std::vector<int> massList, RooRe
   doSecondaryModels(doSecMods),
   isCutBased_(isCB),
 	sqrts_(sqrts),
+	year_(year),
 	quadraticSigmaSum_(quadraticSigmaSum),
 	skipMasses_(skipMasses),
   flashggCats_(flashggCats),
@@ -802,9 +803,9 @@ void FinalModelConstruction::buildRvWvPdf(string name, int nGrv, int nGwv, bool 
   if(verbosity_>1) std::cout << " [INFO] Doing FinalModelConstruction with nGaussians << recursive " << recursive << std::endl;
   //rvPdfs = buildPdf(name,nGrv,recursive,rvSplines,Form("_rv_%dTeV",sqrts_)); 
   //wvPdfs = buildPdf(name,nGwv,recursive,wvSplines,Form("_wv_%dTeV",sqrts_)); 
-  //FIXME trying to remove name duplicatio for 2016+2017 combination
-  rvPdfs = buildPdf(name,nGrv,recursive,rvSplines,Form("_rv_%dTeV_2016",sqrts_)); 
-  wvPdfs = buildPdf(name,nGwv,recursive,wvSplines,Form("_wv_%dTeV_2016",sqrts_)); 
+  //remove name duplication for 2016+2017 combination
+  rvPdfs = buildPdf(name,nGrv,recursive,rvSplines,Form("_rv_%dTeV_%d",sqrts_,year_)); 
+  wvPdfs = buildPdf(name,nGwv,recursive,wvSplines,Form("_wv_%dTeV_%d",sqrts_,year_)); 
   }
 
   // sum the RV and WV pdfs
