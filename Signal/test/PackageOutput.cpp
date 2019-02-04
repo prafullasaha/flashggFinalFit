@@ -63,8 +63,8 @@ vector<string> procs_;
 string procStr_;
 string basePathStr_;
 int sqrts_=13;
-int year_=2016;
-//int year_=2017;
+//int year_=2016;
+int year_=2017;
 
 vector<int> getAllMH(){
   vector<int> result;

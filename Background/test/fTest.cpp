@@ -599,8 +599,8 @@ int main(int argc, char* argv[]){
   lumi_8TeV  = "19.1 fb^{-1}"; // default is "19.7 fb^{-1}"
   lumi_7TeV  = "4.9 fb^{-1}";  // default is "5.1 fb^{-1}"
   lumi_sqrtS = "13 TeV";       // used with iPeriod = 0, e.g. for simulation-only plots (default is an empty string)
-  int year_ = 2016;
-  //int year_ = 2017;
+  //int year_ = 2016;
+  int year_ = 2017;
 
   string fileName;
   int ncats;

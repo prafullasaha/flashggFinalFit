@@ -1,7 +1,6 @@
 from os import system
 
-#ext='fullNewTest2017'
-ext='reoptimisedClean2017'
+ext='preappFinal2017'
 
 fileName = 'potentialNegPdfs_%s.txt'%ext
 with open(fileName, 'r') as f:

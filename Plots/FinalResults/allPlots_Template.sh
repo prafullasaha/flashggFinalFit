@@ -5,7 +5,7 @@ INTLUMI=!INTLUMI!
 ##########################################
 #new STXS fit results
 
-#./makeCombinePlots.py -f combineJobs13TeV_$EXT/Stage0/r_qqH/r_qqH.root,combineJobs13TeV_$EXT/Stage0/r_ggH/r_ggH.root --perprocchcomp -x -3.5,9.5 -o Stage0 --do1sig  -l 0.55,0.65,0.85,0.9 --text="  ${INTLUMI} fb^{-1} (13#scale[0.5]{ }TeV)" --mhval "profiled"  -b --stxs --noCom
+#./makeCombinePlots.py -f combineJobs13TeV_$EXT/Stage0/r_qqH/r_qqH.root,combineJobs13TeV_$EXT/Stage0/r_ggH/r_ggH.root --perprocchcomp -x -3.5,9.5 -o Stage0 --do1sig  -l 0.55,0.65,0.85,0.9 --text="  ${INTLUMI} fb^{-1} (13#scale[0.5]{ }TeV)" --mhval "profiled"  -b --stxs --noComb
 
 #./makeCombinePlots.py -f combineJobs13TeV_$EXT/Stage1/r_qqH/r_qqH.root,combineJobs13TeV_$EXT/Stage1/r_ggH_BSM/r_ggH_BSM.root,combineJobs13TeV_$EXT/Stage1/r_ggH_GE2J/r_ggH_GE2J.root,combineJobs13TeV_$EXT/Stage1/r_ggH_1J_high/r_ggH_1J_high.root,combineJobs13TeV_$EXT/Stage1/r_ggH_1J_med/r_ggH_1J_med.root,combineJobs13TeV_$EXT/Stage1/r_ggH_1J_low/r_ggH_1J_low.root,combineJobs13TeV_$EXT/Stage1/r_ggH_0J/r_ggH_0J.root --perprocchcomp -x -3.5,9.5 -o Stage1 --do1sig  -l 0.55,0.65,0.85,0.9 --text="  ${INTLUMI} fb^{-1} (13#scale[0.5]{ }TeV)" --mhval "profiled"  -b --stxs --noComb
 

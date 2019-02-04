@@ -6,8 +6,7 @@ import shlex
 from array import array
 import ROOT as r
 
-#ext='fullNewTest2017'
-ext='reoptimisedClean2017'
+ext='preappFinal2017'
 
 r.gSystem.Load("libHiggsAnalysisCombinedLimit")
 r.gSystem.Load("libHiggsAnalysisGBRLikelihood")
@@ -63,7 +62,7 @@ for proc in procs:
      nGaussian=-1
      coeffs=[]
      #dynamiccaly get nGaussians
-     pdf= w.pdf("hggpdfsmrel_13TeV_%s_%s_%s_13TeV"%(proc,cat,v));
+     pdf= w.pdf("hggpdfsmrel_13TeV_2017_%s_%s_%s_13TeV_2017"%(proc,cat,v));
      #pdf= r.RooDoubleCBFast(w.pdf("dcb_%s_%s_%s_13TeV"%(proc,cat,v)),"test");
      pdf.Print()
      #exit (1)

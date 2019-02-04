@@ -1,4 +1,4 @@
-EXT="fullNewTest2016"
+EXT="preappFinal2017"
 OUTDIR="outdir_${EXT}"
 
 if [ ! -d "Signal/$OUTDIR" ]; then

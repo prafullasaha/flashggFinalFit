@@ -170,11 +170,11 @@ TGraph * Normalization_13TeV::GetSigmaGraph(TString process)
           XSectionMap = &XSectionMap_ZH2HQQ_VBFTOPO_JET3;
   } else if ( process == "ZH2HQQ_REST" ) {
           XSectionMap = &XSectionMap_ZH2HQQ_REST;
-  } else if ( process == "BBH" ) {
+  } else if ( process == "BBH" || process == "testBBH"  ) {
           XSectionMap = &XSectionMap_BBH;
-  } else if ( process == "THQ" ) {
+  } else if ( process == "THQ" || process == "testTHQ" ) {
           XSectionMap = &XSectionMap_THQ;
-  } else if ( process == "THW" ) {
+  } else if ( process == "THW" || process == "testTHW" ) {
           XSectionMap = &XSectionMap_THW;
   } else if ( process == "ggh" || process=="GG2H" ) {
     XSectionMap = &XSectionMap_ggh;
