@@ -72,6 +72,8 @@ parser.add_option("--it",dest="it",type="string",help="if using superloop, index
 parser.add_option("--itLedger",dest="itLedger",type="string",help="ledger to keep track of values of each iteration if using superloop")
 parser.add_option("--specifyX",dest="specifyX",type="string",help="use a specific variable name in mu plots (eg r_Untagged_Tag_0)")
 parser.add_option("--removeNegative",dest="removeNegative",default=False,action="store_true",help="Remove negative NLL values")
+parser.add_option("--ignoreZeros",dest="ignoreZeros",default=False,action="store_true",help="Ignore the zero NLL values that are assocaited with pre-loaded best-fit")
+parser.add_option("--stayPositive",dest="stayPositive",default=False,action="store_true",help="Don't include negative POI values in the scan")
 parser.add_option("--paperStyle",dest="paperStyle",default=False,action="store_true",help="Make plots in paper style (without preliminary etc)")
 #parser.add_option("--paperStyle",dest="paperStyle",default=True,action="store_false",help="Make plots in paper style (without preliminary etc)")
 (options,args)=parser.parse_args()
@@ -680,7 +682,7 @@ def plot1DNLL(returnErrors=False,xvar="", ext=""):
       # tree.quantileExpected==1: continue
       if tree.deltaNLL<0 and options.verbose: print "Warning, found -ve deltaNLL = ",  tree.deltaNLL, " at ", xv 
       if xv in [re[0] for re in res]: continue
-      if 2*tree.deltaNLL < 100 and not (tree.deltaNLL<0. and options.removeNegative):
+      if abs(2*tree.deltaNLL) < 100 and not (tree.deltaNLL<0. and options.removeNegative) and not (abs(tree.deltaNLL)<0.000001 and options.ignoreZeros) and not (xv<0.001 and options.stayPositive):
         res.append([xv,2*tree.deltaNLL,lcMH])
     res.sort()
 
@@ -1321,6 +1323,7 @@ def plotMPdfChComp(plottype="perTag"):
            elif "ggH_1J" in catName: catName ="#scale[1.5]{ggH 1J}"
            elif "ggH_GE2J" in catName: catName ="#scale[1.5]{ggH GE2J}"
            elif "ggH_BSM" in catName: catName ="#scale[1.5]{ggH BSM}"
+           elif "ggH_VBF" in catName: catName ="#scale[1.5]{ggH VBF-like}"
            elif "ggH" in catName: catName ="#scale[1.5]{ggH}"
            #elif "GG2H" in catName: catName ="#scale[1.5]{ggH}"
            if "qqH_Rest" in catName: catName ="#scale[1.5]{VBF rest}"
@@ -1395,6 +1398,9 @@ def plotMPdfChComp(plottype="perTag"):
       points.append(["",0,0,0,0,0])
       catNames.insert(1,"DummyThird")
       points.insert(1,["",0,0,0,0,0])
+    elif options.outname.count('Minimal'):
+      catNames.append("DummySecond")
+      points.append(["",0,0,0,0,0])
   if not options.noComb:  catNames=catNames[1:]
 
   r.gROOT.SetBatch(options.batch)
@@ -1692,9 +1698,6 @@ def plotMPdfChComp(plottype="perTag"):
                        ("VBF_3J"        ,[sqrt(0.004*0.004+0.021*0.021), sqrt(0.003*0.003+0.021*0.021)]),
                        ("VBF_Rest"      ,[sqrt(0.004*0.004+0.021*0.021), sqrt(0.003*0.003+0.021*0.021)])
                        ])
-      print 'ED DEBUG proc uncert map is'
-      print procUncertMap
-      print procUncertMap.keys()
       boxIndexMap = { name:i for i,name in enumerate(reversed(procUncertMap.keys())) }
     elif 'Stage1' in options.outname:
       procUncertMap = {"GG2H_0J"        :[sqrt(0.038*0.038+0.001*0.001), sqrt(0.038*0.038+0.001*0.001)], #sum in quadrature of uncerts removed, plus then minus
