@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import subprocess
+
 from optparse import OptionParser
 parser = OptionParser()
 parser.add_option("-b","--bkgfilename",help="Data and background workspace file")
@@ -92,6 +94,28 @@ for cat in range(ncats):
   print execLine
   
   os.system('chmod +x %s'%f.name)
+
+
+  if (options.batch == "HTCONDOR"):
+	queue = 'tomorrow'
+	HTCondorSubfile = open('%s/JOB%d.job'%(options.outDir, cat),'w')
+	HTCondorSubfile.write('+JobFlavour = "%s"\n'%(queue))
+	HTCondorSubfile.write('\n')
+	HTCondorSubfile.write('executable  = %s/sub%d.sh\n'%(options.outDir,cat))
+	HTCondorSubfile.write('output  = %s/Job%d.out\n'%(options.outDir,cat))
+	HTCondorSubfile.write('error  = %s/Job%d.err\n'%(options.outDir,cat))
+	HTCondorSubfile.write('log  = %s/Job%d_htc.log\n'%(options.outDir,cat))
+	HTCondorSubfile.write('\n')
+	HTCondorSubfile.write('max_retries = 1\n')
+	HTCondorSubfile.write('queue 1\n')
+	subprocess.Popen("condor_submit "+HTCondorSubfile.name,
+                               shell=True, # bufsize=bufsize,
+                               stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE,
+                               close_fds=True)
+
+'''
   if options.dryRun:
     if (options.batch == "IC") : print 'qsub -q %s -o %s.log %s'%(options.queue,os.path.abspath(f.name),os.path.abspath(f.name))
     else: print 'bsub -q %s -o %s.log %s'%(options.queue,os.path.abspath(f.name),os.path.abspath(f.name))
@@ -101,5 +125,5 @@ for cat in range(ncats):
   else:
      if (options.batch == "IC") : os.system('qsub -q %s -o %s.log %s'%(options.queue,os.path.abspath(f.name),os.path.abspath(f.name)))
      else : os.system('bsub -q %s -o %s.log %s'%(options.queue,os.path.abspath(f.name),os.path.abspath(f.name)))
-  
+'''  
   

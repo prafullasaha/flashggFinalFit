@@ -15,6 +15,7 @@ from Queue import Queue
 
 from threading import Thread, Semaphore
 from multiprocessing import cpu_count
+import subprocess
 
 class Wrap:
     def __init__(self, func, args, queue):
@@ -146,7 +147,24 @@ for proc in  opts.procs.split(","):
     counter =  counter+1
     exec_line = "%s/bin/signalFTest -i %s  -p %s -f %s --considerOnly %s -o %s/%s --datfilename %s/%s/fTestJobs/outputs/config_%d.dat" %(os.getcwd(), opts.infile,proc,opts.flashggCats,cat,os.getcwd(),opts.outDir,os.getcwd(),opts.outDir, counter)
     #print exec_line
-    writePostamble(file,exec_line)
+    writePostamble(file,  exec_line)
+   
 
-
-
+    if (opts.batch == "HTCONDOR"):
+	queue = 'workday'	 
+	HTCondorSubfile = open('%s/fTestJobs/JOB%d.job'%(opts.outDir,counter-1),'w')
+	HTCondorSubfile.write('+JobFlavour = "%s"\n'%(queue))
+	HTCondorSubfile.write('\n')
+	HTCondorSubfile.write('executable  = %s/fTestJobs/sub%d.sh\n'%(opts.outDir,counter-1))
+	HTCondorSubfile.write('output  = %s/fTestJobs/JOB%d.out\n'%(opts.outDir,counter-1))
+	HTCondorSubfile.write('error  = %s/fTestJobs/JOB%d.err\n'%(opts.outDir,counter-1))
+	HTCondorSubfile.write('log  = %s/fTestJobs/JOB%d_htc.log\n'%(opts.outDir,counter-1))
+	HTCondorSubfile.write('\n')
+	HTCondorSubfile.write('max_retries = 1\n')
+	HTCondorSubfile.write('queue 1\n')
+	subprocess.Popen("condor_submit "+HTCondorSubfile.name,
+                               shell=True, # bufsize=bufsize,
+                               stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE,
+                               close_fds=True)

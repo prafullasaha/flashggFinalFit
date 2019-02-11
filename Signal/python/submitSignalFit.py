@@ -15,6 +15,7 @@ from Queue import Queue
 
 from threading import Thread, Semaphore
 from multiprocessing import cpu_count
+import subprocess
 
 class Wrap:
     def __init__(self, func, args, queue):
@@ -127,12 +128,9 @@ def writePostamble(sub_file, exec_line):
     system('rm -f %s.fail'%os.path.abspath(sub_file.name))
     system('rm -f %s.log'%os.path.abspath(sub_file.name))
     system('rm -f %s.err'%os.path.abspath(sub_file.name))
-    if (opts.batch == "LSF") : system('bsub -q %s -o %s.log %s'%(opts.queue,os.path.abspath(sub_file.name),os.path.abspath(sub_file.name)))
-    if (opts.batch == "IC") : 
-      system('qsub -q %s -l h_rt=0:20:0 -o %s.log -e %s.err %s'%(opts.queue,os.path.abspath(sub_file.name),os.path.abspath(sub_file.name),os.path.abspath(sub_file.name)))
-      #print "system(",'qsub -q %s -o %s.log -e %s.err %s '%(opts.queue,os.path.abspath(sub_file.name),os.path.abspath(sub_file.name),os.path.abspath(sub_file.name)),")"
+#   if (opts.batch == "LSF") : system('bsub -q %s -o %s.log %s'%(opts.queue,os.path.abspath(sub_file.name),os.path.abspath(sub_file.name))
   if opts.runLocal:
-     system('bash %s'%os.path.abspath(sub_file.name))
+	system('bash %s'%os.path.abspath(sub_file.name))
 
 
 #######################################
@@ -154,7 +152,23 @@ for proc in  opts.procs.split(","):
       bsRW=1
     exec_line = "%s/bin/SignalFit --verbose 0 -i %s -d %s/%s  --mhLow=%s --mhHigh=%s -s %s/%s --procs %s -o  %s/%s -p %s/%s -f %s --changeIntLumi %s --binnedFit 1 --nBins 320 --split %s,%s --beamSpotReweigh %d --dataBeamSpotWidth %f --massList %s --useDCBplusGaus %s --useSSF %s -C -1" %(os.getcwd(), opts.infile,os.getcwd(),opts.datfile,opts.mhLow, opts.mhHigh, os.getcwd(),opts.systdatfile, opts.procs,os.getcwd(),opts.outfilename.replace(".root","_%s_%s.root"%(proc,cat)), os.getcwd(),opts.outDir, opts.flashggCats ,opts.changeIntLumi, proc,cat,bsRW,float(opts.bs), opts.massList, opts.useDCB_1G, opts.useSSF)
     #print exec_line
-    writePostamble(file,exec_line)
+    writePostamble(file,  exec_line)
 
-
-
+    if (opts.batch == "HTCONDOR"):
+	queue = 'workday'
+    	HTCondorSubfile = open('%s/SignalFitJobs/JOB%d.job'%(opts.outDir,counter-1),'w')
+    	HTCondorSubfile.write('+JobFlavour = "%s"\n'%(queue))
+    	HTCondorSubfile.write('\n')
+    	HTCondorSubfile.write('executable  = %s/SignalFitJobs/sub%d.sh\n'%(opts.outDir,counter-1))
+    	HTCondorSubfile.write('output  = %s/SignalFitJobs/Job%d.out\n'%(opts.outDir,counter-1))
+    	HTCondorSubfile.write('error  = %s/SignalFitJobs/Job%d.err\n'%(opts.outDir,counter-1))
+    	HTCondorSubfile.write('log  = %s/SignalFitJobs/Job%d_htc.log\n'%(opts.outDir,counter-1))
+    	HTCondorSubfile.write('\n')
+    	HTCondorSubfile.write('max_retries = 1\n')
+    	HTCondorSubfile.write('queue 1\n')
+    	subprocess.Popen("condor_submit "+HTCondorSubfile.name,
+                               shell=True, # bufsize=bufsize,
+                               stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE,
+                               close_fds=True)
