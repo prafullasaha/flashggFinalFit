@@ -13,9 +13,9 @@ sigPlotsOnly = False
 
 #justPrint=True
 ##isSubmitted = True
-phoSystOnly = True
+#phoSystOnly = True
 #useDCB = True
-#sigFitOnly = True
+sigFitOnly = True
 #packageOnly = True
 #sigPlotsOnly = True
 
@@ -23,7 +23,8 @@ print 'About to run signal scripts'
 print 'isSubmitted = %s, phoSystOnly = %s, sigFitOnly = %s, sigPlotsOnly = %s'%(str(isSubmitted), str(phoSystOnly), str(sigFitOnly), str(sigPlotsOnly))
 
 #setup files 
-ext = 'preappFinal2017'
+#ext = 'preappFinal2017'
+ext = 'approvalFinal2017'
 print 'ext = %s'%ext
 
 baseFilePath  = '/vols/cms/es811/FinalFits/ws_%s/'%ext

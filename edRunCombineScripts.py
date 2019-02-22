@@ -23,7 +23,8 @@ print 'About to run combine scripts'
 print 'datacardOnly = %s, combineOnly = %s, combinePlotsOnly = %s, effAccOnly = %s, yieldsOnly = %s'%(str(datacardOnly), str(combineOnly), str(combinePlotsOnly), str(effAccOnly), str(yieldsOnly) )
 
 #setup files 
-ext = 'preappFinal2017'
+#ext = 'preappFinal2017'
+ext = 'approvalFinal2017'
 print 'ext = %s'%ext
 
 baseFilePath  = '/vols/cms/es811/FinalFits/ws_%s/'%ext
