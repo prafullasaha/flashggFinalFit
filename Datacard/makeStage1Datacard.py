@@ -249,6 +249,7 @@ theorySystAbsScale={}
 #theorySystAbsScale['names'] = ["QCDscale_qqbar_up","QCDscale_gg_up","QCDscale_qqbar_down","QCDscale_gg_down","pdf_alphaS_qqbar","pdf_alphaS_gg"] 
 #theorySystAbsScale['names_to_consider'] =   ["QCDscale_ggH_up",  "QCDscale_qqH_up",  "QCDscale_VH_up",  "QCDscale_ttH_up",  "QCDscale_ggH_down",  "QCDscale_qqH_down",  "QCDscale_VH_down",  "QCDscale_ttH_down",  "pdf_Higgs_qqbar",  "pdf_alphaS_gg",  "pdf_alphaS_ttH"] #QCD scale up, QCD scale down, PDF+alpha S, PDF, alpha S 
 
+#FIXME this should be updated
 theorySystAbsScale['names'] =   ["QCDscale_ggH_up",  "QCDscale_qqH_up",  "QCDscale_VH_up",  "QCDscale_ttH_up",  "QCDscale_ggH_down",  "QCDscale_qqH_down",  "QCDscale_VH_down",  "QCDscale_ttH_down",  "pdf_Higgs_qqbar",  "pdf_Higgs_gg",  "pdf_Higgs_ttH"] #QCD scale up, QCD scale down, PDF+alpha S, PDF, alpha S 
 
 theorySystAbsScale['ttH_hgg'] =     [0.0,                 0.0,                0.0,               0.058,              0.0,                   0.0,                 0.0,                 -0.092,               0.0,                0.0,             0.036] # ttH is a _qqbar process
@@ -737,14 +738,18 @@ def printUEPSSyst():
             continue
           else: continue
         for cat in options.cats:
-          if not ('GG2H' in proc or 'VBF' in proc): 
+          if not (proc.startswith('GG2H') or proc.startswith('VBF')): 
             continue
           elif not (cat in incCats or cat in dijetCats): 
             continue
+          print 'ED DEBUG on proc, cat, unc: %s, %s, %s'%(proc, cat, uncertainty)
           if wsUp and wsDown:
+            print 'ED DEBUG got both ws'
             dataUp = "%s_%sUp_13TeV_%s" % (abbrev,uncertainty,cat) 
             dataDown = "%s_%sDown_13TeV_%s" % (abbrev,uncertainty,cat) 
+            print 'ED DEBUG about to go for up dataset named %s'%dataUp
             weightUp = wsUp.data(dataUp).sumEntries()
+            print 'ED DEBUG about to go for down dataset named %s'%dataDown
             weightDown = wsDown.data(dataDown).sumEntries()
             delta = weightUp - weightDown
             sumBoth = weightUp + weightDown
@@ -752,19 +757,25 @@ def printUEPSSyst():
             else: value = 1.
             procValues[cat] = value
           elif wsUp and not wsDown: #one variation missing so compare to central
+            print 'ED DEBUG got one ws'
             dataUp = "%s_%sUp_13TeV_%s" % (abbrev,uncertainty,cat) 
+            print 'ED DEBUG about to go for up dataset named %s'%dataUp
             weightUp = wsUp.data(dataUp).sumEntries()
+            print 'ED DEBUG about to go for nominal dataset named %s_%d_13TeV_%s'%(proc,options.mass,cat)
             weightNom = inWS.data("%s_%d_13TeV_%s"%(proc,options.mass,cat)).sumEntries()
             delta = weightUp - weightNom
             if weightNom > 0.: value = 1. + (delta / weightNom)
             else: value = 1.
             procValues[cat] = value
           elif wsDown and not wsUp: #one variation missing so compare to central
+            print 'ED DEBUG got one ws'
             dataDown = "%s_%sDown_13TeV_%s" % (abbrev,uncertainty,cat) 
-            weightDown = wsUp.data(dataDown).sumEntries()
+            print 'ED DEBUG about to go for down dataset named %s'%dataDown
+            weightDown = wsDown.data(dataDown).sumEntries()
+            print 'ED DEBUG about to go for nominal dataset named %s_%d_13TeV_%s'%(proc,options.mass,cat)
             weightNom = inWS.data("%s_%d_13TeV_%s"%(proc,options.mass,cat)).sumEntries()
             delta = weightNom - weightDown
-            if weightNom > 0.: value = 1. + (delta / weightNom )
+            if weightNom > 0.: value = 1. + (delta / weightNom)
             else: value = 1.
             procValues[cat] = value
           else:
@@ -773,7 +784,7 @@ def printUEPSSyst():
       for cat in options.cats:
         for proc in options.procs:
           proc = flashggProcs[proc]
-          if not ('GG2H' in proc or 'VBF' in proc): 
+          if not (proc.startswith('GG2H') or proc.startswith('VBF')): 
             lines[uncertainty] += '- '
             continue
           elif not (cat in incCats or cat in dijetCats): 

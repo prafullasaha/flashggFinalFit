@@ -55,6 +55,7 @@ def Init13TeV():
   SM.makeXS("tHq","13TeV")
   SM.makeXS("tHW","13TeV")
   SM.makeXS("bbH","13TeV")
+  SM.makeXS("ggZH","13TeV")
   SM.makeXS("WH","13TeV") 
   SM.makeXS("ZH","13TeV") 
   options.funcXSext = "13TeV" 

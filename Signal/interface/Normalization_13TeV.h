@@ -83,6 +83,7 @@ class Normalization_13TeV {
   std::map<double,double> XSectionMap_ZH2HQQ_VBFTOPO_JET3;
   std::map<double,double> XSectionMap_ZH2HQQ_REST;
   std::map<double,double> XSectionMap_BBH;
+  std::map<double,double> XSectionMap_GGZH;
   std::map<double,double> XSectionMap_THQ;
   std::map<double,double> XSectionMap_THW;
 };

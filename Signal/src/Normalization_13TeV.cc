@@ -26,6 +26,7 @@ int Normalization_13TeV::Init(int sqrtS){
         double valXSWH         = (double)TPython::Eval(Form("buildSMHiggsSignalXSBR.getXS(%f,'%s')",mH,"WH"));
         double valXSZH         = (double)TPython::Eval(Form("buildSMHiggsSignalXSBR.getXS(%f,'%s')",mH,"ZH"));
         double valXSbbH        = (double)TPython::Eval(Form("buildSMHiggsSignalXSBR.getXS(%f,'%s')",mH,"bbH"));
+        double valXSggZH        = (double)TPython::Eval(Form("buildSMHiggsSignalXSBR.getXS(%f,'%s')",mH,"ggZH"));
         double valXStHq        = (double)TPython::Eval(Form("buildSMHiggsSignalXSBR.getXS(%f,'%s')",mH,"tHq"));
         double valXStHW        = (double)TPython::Eval(Form("buildSMHiggsSignalXSBR.getXS(%f,'%s')",mH,"tHW"));
         double valXSQQ2HLNU    = valXSWH*(3.*10.86*0.01)/*3xBR(W to lv)*/;  
@@ -91,6 +92,7 @@ int Normalization_13TeV::Init(int sqrtS){
 
         XSectionMap_TTH[mH]                      = valXSttH;
         XSectionMap_BBH[mH]                      = valXSbbH;
+        XSectionMap_GGZH[mH]                     = valXSggZH;
         XSectionMap_THQ[mH]                      = valXStHq;
         XSectionMap_THW[mH]                      = valXStHW;
     }
@@ -172,6 +174,8 @@ TGraph * Normalization_13TeV::GetSigmaGraph(TString process)
           XSectionMap = &XSectionMap_ZH2HQQ_REST;
   } else if ( process == "BBH" || process == "testBBH"  ) {
           XSectionMap = &XSectionMap_BBH;
+  } else if ( process == "GGZH" || process == "testGGZH"  ) {
+          XSectionMap = &XSectionMap_GGZH;
   } else if ( process == "THQ" || process == "testTHQ" ) {
           XSectionMap = &XSectionMap_THQ;
   } else if ( process == "THW" || process == "testTHW" ) {
@@ -198,6 +202,8 @@ TGraph * Normalization_13TeV::GetSigmaGraph(TString process)
     XSectionMap = &XSectionMap_ZH2HQQ;
   } else if ( process=="BBH" ) {
     XSectionMap = &XSectionMap_BBH;
+  } else if ( process=="GGZH" ) {
+    XSectionMap = &XSectionMap_GGZH;
   } else if ( process=="THQ" ) {
     XSectionMap = &XSectionMap_THQ;
   } else if ( process=="THW" ) {
@@ -322,6 +328,8 @@ double Normalization_13TeV::GetXsection(double mass, TString HistName) {
           XSectionMap = &XSectionMap_ZH2HQQ_REST;
   } else if ( HistName.Contains("BBH") ) {
           XSectionMap = &XSectionMap_BBH;
+  } else if ( HistName.Contains("GGZH") ) {
+          XSectionMap = &XSectionMap_GGZH;
   } else if ( HistName.Contains("THQ") ) {
           XSectionMap = &XSectionMap_THQ;
   } else if ( HistName.Contains("THW") ) {
@@ -348,6 +356,8 @@ double Normalization_13TeV::GetXsection(double mass, TString HistName) {
     XSectionMap = &XSectionMap_ZH2HQQ;
   } else if ( HistName.Contains("BBH") ) {
     XSectionMap = &XSectionMap_BBH;
+  } else if ( HistName.Contains("GGZH") ) {
+    XSectionMap = &XSectionMap_GGZH;
   } else if ( HistName.Contains("THQ") ) {
     XSectionMap = &XSectionMap_THQ;
   } else if ( HistName.Contains("THW") ) {
