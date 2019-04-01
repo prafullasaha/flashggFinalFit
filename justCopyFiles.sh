@@ -1,4 +1,5 @@
-EXT="preappFinal2017"
+#EXT="preappFinal2017"
+EXT="approvalFinal2017"
 OUTDIR="outdir_${EXT}"
 
 if [ ! -d "Signal/$OUTDIR" ]; then

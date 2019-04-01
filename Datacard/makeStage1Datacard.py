@@ -882,23 +882,24 @@ def printUEPSSyst():
       allValues = {}
       for proc in options.procs:
         proc = flashggProcs[proc]
+        if not (proc.startswith('GG2H') or proc.startswith('VBF')): 
+          continue
         abbrev = ''
         for longP,shortP in tpMap.iteritems():
-          if proc.startswith(longP): abbrev = shortP
+          if proc.startswith(longP): 
+            abbrev = shortP
+            break
         procValues = {}
         wsUp = None
         wsDown = None
         for filename in uepsFiles[uncertainty]:
           if proc in filename and 'Up' in filename: 
             wsUp = (r.TFile(filename)).Get("tagsDumper/cms_hgg_13TeV")
-            continue
+            break
           elif proc in filename and 'Down' in filename: 
             wsDown = (r.TFile(filename)).Get("tagsDumper/cms_hgg_13TeV")
-            continue
-          else: continue
+            break
         for cat in options.cats:
-          if not (proc.startswith('GG2H') or proc.startswith('VBF')): 
-            continue
           elif not (cat in incCats or cat in dijetCats): 
             continue
           print 'ED DEBUG on proc, cat, unc: %s, %s, %s'%(proc, cat, uncertainty)
@@ -933,7 +934,7 @@ def printUEPSSyst():
             weightDown = wsDown.data(dataDown).sumEntries()
             print 'ED DEBUG about to go for nominal dataset named %s_%d_13TeV_%s'%(proc,options.mass,cat)
             weightNom = inWS.data("%s_%d_13TeV_%s"%(proc,options.mass,cat)).sumEntries()
-            delta = weightNom - weightDown
+            delta = weightDown - weightNom
             if weightNom > 0.: value = 1. + (delta / weightNom)
             else: value = 1.
             procValues[cat] = value

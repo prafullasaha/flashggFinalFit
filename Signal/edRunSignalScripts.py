@@ -15,9 +15,9 @@ sigPlotsOnly = False
 ##isSubmitted = True
 #phoSystOnly = True
 #useDCB = True
-sigFitOnly = True
+#sigFitOnly = True
 #packageOnly = True
-#sigPlotsOnly = True
+sigPlotsOnly = True
 
 print 'About to run signal scripts'
 print 'isSubmitted = %s, phoSystOnly = %s, sigFitOnly = %s, sigPlotsOnly = %s'%(str(isSubmitted), str(phoSystOnly), str(sigFitOnly), str(sigPlotsOnly))
