@@ -14,7 +14,8 @@ print 'About to run combined combine scripts'
 #setup files 
 #ext          = 'preappFinal2016'
 #ext          = 'preappFinal2017'
-ext          = 'preappFinal2016plus2017'
+#ext          = 'preappFinal2016plus2017'
+ext          = 'approvalFinal2016plus2017'
 print 'ext = %s'%ext
 
 #misc config

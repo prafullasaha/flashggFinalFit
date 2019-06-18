@@ -682,7 +682,9 @@ def plot1DNLL(returnErrors=False,xvar="", ext=""):
       # tree.quantileExpected==1: continue
       if tree.deltaNLL<0 and options.verbose: print "Warning, found -ve deltaNLL = ",  tree.deltaNLL, " at ", xv 
       if xv in [re[0] for re in res]: continue
-      if abs(2*tree.deltaNLL) < 100 and not (tree.deltaNLL<0. and options.removeNegative) and not (abs(tree.deltaNLL)<0.000001 and options.ignoreZeros) and not (xv<0.001 and options.stayPositive):
+      #if abs(2*tree.deltaNLL) < 100 and not (tree.deltaNLL<0. and options.removeNegative) and not (abs(tree.deltaNLL)<0.000001 and options.ignoreZeros) and not (xv<0.001 and options.stayPositive):
+      #if abs(2*tree.deltaNLL) < 40 and not (tree.deltaNLL<0. and options.removeNegative) and not (abs(tree.deltaNLL)<0.000001 and options.ignoreZeros) and not (xv<0.001 and options.stayPositive):
+      if abs(2*tree.deltaNLL) < 20 and not xv > 4.5 and not (tree.deltaNLL<0. and options.removeNegative) and not (abs(tree.deltaNLL)<0.000001 and options.ignoreZeros) and not (xv<0.001 and options.stayPositive): #FIXME
         res.append([xv,2*tree.deltaNLL,lcMH])
     res.sort()
 
@@ -1454,6 +1456,12 @@ def plotMPdfChComp(plottype="perTag"):
   for p, point in enumerate(catFits):
     grIndex = p//ppergraph
     pIndex  = p%ppergraph
+    if point[1] < 0.15: 
+      point[1] = 0. #FIXME
+      point[2] += 0.1 #FIXME
+    if catNames[p].count('2J high'): 
+      point[3] = point[1] #FIXME
+      point[2] += 0.1 #FIXME
     if options.groups==1: yshift=0.5
 
     elif options.groups%2==0 : # Even
@@ -1486,7 +1494,8 @@ def plotMPdfChComp(plottype="perTag"):
         #binlabel = "%s      %.2f ^{+%.2f}_{-%.2f}"%(catNames[p],point[1],point[2],point[1])
         binlabel =   "%s        %.1f ^{+%.1f}_{-%.1f}"%(catNames[p],point[1],point[2],point[1])
       else:
-        if (point[2]<0.354 or point[3]<0.354):
+        #if (point[2]<0.354 or point[3]<0.354):
+        if (point[2]<0.354 and point[3]<0.354): #FIXME
           binlabel = "%s      %.2f ^{+%.2f}_{-%.2f}"%(catNames[p],point[1],point[2],point[3])
           if (point[1]<0.001): 
             binlabel = "%s        %.1f ^{+%.1f}_{-%.1f}"%(catNames[p],point[1],point[2],point[3])
@@ -1499,7 +1508,8 @@ def plotMPdfChComp(plottype="perTag"):
         #binlabel =   "%s        %.1f ^{+%.1f}_{-%.1f}  "%(catNames[p],point[1],point[2],point[1])
         binlabel =   "%s        %.1f ^{_{+%.1f}}_{^{-%.1f}} "%(catNames[p],point[1],point[2],point[1])
       else:
-        if (point[2]<0.354 or point[3]<0.354):
+        #if (point[2]<0.354 or point[3]<0.354):
+        if (point[2]<0.354 and point[3]<0.354): #FIXME
           #binlabel = "%s       %.2f ^{+%.2f}_{-%.2f}"%(catNames[p],point[1],point[2],point[3])
           binlabel = "%s       %.2f ^{_{+%.2f}}_{^{-%.2f}}"%(catNames[p],point[1],point[2],point[3])
           if (point[1]<0.001): 
@@ -1637,8 +1647,8 @@ def plotMPdfChComp(plottype="perTag"):
   #doHatching = True
   doHatching = False
   if doStxs or options.percatchcomp:
-    pass #FIXME
-    #doHatching = True
+    #pass #FIXME
+    doHatching = True
   if doHatching:
     hatchBox = r.TBox(-0.2,0.,0.,len(catFits))
     hatchBox.SetFillStyle(3004)
