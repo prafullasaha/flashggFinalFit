@@ -1302,7 +1302,7 @@ void FinalModelConstruction::plotPdf(string outDir){
 		// to get correct normlization need to manipulate with bins and range
     extendPdf->plotOn(pdfPlot,Normalization(mass->getBins()/160.*(mass->getMax()-mass->getMin())/60.,RooAbsReal::RelativeExpected));
   }
-  string sim="Simulation Preliminary";
+  string sim="";
   pdfPlot->Draw();
   lumi_sqrtS = Form("13 TeV (%d)",year_);
   CMS_lumi( canv, 0,0, sim );

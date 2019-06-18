@@ -9,11 +9,11 @@
 // Global variables
 //
 
-TString cmsText     = "CMS";
+TString cmsText     = "";
 float cmsTextFont   = 61;  // default is helvetic-bold
 
 bool writeExtraText = false;
-TString extraText   = "Simulation Preliminary";
+TString extraText   = "";
 float extraTextFont = 52;  // default is helvetica-italics
 
 // text sizes and text offsets with respect to the top frame
