@@ -123,7 +123,8 @@ specOpts.add_option("--splitChannels",default=None)
 specOpts.add_option("--perProcessChannelCompatibilityPOI",default=None)
 specOpts.add_option("--perProcessMuPOI",default=None)
 specOpts.add_option("--doSTXS",default=False,action="store_true",help="Use STXS POIs")
-specOpts.add_option("--stxsFreezeNuisances",default="QCDscale_qqH,QCDscale_ttH,QCDscale_VH,pdf_Higgs_qqbar,pdf_Higgs_ttH,pdf_Higgs_gg,CMS_hgg_THU_ggH_Res,CMS_hgg_THU_ggH_Mu",help="The nuisances to be frozen when doing the STXS measurements")
+#specOpts.add_option("--stxsFreezeNuisances",default="QCDscale_qqH,QCDscale_ttH,QCDscale_VH,pdf_Higgs_qqbar,pdf_Higgs_ttH,pdf_Higgs_gg,CMS_hgg_THU_ggH_Res,CMS_hgg_THU_ggH_Mu",help="The nuisances to be frozen when doing the STXS measurements")
+specOpts.add_option("--stxsFreezeNuisances",default="QCDscale_qqH,pdf_Higgs_ggH,pdf_Higgs_qqH",help="The nuisances to be frozen when doing the STXS measurements")
 specOpts.add_option("--perTagChannelCompatibilityPOI",default=None)
 specOpts.add_option("--profileMH",default=False)
 specOpts.add_option("--toysFile",default=None)
@@ -874,8 +875,8 @@ def writeMultiDimFit(method=None,wsOnly=False):
           if opts.parallel and opts.dryRun:
                           parallel.run(system,(exec_line,))
           else:
-                          pass #FIXME
-                          #system(exec_line)
+                          system(exec_line)
+                          #pass #FIXME
               
         if wsOnly:
            return

@@ -84,8 +84,9 @@ def editDatacard(theYear='2016'):
   'CMS_hgg_scaleWeight_0','CMS_hgg_scaleWeight_1','CMS_hgg_scaleWeight_2','CMS_hgg_alphaSWeight_0',
   'CMS_hgg_pdfWeight_0','CMS_hgg_pdfWeight_1','CMS_hgg_pdfWeight_2','CMS_hgg_pdfWeight_3','CMS_hgg_pdfWeight_4','CMS_hgg_pdfWeight_5','CMS_hgg_pdfWeight_6','CMS_hgg_pdfWeight_7','CMS_hgg_pdfWeight_8','CMS_hgg_pdfWeight_9','CMS_hgg_pdfWeight_10','CMS_hgg_pdfWeight_11','CMS_hgg_pdfWeight_12','CMS_hgg_pdfWeight_13','CMS_hgg_pdfWeight_14','CMS_hgg_pdfWeight_15','CMS_hgg_pdfWeight_16','CMS_hgg_pdfWeight_17','CMS_hgg_pdfWeight_18','CMS_hgg_pdfWeight_19','CMS_hgg_pdfWeight_20','CMS_hgg_pdfWeight_21','CMS_hgg_pdfWeight_22','CMS_hgg_pdfWeight_23','CMS_hgg_pdfWeight_24','CMS_hgg_pdfWeight_25','CMS_hgg_pdfWeight_26','CMS_hgg_pdfWeight_27','CMS_hgg_pdfWeight_28','CMS_hgg_pdfWeight_29','CMS_hgg_pdfWeight_30','CMS_hgg_pdfWeight_31','CMS_hgg_pdfWeight_32','CMS_hgg_pdfWeight_33','CMS_hgg_pdfWeight_34','CMS_hgg_pdfWeight_35','CMS_hgg_pdfWeight_36','CMS_hgg_pdfWeight_37','CMS_hgg_pdfWeight_38','CMS_hgg_pdfWeight_39','CMS_hgg_pdfWeight_40','CMS_hgg_pdfWeight_41','CMS_hgg_pdfWeight_42','CMS_hgg_pdfWeight_43','CMS_hgg_pdfWeight_44','CMS_hgg_pdfWeight_45','CMS_hgg_pdfWeight_46','CMS_hgg_pdfWeight_47','CMS_hgg_pdfWeight_48','CMS_hgg_pdfWeight_49','CMS_hgg_pdfWeight_50','CMS_hgg_pdfWeight_51','CMS_hgg_pdfWeight_52','CMS_hgg_pdfWeight_53','CMS_hgg_pdfWeight_54','CMS_hgg_pdfWeight_55','CMS_hgg_pdfWeight_56','CMS_hgg_pdfWeight_57','CMS_hgg_pdfWeight_58','CMS_hgg_pdfWeight_59',
   'CMS_hgg_THU_ggH_Mu','CMS_hgg_THU_ggH_Res','CMS_hgg_THU_ggH_Mig01','CMS_hgg_THU_ggH_Mig12','CMS_hgg_THU_ggH_VBF2j','CMS_hgg_THU_ggH_VBF3j','CMS_hgg_THU_ggH_PT60','CMS_hgg_THU_ggH_PT120','CMS_hgg_THU_ggH_qmtop',
-  'QCDscale_qqH','QCDscale_VH','QCDscale_ttH',
-  'pdf_Higgs_qqbar','pdf_Higgs_gg','pdf_Higgs_ttH',
+  'QCDscale_qqH','QCDscale_VH','QCDscale_ttH','QCDscale_bbH','QCDscale_tHq','QCDscale_tHW','QCDscale_ggZH',
+  'pdf_Higgs_ggH','pdf_Higgs_qqH','pdf_Higgs_VH','pdf_Higgs_ttH','pdf_Higgs_bbH','pdf_Higgs_tHq','pdf_Higgs_tHW','pdf_Higgs_ggZH',
+  'CMS_hgg_UE','CMS_hgg_PS',
   'CMS_hgg_MET_JEC','CMS_hgg_MET_JER','CMS_hgg_MET_Unclustered','CMS_hgg_MET_PhotonScale',
   'CMS_hgg_JER_TTH','CMS_hgg_JEC_TTH',
   'CMS_hgg_phoIdMva','CMS_hgg_PreselSF',
@@ -152,4 +153,5 @@ def main():
   doCardCombination()
 
 if __name__ == '__main__':
-  main()
+  #main()
+  renameFiles(theDir='temp2017', yearIndex=1)

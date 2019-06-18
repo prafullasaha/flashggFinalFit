@@ -12,8 +12,8 @@ r.gStyle.SetNumberContours(500)
 lumi = 77.4
 
 fits  = od()
-#fits['Inclusive'] = ['r']
-#fits['Stage0'] = ['r_qqH', 'r_ggH']
+fits['Inclusive'] = ['r']
+fits['Stage0'] = ['r_qqH', 'r_ggH']
 fits['Stage1'] = reversed(['r_qqH', 'r_ggH_BSM', 'r_ggH_GE2J', 'r_ggH_1J_high', 'r_ggH_1J_med', 'r_ggH_1J_low', 'r_ggH_0J'])
 fits['Stage1Minimal'] = reversed(['r_qqH_Rest', 'r_qqH_3J', 'r_qqH_2J', 
                             'r_ggH_VBFTOPO', 'r_ggH_2J_BSM', 'r_ggH_GE2J_high', 'r_ggH_GE2J_med', 'r_ggH_GE2J_low', 

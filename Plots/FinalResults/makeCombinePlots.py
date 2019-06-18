@@ -682,7 +682,8 @@ def plot1DNLL(returnErrors=False,xvar="", ext=""):
       # tree.quantileExpected==1: continue
       if tree.deltaNLL<0 and options.verbose: print "Warning, found -ve deltaNLL = ",  tree.deltaNLL, " at ", xv 
       if xv in [re[0] for re in res]: continue
-      if abs(2*tree.deltaNLL) < 100 and not (tree.deltaNLL<0. and options.removeNegative) and not (abs(tree.deltaNLL)<0.000001 and options.ignoreZeros) and not (xv<0.001 and options.stayPositive):
+      #if abs(2*tree.deltaNLL) < 100 and not (tree.deltaNLL<0. and options.removeNegative) and not (abs(tree.deltaNLL)<0.000001 and options.ignoreZeros) and not (xv<0.001 and options.stayPositive):
+      if abs(2*tree.deltaNLL) < 100 and not (tree.deltaNLL<0. and options.removeNegative) and not (abs(tree.deltaNLL)<0.000001 and options.ignoreZeros) and not (xv<0.001 and options.stayPositive) and not (x.count('ggH') and xv<0.8):
         res.append([xv,2*tree.deltaNLL,lcMH])
     res.sort()
 
@@ -1326,10 +1327,14 @@ def plotMPdfChComp(plottype="perTag"):
            elif "ggH_VBF" in catName: catName ="#scale[1.5]{ggH VBF-like}"
            elif "ggH" in catName: catName ="#scale[1.5]{ggH}"
            #elif "GG2H" in catName: catName ="#scale[1.5]{ggH}"
-           if "qqH_Rest" in catName: catName ="#scale[1.5]{VBF rest}"
-           elif "qqH_2J" in catName: catName ="#scale[1.5]{VBF 2J-like}"
-           elif "qqH_3J" in catName: catName ="#scale[1.5]{VBF 3J-like}"
-           elif "qqH" in catName: catName ="#scale[1.5]{VBF}"
+           #if "qqH_Rest" in catName: catName ="#scale[1.5]{VBF rest}"
+           #elif "qqH_2J" in catName: catName ="#scale[1.5]{VBF 2J-like}"
+           #elif "qqH_3J" in catName: catName ="#scale[1.5]{VBF 3J-like}"
+           #elif "qqH" in catName: catName ="#scale[1.5]{VBF}"
+           if "qqH_Rest" in catName: catName ="#scale[1.5]{qqH other}"
+           elif "qqH_2J" in catName: catName ="#scale[1.5]{qqH 2J-like}"
+           elif "qqH_3J" in catName: catName ="#scale[1.5]{qqH 3J-like}"
+           elif "qqH" in catName: catName ="#scale[1.5]{qqH}"
            #if "ttH" in catName: catName ="#scale[1.5]{#sigma_{ttH}/#sigma_{theo}}"
            if "ttH" in catName: catName ="#scale[1.5]{TTH}"
            if "TTH" in catName: catName ="#scale[1.5]{ttH}"
@@ -1387,6 +1392,35 @@ def plotMPdfChComp(plottype="perTag"):
     k+=1
     loffiles.pop(0)
     options.outname=cache
+
+  #FIXME ed hack
+  if 'Stage1Minimal' in options.outname:
+    points = [ #stage 1 minimal
+    ['',  0.000,  1.705,  0.000,  9., 9.], # qqH rest 
+    ['',  0.000,  0.667,  0.000,  9., 9.], # qqH 3J-like
+    ['',  1.285,  0.638,  0.505,  9., 9.], # qqH 2J-like
+    ['',  0.000,  0.523,  0.000,  9., 9.], # ggH VBF-like
+    ['',  2.757,  1.051,  1.204,  9., 9.], # ggH 2J BSM
+    ['',  0.550,  0.840,  0.550,  9., 9.], # ggH 2J high
+    ['',  2.690,  1.044,  1.149,  9., 9.], # ggH 2J med 
+    ['',  0.289,  1.446,  0.289,  9., 9.], # ggH 2J low
+    ['',  1.760,  1.647,  1.461,  9., 9.], # ggH 1J BSM
+    ['',  1.972,  0.969,  0.722,  9., 9.], # ggH 1J high
+    ['',  0.488,  0.470,  0.428,  9., 9.], # ggH 1J med
+    ['',  1.546,  0.662,  0.567,  9., 9.], # ggH 1J low
+    ['',  1.174,  0.201,  0.200,  9., 9.]  # ggH 0J
+    ]
+  elif 'Stage1' in options.outname:
+    points = [ #stage 1
+    ['',  0.817,  0.426,  0.324,  9., 9.], # qqH
+    ['',  2.183,  0.830,  0.770,  9., 9.], # ggH BSM
+    ['',  0.753,  0.553,  0.517,  9., 9.], # ggH GE2J
+    ['',  1.687,  0.942,  0.664,  9., 9.], # ggH 1J high
+    ['',  0.731,  0.433,  0.410,  9., 9.], # ggH 1J med
+    ['',  1.344,  0.616,  0.539,  9., 9.], # ggH 1J low
+    ['',  1.181,  0.202,  0.199,  9., 9.]  # ggH 0J
+    ]
+
   
   rMin=1000.
   rMax=-1000.
@@ -1486,7 +1520,8 @@ def plotMPdfChComp(plottype="perTag"):
         #binlabel = "%s      %.2f ^{+%.2f}_{-%.2f}"%(catNames[p],point[1],point[2],point[1])
         binlabel =   "%s        %.1f ^{+%.1f}_{-%.1f}"%(catNames[p],point[1],point[2],point[1])
       else:
-        if (point[2]<0.354 or point[3]<0.354):
+        #if (point[2]<0.354 or point[3]<0.354):
+        if (point[2]<0.354 and point[3]<0.354): #FIXME
           binlabel = "%s      %.2f ^{+%.2f}_{-%.2f}"%(catNames[p],point[1],point[2],point[3])
           if (point[1]<0.001): 
             binlabel = "%s        %.1f ^{+%.1f}_{-%.1f}"%(catNames[p],point[1],point[2],point[3])
@@ -1499,7 +1534,8 @@ def plotMPdfChComp(plottype="perTag"):
         #binlabel =   "%s        %.1f ^{+%.1f}_{-%.1f}  "%(catNames[p],point[1],point[2],point[1])
         binlabel =   "%s        %.1f ^{_{+%.1f}}_{^{-%.1f}} "%(catNames[p],point[1],point[2],point[1])
       else:
-        if (point[2]<0.354 or point[3]<0.354):
+        #if (point[2]<0.354 or point[3]<0.354):
+        if (point[2]<0.354 and point[3]<0.354): #FIXME
           #binlabel = "%s       %.2f ^{+%.2f}_{-%.2f}"%(catNames[p],point[1],point[2],point[3])
           binlabel = "%s       %.2f ^{_{+%.2f}}_{^{-%.2f}}"%(catNames[p],point[1],point[2],point[3])
           if (point[1]<0.001): 
@@ -1519,7 +1555,8 @@ def plotMPdfChComp(plottype="perTag"):
     catGraph1sig[grIndex].SetLineWidth(2)
     catGraph1sig[grIndex].SetMarkerStyle(21)
     catGraph1sig[grIndex].SetMarkerColor(int(options.colors[grIndex]))
-    catGraph1sig[grIndex].SetMarkerSize(1.5)
+    #catGraph1sig[grIndex].SetMarkerSize(1.5)
+    catGraph1sig[grIndex].SetMarkerSize(1.1) #FIXME
   
     catGraph2sig[grIndex].SetLineColor(int(options.colors[grIndex]))
     catGraph2sig[grIndex].SetLineWidth(2)
@@ -1582,7 +1619,9 @@ def plotMPdfChComp(plottype="perTag"):
   #elif plottype =="perProc" and options.percatchcomp: leg.AddEntry(catGraph1sig[0],"Per category #pm 1#sigma","LP")
   #elif plottype =="perProc": leg.AddEntry(catGraph1sig[0],"Per process #pm 1#sigma","LP")
   elif plottype =="perProc" and options.percatchcomp: leg.AddEntry(catGraph1sig[0],"Per category 68% CL","LP")
-  elif plottype =="perProc": leg.AddEntry(catGraph1sig[0],"Per process 68% CL","LP")
+  #elif plottype =="perProc": leg.AddEntry(catGraph1sig[0],"Per process 68% CL","LP") #FIXME
+  elif plottype =="perProc": leg.AddEntry(catGraph1sig[0],"Observation","LP") #FIXME
+  #elif plottype =="perProc": leg.AddEntry(catGraph1sig[0],"Per process 2#DeltaNLL = #pm1","LP")
   if not options.do1sig and not options.noComb: 
     if plottype =="perTag":
       leg.AddEntry(catGraph2sig[0],"Per category #pm 2#sigma","LP");
@@ -1639,6 +1678,8 @@ def plotMPdfChComp(plottype="perTag"):
   if doStxs or options.percatchcomp:
     pass #FIXME
     #doHatching = True
+  if 'Stage1Minimal' in options.outname:
+    doHatching = True
   if doHatching:
     hatchBox = r.TBox(-0.2,0.,0.,len(catFits))
     hatchBox.SetFillStyle(3004)
@@ -1684,34 +1725,37 @@ def plotMPdfChComp(plottype="perTag"):
       boxIndexMap = {"GG2H":1,"VBF":0} #order of processes
     elif 'Stage1Minimal' in options.outname:
       procUncertMap = od([ 
-                       ("GG2H_0J"       ,[sqrt(0.038*0.038+0.001*0.001), sqrt(0.038*0.038+0.001*0.001)]), #sum in quadrature of uncerts removed, plus then minus
-                       ("GG2H_1J_low"   ,[sqrt(0.052*0.052+0.045*0.045), sqrt(0.052*0.052+0.045*0.045)]), #ggH values taken from 2017 scheme
-                       ("GG2H_1J_med"   ,[sqrt(0.052*0.052+0.045*0.045), sqrt(0.052*0.052+0.045*0.045)]),
-                       ("GG2H_1J_high"  ,[sqrt(0.052*0.052+0.045*0.045), sqrt(0.052*0.052+0.045*0.045)]),
-                       ("GG2H_1J_BSM"   ,[sqrt(0.052*0.052+0.045*0.045), sqrt(0.052*0.052+0.045*0.045)]),
-                       ("GG2H_GE2J_low" ,[sqrt(0.089*0.089+0.089*0.089), sqrt(0.089*0.089+0.089*0.089)]),
-                       ("GG2H_GE2J_med" ,[sqrt(0.089*0.089+0.089*0.089), sqrt(0.089*0.089+0.089*0.089)]),
-                       ("GG2H_GE2J_high",[sqrt(0.089*0.089+0.089*0.089), sqrt(0.089*0.089+0.089*0.089)]),
-                       ("GG2H_2J_BSM"   ,[sqrt(0.089*0.089+0.089*0.089), sqrt(0.089*0.089+0.089*0.089)]),
-                       ("GG2H_VBFTOPO"   ,[0.                           , 0.                          ]),
-                       ("VBF_2J"        ,[sqrt(0.004*0.004+0.021*0.021), sqrt(0.003*0.003+0.021*0.021)]),
-                       ("VBF_3J"        ,[sqrt(0.004*0.004+0.021*0.021), sqrt(0.003*0.003+0.021*0.021)]),
-                       ("VBF_Rest"      ,[sqrt(0.004*0.004+0.021*0.021), sqrt(0.003*0.003+0.021*0.021)])
+                       ("GG2H_0J"       ,[0.056, 0.056]), #sum in quadrature of uncerts removed, plus then minus
+                       ("GG2H_1J_low"   ,[0.135, 0.135 ]), #ggH values taken from 2017 scheme
+                       ("GG2H_1J_med"   ,[0.134, 0.134 ]),
+                       ("GG2H_1J_high"  ,[0.189, 0.189 ]),
+                       ("GG2H_1J_BSM"   ,[0.237, 0.237 ]),
+                       ("GG2H_GE2J_low" ,[0.233, 0.233 ]),
+                       ("GG2H_GE2J_med" ,[0.225, 0.225 ]),
+                       ("GG2H_GE2J_high",[0.258, 0.258 ]),
+                       ("GG2H_2J_BSM"   ,[0.307, 0.307 ]),
+                       ("GG2H_VBFTOPO"  ,[0.341, 0.341 ]),
+                       ("VBF_2J"        ,[0.024, 0.024]),
+                       ("VBF_3J"        ,[0.023, 0.023]),
+                       ("VBF_Rest"      ,[0.067, 0.067])
                        ])
       boxIndexMap = { name:i for i,name in enumerate(reversed(procUncertMap.keys())) }
     elif 'Stage1' in options.outname:
-      procUncertMap = {"GG2H_0J"        :[sqrt(0.038*0.038+0.001*0.001), sqrt(0.038*0.038+0.001*0.001)], #sum in quadrature of uncerts removed, plus then minus
-                       "GG2H_1J_low"    :[sqrt(0.052*0.052+0.045*0.045), sqrt(0.052*0.052+0.045*0.045)], #ggH values taken from 2017 scheme
-                       "GG2H_1J_med"    :[sqrt(0.052*0.052+0.045*0.045), sqrt(0.052*0.052+0.045*0.045)],
-                       "GG2H_1J_high"   :[sqrt(0.052*0.052+0.045*0.045), sqrt(0.052*0.052+0.045*0.045)],
-                       "GG2H_BSM"       :[sqrt(0.079*0.079+0.077*0.077), sqrt(0.079*0.079+0.077*0.077)],
-                       "GG2H_GE2J"      :[sqrt(0.078*0.078+0.078*0.078), sqrt(0.078*0.078+0.078*0.078)],
-                       "VBF"            :[sqrt(0.004*0.004+0.021*0.021), sqrt(0.003*0.003+0.021*0.021)]}
-      boxIndexMap = {"GG2H_0J":6,"GG2H_1J_low":5, "GG2H_1J_med":4, "GG2H_1J_high":3, "GG2H_BSM":2, "GG2H_GE2J":1, "VBF":0}
+      procUncertMap = od([
+                       ("GG2H_0J"        ,[0.051, 0.051]), #sum in quadrature of uncerts removed, plus then minus
+                       ("GG2H_1J_low"    ,[0.135, 0.135]), #ggH values taken from 2017 scheme
+                       ("GG2H_1J_med"    ,[0.134, 0.134]),
+                       ("GG2H_1J_high"   ,[0.189, 0.189]),
+                       ("GG2H_GE2J"      ,[0.203, 0.203]),
+                       ("GG2H_BSM"       ,[0.267, 0.267]),
+                       ("VBF"            ,[0.055, 0.055])
+                       ])
+      boxIndexMap = { name:i for i,name in enumerate(reversed(procUncertMap.keys())) }
     smBoxes = {}
     for proc in procUncertMap.keys():
       uncertVal =  procUncertMap[proc]
       index =  boxIndexMap[proc]
+      print 'ED DEBUG on proc %s with uncerts +%.3f, -%.3f'%(proc, uncertVal[0], uncertVal[1])
       smBoxes[proc] = r.TBox(1.-uncertVal[1],index,1.+uncertVal[0],index+1)
       smBoxes[proc].SetFillStyle(1001)
       #smBoxes[proc].SetFillColor(r.kGreen-3) #default darkish green
@@ -1738,7 +1782,8 @@ def plotMPdfChComp(plottype="perTag"):
       lat2.DrawLatex(0.57,0.40,"m_{H} = %s GeV"%options.mhval)
     else:
       if not doStxs: lat2.DrawLatex(0.57,0.50,"m_{H} %s"%options.mhval)
-      else: lat2.DrawLatex(0.57,0.6,"m_{H} %s"%options.mhval)
+      #else: lat2.DrawLatex(0.57,0.6,"m_{H} %s"%options.mhval)
+      else: lat2.DrawLatex(0.67,0.6,"m_{H} %s"%options.mhval)
 
   for gr in range(options.groups):
     #print gr
