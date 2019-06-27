@@ -881,7 +881,7 @@ vector<RooAbsPdf*> FinalModelConstruction::build_DCBpGaus_Pdf(string name, int n
   sig_fit_gaus->SetName(Form("sigma_gaus_%s",ext.c_str()));
   RooAbsReal *sigma_gaus = getSigmaWithPhotonSyst(sig_fit_gaus,Form("sig_gaus_%s",ext.c_str()));// add systmatic nuisances if needed
 	//RooGaussian *gaus = new RooGaussian(Form("gaus_%s",ext.c_str()),Form("gaus_%s",ext.c_str()),*mass,*mean_dcb,*sigma_gaus);
-  RooRealVar *width = new RooRealVar("GW","Higgs Width",0.004,0.,5.);
+  RooRealVar *width = new RooRealVar("GH","Higgs Width",0.004,0.,5.);
 	RooVoigtian *gaus = new RooVoigtian(Form("gaus_%s",ext.c_str()),Form("gaus_%s",ext.c_str()),*mass,*mean_dcb,*width,*sigma_gaus);
   RooAbsReal *frac = splines[Form("frac_constrained")];
   if (verbosity_>1) std::cout << "[INFO] retrieved parameter frac_constrained"  << " ? " << frac<< std::endl;
@@ -982,7 +982,7 @@ vector<RooAbsPdf*> FinalModelConstruction::buildPdf(string name, int nGaussians,
   vector <TGraph * > sigmaGraphs;
   
   // loop through the chosen number of Gaussians and make each of them in turn
-  RooRealVar *width = new RooRealVar("GW","Higgs Width",0.004,0.,5.);
+  RooRealVar *width = new RooRealVar("GH","Higgs Width",0.004,0.,5.);
   for (int g=0; g<nGaussians; g++){
     // get the params from splines, and add systematics nuisances as needed
     RooAbsReal *dm = splines[Form("dm_g%d",g)];

@@ -1,0 +1,50 @@
+#proc cat nGausRV nGausWV
+GG2H UntaggedTag_0 3 1
+GG2H UntaggedTag_1 3 3
+GG2H UntaggedTag_2 4 3
+GG2H UntaggedTag_3 4 3
+GG2H VBFTag_0 -1 -1 VBF VBFTag_0
+GG2H VBFTag_1 -1 -1 VBF VBFTag_1
+GG2H VBFTag_2 4 -1
+QQ2HLL UntaggedTag_0 -1 -1 GG2H UntaggedTag_0
+QQ2HLL UntaggedTag_1 -1 -1 GG2H UntaggedTag_1
+QQ2HLL UntaggedTag_2 2 -1
+QQ2HLL UntaggedTag_3 3 1
+QQ2HLL VBFTag_0 3 1
+QQ2HLL VBFTag_1 3 1
+QQ2HLL VBFTag_2 3 1
+QQ2HLNU UntaggedTag_0 -1 -1 GG2H UntaggedTag_0
+QQ2HLNU UntaggedTag_1 3 -1 GG2H UntaggedTag_1
+QQ2HLNU UntaggedTag_2 4 1
+QQ2HLNU UntaggedTag_3 3 1
+QQ2HLNU VBFTag_0 3 1
+QQ2HLNU VBFTag_1 3 1
+QQ2HLNU VBFTag_2 -1 -1 VBF VBFTag_2 VBF VBFTag_2
+TTH UntaggedTag_0 3 3
+TTH UntaggedTag_1 -1 -1 GG2H UntaggedTag_1 GG2H UntaggedTag_1
+TTH UntaggedTag_2 3 -1
+TTH UntaggedTag_3 3 -1 GG2H UntaggedTag_3
+TTH VBFTag_0 -1 -1 VBF VBFTag_0
+TTH VBFTag_1 -1 -1 VBF VBFTag_1
+TTH VBFTag_2 -1 -1 VBF VBFTag_2
+VBF UntaggedTag_0 -1 -1 GG2H UntaggedTag_0 GG2H UntaggedTag_0
+VBF UntaggedTag_1 4 3
+VBF UntaggedTag_2 4 3
+VBF UntaggedTag_3 4 3
+VBF VBFTag_0 4 3
+VBF VBFTag_1 4 3
+VBF VBFTag_2 4 3
+WH2HQQ UntaggedTag_0 3 3
+WH2HQQ UntaggedTag_1 3 -1 GG2H UntaggedTag_1
+WH2HQQ UntaggedTag_2 3 1
+WH2HQQ UntaggedTag_3 3 1
+WH2HQQ VBFTag_0 -1 -1 VBF VBFTag_0
+WH2HQQ VBFTag_1 -1 -1 VBF VBFTag_1
+WH2HQQ VBFTag_2 -1 -1 VBF VBFTag_2
+ZH2HQQ UntaggedTag_0 2 2
+ZH2HQQ UntaggedTag_1 3 3
+ZH2HQQ UntaggedTag_2 2 -1
+ZH2HQQ UntaggedTag_3 3 -1 GG2H UntaggedTag_3
+ZH2HQQ VBFTag_0 3 3
+ZH2HQQ VBFTag_1 3 3
+ZH2HQQ VBFTag_2 -1 -1 VBF VBFTag_2
