@@ -211,6 +211,27 @@ print "[INFO] Get Intlumi from file, value : ", intL," pb^{-1}", " sqrts ", sqrt
 
 
 ###############################################################################
+#Set up veto for unneeded proc, cat combinations
+toVeto = []
+for cat in options.cats:
+  catTot = 0.
+  for proc in options.procs:
+    if proc.count('bkg'): continue
+    print 'ED DEBUG %s_%d_13TeV_%s'%(flashggProcs[proc],options.mass,cat)
+    catTot += inWS.data("%s_%d_13TeV_%s"%(flashggProcs[proc],options.mass,cat)).sumEntries()
+  for proc in options.procs:
+    if proc.count('bkg'): continue
+    print 'ED DEBUG %s_%d_13TeV_%s'%(flashggProcs[proc],options.mass,cat)
+    procTot = inWS.data("%s_%d_13TeV_%s"%(flashggProcs[proc],options.mass,cat)).sumEntries()
+    if 1000 * procTot < catTot:
+      print 'ED DEBUG adding the combination %s,%s to the veto list'%(proc,cat)
+      toVeto.append( (proc,cat) )
+print 'the veto list is:'
+print toVeto
+###############################################################################
+
+
+###############################################################################
 ## SHAPE SYSTEMATIC SETUP  ####################################################
 ###############################################################################
 file_ext = 'mva'
@@ -439,6 +460,7 @@ def printTheorySysts():
         outFile.write('%-35s  lnN   '%(name))
         for c in options.cats:
           for p in options.procs:
+            if toVeto.count( (p,c) ): continue #ED FIXME
             if "bkg" in flashggProcs[p] or "BBH" in flashggProcs[p] or "THQ" in flashggProcs[p] or "THW" in flashggProcs[p] or "GGZH" in flashggProcs[p] or (('QCDscale' in systName or 'scaleWeight' in systName) and options.newGghScheme):
               outFile.write('- ')
               continue
@@ -450,6 +472,7 @@ def printTheorySysts():
       outFile.write('%-35s  lnN   '%(name))
       for c in options.cats:
         for p in options.procs:
+          if toVeto.count( (p,c) ): continue #ED FIXME
           #with new WG1 prescription, specific other nuisances deal with ggH theory uncerts
           if not "GG2H" in flashggProcs[p]:
             outFile.write('- ')
@@ -483,6 +506,7 @@ def printTheorySysts():
         outFile.write('%-35s  lnN   '%(name))
         for c in options.cats:
           for p in options.procs:
+            if toVeto.count( (p,c) ): continue #ED FIXME
             #with new WG1 prescription, specific other nuisances deal with ggH theory uncerts
             if "bkg" in flashggProcs[p] or "BBH" in flashggProcs[p] or "THQ" in flashggProcs[p] or "THW" in flashggProcs[p] or "GGZH" in flashggProcs[p] or ('scaleWeight' in systName and options.newGghScheme and 'ggH' in p):
               outFile.write('- ')
@@ -507,6 +531,7 @@ def printTheorySysts():
     outFile.write('%-35s  lnN   '%(syst.replace("_up",""))) # if it doesn;t contain "_up", the replace has no effect anyway 
     for c in options.cats:
       for p in options.procs:
+            if toVeto.count( (p,c) ): continue #ED FIXME
             #if "bkg" in flashggProcs[p] or "BBH" in flashggProcs[p] or "THQ" in flashggProcs[p] or "THW" in flashggProcs[p]:
             if "bkg" in flashggProcs[p]:
               outFile.write('- ')
@@ -816,6 +841,7 @@ def printBRSyst():
   outFile.write('%-35s   lnN   '%('BR_hgg'))
   for c in options.cats:
     for p in options.procs:
+      if toVeto.count( (p,c) ): continue #ED FIXME
       if '%s:%s'%(p,c) in options.toSkip: continue
       if p in bkgProcs:
         outFile.write('- ')
@@ -829,6 +855,7 @@ def printLumiSyst():
   outFile.write('%-35s   lnN   '%('lumi_%dTeV'%sqrts))
   for c in options.cats:
     for p in options.procs:
+      if toVeto.count( (p,c) ): continue #ED FIXME
       if '%s:%s'%(p,c) in options.toSkip: continue
       if p in bkgProcs:
         outFile.write('- ')
@@ -842,6 +869,7 @@ def printTrigSyst():
   outFile.write('%-35s   lnN   '%'CMS_hgg_n_trig_eff')
   for c in options.cats:
     for p in options.procs:
+      if toVeto.count( (p,c) ): continue #ED FIXME
       if '%s:%s'%(p,c) in options.toSkip: continue
       if p in bkgProcs:
         outFile.write('- ')
@@ -1125,6 +1153,16 @@ def printFileOptions():
   print '[INFO] File opts...'
   for typ, info in fileDetails.items():
     for c in options.cats:
+      print 'considering the combination %s,%s to be vetoed'%(typ,c)
+      print 'is it in the following list?'
+      print toVeto
+      print 'if so should see an explicit veto message below'
+      if toVeto.count( (typ,c) ): 
+        print 'ED DEBUG explicitly vetoing %s,%s combination'%(typ,c)
+        continue #ED FIXME
+      else:
+        print 'ED DEBUG not vetoing %s,%s combination'%(typ,c)
+      print
       file = info[0].replace('$CAT','%s'%c)
       wsname = info[1]
       pdfname = info[2].replace('$CHANNEL','%s'%c)
@@ -1152,6 +1190,7 @@ def printObsProcBinLines():
   outFile.write('%-15s '%'bin')
   for c in options.cats:
     for p in options.procs:
+      if toVeto.count( (p,c) ): continue #ED FIXME
       if '%s:%s'%(p,c) in options.toSkip: continue
       outFile.write('%s_%dTeV '%(c,sqrts))
   outFile.write('\n')
@@ -1159,6 +1198,7 @@ def printObsProcBinLines():
   outFile.write('%-15s '%'process')
   for c in options.cats:
     for p in options.procs:
+      if toVeto.count( (p,c) ): continue #ED FIXME
       if '%s:%s'%(p,c) in options.toSkip: continue
       outFile.write('%s '%p)
   outFile.write('\n')
@@ -1166,6 +1206,7 @@ def printObsProcBinLines():
   outFile.write('%-15s '%'process')
   for c in options.cats:
     for p in options.procs:
+      if toVeto.count( (p,c) ): continue #ED FIXME
       if '%s:%s'%(p,c) in options.toSkip: continue
       outFile.write('%d '%procId[p])
   outFile.write('\n')
@@ -1173,6 +1214,7 @@ def printObsProcBinLines():
   outFile.write('%-15s '%'rate')
   for c in options.cats:
     for p in options.procs:
+      if toVeto.count( (p,c) ): continue #ED FIXME
       if '%s:%s'%(p,c) in options.toSkip: continue
       #if p in bkgProcs:
       if p == 'bkg_mass': #even if not doing systematics, eg bbH, still want to scale by lumi...
@@ -1363,6 +1405,7 @@ def printFlashggSysts():
       outFile.write('%-35s   lnN   '%(name))
       for c in options.cats:
         for p in options.procs:
+          if toVeto.count( (p,c) ): continue #ED FIXME
           if '%s:%s'%(p,c) in options.toSkip: continue
           #print "p,c is",p,c
           if p in bkgProcs or ('pdfWeight' in flashggSyst and ('ggH_hgg' not in p and 'qqH_hgg' not in p)) or ('THU_ggH' in flashggSyst and 'ggH_hgg' not in p):
@@ -1542,6 +1585,7 @@ def printVbfSysts():
       outFile.write('%-35s   lnN   '%name)
       for c in options.cats:
         for p in options.procs:
+          if toVeto.count( (p,c) ): continue #ED FIXME
           if '%s:%s'%(p,c) in options.toSkip: continue
           if 'ggH_hgg' in p: thisUncert = vbfSystVal[0]
           elif 'qqH_hgg' in p: thisUncert = vbfSystVal[1]
@@ -1601,6 +1645,7 @@ def printLepSysts():
   outFile.write('%-35s   lnN   '%('CMS_scale_met_old'))
   for c in options.cats:
     for p in options.procs:
+      if toVeto.count( (p,c) ): continue #ED FIXME
       if '%s:%s'%(p,c) in options.toSkip: 
         outFile.write('- ')
         continue
@@ -1632,6 +1677,7 @@ def printTTHSysts():
       outFile.write('%-35s   lnN   '%(name))
       for c in options.cats:
         for p in options.procs:
+          if toVeto.count( (p,c) ): continue #ED FIXME
           #gc.collect()
           if '%s:%s'%(p,c) in options.toSkip: continue
           if p in bkgProcs or ('pdfWeight' in tthSyst and ('ggH_hgg' not in p and 'qqH_hgg' not in p)):
@@ -1655,6 +1701,7 @@ def printSimpleTTHSysts():
     outFile.write('%-35s   lnN   '%systName)
     for c in options.cats:
       for p in options.procs:
+        if toVeto.count( (p,c) ): continue #ED FIXME
         if '%s:%s'%(p,c) in options.toSkip: 
           outFile.write('- ')
           continue
@@ -1692,6 +1739,7 @@ if ((options.justThisSyst== "batch_split") or options.justThisSyst==""):
   printNuisParams()
   printMultiPdf()
   printBRSyst()
+  exit(1)
   printLumiSyst()
   #printTrigSyst() # now a weight in the main roodataset!
   printSimpleTTHSysts()
