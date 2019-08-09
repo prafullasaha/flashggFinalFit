@@ -117,7 +117,8 @@ baseCombProcs = {'GG2H':'ggH_hgg','VBF':'qqH_hgg','TTH':'ttH_hgg','QQ2HLNU':'WH_
 for proc in tempProcs:
   combProc = ''
   for baseProc in baseCombProcs.keys():
-    if proc.startswith(baseProc): combProc = proc.replace(baseProc,baseCombProcs[baseProc],1)
+    #if proc.startswith(baseProc): combProc = proc.replace(baseProc,baseCombProcs[baseProc],1)
+    if proc.startswith(baseProc): combProc = '%s_hgg'%proc.replace(baseProc,baseCombProcs[baseProc],1).replace('_hgg','')
   combProcs[proc] = combProc
 combProcs['bkg_mass'] = 'bkg_mass' 
 flashggProcs = odict()
@@ -538,7 +539,11 @@ def printTheorySysts():
               continue
             else:
               #FIXME hack to return to stage 0 style procs
-              p = p.split('_hgg')[0] + '_hgg'
+              #p = p.split('_hgg')[0] + '_hgg'
+              if p.split('_')[0]=='WH' or p.split('_')[0]=='ZH':
+                p = '%s_%s'%(p.split('_')[0], p.split('_')[1]) + '_hgg'
+              else: 
+                p = p.split('_')[0] + '_hgg'
               value = 1+theorySystAbsScale[p][theorySystAbsScale['names'].index(syst)] 
               if asymmetric :
                 valueDown = 1+theorySystAbsScale[p][theorySystAbsScale['names'].index(syst.replace("_up","_down"))]
@@ -1408,7 +1413,7 @@ def printFlashggSysts():
           if toVeto.count( (p,c) ): continue #ED FIXME
           if '%s:%s'%(p,c) in options.toSkip: continue
           #print "p,c is",p,c
-          if p in bkgProcs or ('pdfWeight' in flashggSyst and ('ggH_hgg' not in p and 'qqH_hgg' not in p)) or ('THU_ggH' in flashggSyst and 'ggH_hgg' not in p):
+          if p in bkgProcs or ('pdfWeight' in flashggSyst and ('ggH' not in p and 'qqH' not in p)) or ('THU_ggH' in flashggSyst and 'ggH' not in p):
             outFile.write('- ')
           else:
             outFile.write(getFlashggLine(p,c,flashggSyst))
@@ -1587,9 +1592,9 @@ def printVbfSysts():
         for p in options.procs:
           if toVeto.count( (p,c) ): continue #ED FIXME
           if '%s:%s'%(p,c) in options.toSkip: continue
-          if 'ggH_hgg' in p: thisUncert = vbfSystVal[0]
-          elif 'qqH_hgg' in p: thisUncert = vbfSystVal[1]
-          elif ('ttH_hgg' in p and affectsTTH): thisUncert = vbfSystVal[2]
+          if 'ggH' in p: thisUncert = vbfSystVal[0]
+          elif 'qqH' in p: thisUncert = vbfSystVal[1]
+          elif ('ttH' in p and affectsTTH): thisUncert = vbfSystVal[2]
           else:
             outFile.write('- ')
             continue
@@ -1649,7 +1654,7 @@ def printLepSysts():
       if '%s:%s'%(p,c) in options.toSkip: 
         outFile.write('- ')
         continue
-      if p in bkgProcs or 'ggH_hgg' in p or 'qqH_hgg' in p: 
+      if p in bkgProcs or 'ggH' in p or 'qqH' in p: 
         outFile.write('- ')
         continue
       else:
@@ -1680,7 +1685,7 @@ def printTTHSysts():
           if toVeto.count( (p,c) ): continue #ED FIXME
           #gc.collect()
           if '%s:%s'%(p,c) in options.toSkip: continue
-          if p in bkgProcs or ('pdfWeight' in tthSyst and ('ggH_hgg' not in p and 'qqH_hgg' not in p)):
+          if p in bkgProcs or ('pdfWeight' in tthSyst and ('ggH' not in p and 'qqH' not in p)):
             outFile.write('- ')
           elif ('JEC' in tthSyst or 'JER' in tthSyst) and (c in vhHadCat or c in tthCats): #also want this to apply to VH Hadronic, WHLeptonic and VHLeptonicLoose
             outFile.write(getFlashggLine(p,c,tthSyst))
@@ -1705,7 +1710,7 @@ def printSimpleTTHSysts():
         if '%s:%s'%(p,c) in options.toSkip: 
           outFile.write('- ')
           continue
-        if 'ggH_hgg' in p and c in tthCats:
+        if 'ggH' in p and c in tthCats:
           outFile.write('%6.4f/%6.4f '%(1.-systVal,1.+systVal))
         else:
           outFile.write('- ')
@@ -1739,7 +1744,6 @@ if ((options.justThisSyst== "batch_split") or options.justThisSyst==""):
   printNuisParams()
   printMultiPdf()
   printBRSyst()
-  exit(1)
   printLumiSyst()
   #printTrigSyst() # now a weight in the main roodataset!
   printSimpleTTHSysts()
