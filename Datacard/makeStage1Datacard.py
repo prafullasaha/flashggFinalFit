@@ -220,11 +220,14 @@ for cat in options.cats:
     if proc.count('bkg'): continue
     print 'ED DEBUG %s_%d_13TeV_%s'%(flashggProcs[proc],options.mass,cat)
     catTot += inWS.data("%s_%d_13TeV_%s"%(flashggProcs[proc],options.mass,cat)).sumEntries()
+  print
+  print 'ED DEBUG total yield for category %s is %.5f'%(cat,catTot)
+  print 
   for proc in options.procs:
     if proc.count('bkg'): continue
     print 'ED DEBUG %s_%d_13TeV_%s'%(flashggProcs[proc],options.mass,cat)
     procTot = inWS.data("%s_%d_13TeV_%s"%(flashggProcs[proc],options.mass,cat)).sumEntries()
-    if 1000 * procTot < catTot:
+    if 1000. * procTot < catTot:
       print 'ED DEBUG adding the combination %s,%s to the veto list'%(proc,cat)
       toVeto.append( (proc,cat) )
 print 'the veto list is:'
@@ -1161,9 +1164,13 @@ def printFileOptions():
       print 'considering the combination %s,%s to be vetoed'%(typ,c)
       print 'is it in the following list?'
       print toVeto
+      if not (typ.count('bkg') or typ.count('data_obs')):
+        print 'or does it have zero yield? looking for the following string: %s_%d_13TeV_%s'%(flashggProcs[typ],options.mass,cat)
+        print 'or does it have zero yield? Yield = %.5f'%inWS.data("%s_%d_13TeV_%s"%(flashggProcs[typ],options.mass,cat)).sumEntries()
       print 'if so should see an explicit veto message below'
       if toVeto.count( (typ,c) ): 
         print 'ED DEBUG explicitly vetoing %s,%s combination'%(typ,c)
+        print 
         continue #ED FIXME
       else:
         print 'ED DEBUG not vetoing %s,%s combination'%(typ,c)
