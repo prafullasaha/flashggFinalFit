@@ -1,0 +1,9 @@
++JobFlavour = "workday"
+
+executable  = outdir_Initial_tHq/fTestJobs/sub2.sh
+output  = outdir_Initial_tHq/fTestJobs/JOB2.out
+error  = outdir_Initial_tHq/fTestJobs/JOB2.err
+log  = outdir_Initial_tHq/fTestJobs/JOB2_htc.log
+
+max_retries = 1
+queue 1

@@ -1,0 +1,15 @@
+Error in <TSystem::ExpandFileName>: input: $HOME/.root.mimes, output: $HOME/.root.mimes
+Warning in <TClassTable::Add>: class RooPowerLaw already in TClassTable
+Warning in <TClassTable::Add>: class RooDoubleCBFast already in TClassTable
+Warning in <TClassTable::Add>: class LCRooChi2Var already in TClassTable
+Warning in <TClassTable::Add>: class LCRooAddition already in TClassTable
+Error in <TCling::RegisterModule>: cannot find dictionary module RootDict_rdict.pcm
+Warning in <TClassTable::Add>: class Packager already in TClassTable
+Warning in <TClassTable::Add>: class WSTFileWrapper already in TClassTable
+Warning in <TClassTable::Add>: class LinearInterp already in TClassTable
+Warning in <TClassTable::Add>: class InitialFit already in TClassTable
+Warning in <TClassTable::Add>: class RooGaussBern2D already in TClassTable
+Warning in <TClassTable::Add>: class SimultaneousFit already in TClassTable
+Warning in <TClassTable::Add>: class Normalization_8TeV already in TClassTable
+Warning in <TClassTable::Add>: class FinalModelConstruction already in TClassTable
+Error in <TCling::RegisterModule>: cannot find dictionary module RootDict_rdict.pcm

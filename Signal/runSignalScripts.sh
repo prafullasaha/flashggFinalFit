@@ -113,6 +113,10 @@ fi
 if [[ $BATCH == "LSF" ]]; then
 DEFAULTQUEUE=1nh
 fi
+if [[ $BATCH == "HTCONDOR" ]]; then
+DEFAULTQUEUE=hep.q
+fi
+
 BSOPT=""
 
 if [[ $BS == "" ]]; then

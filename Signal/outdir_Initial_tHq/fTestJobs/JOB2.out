@@ -1,0 +1,30 @@
+/pool/condor/dir_27631
+[INFO] datfilename_	/afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTestJobs/outputs/config_3.dat
+[INFO] filename_	/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_TuneCP5.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_TuneCP5.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
+ [INFO] considering only TTHLeptonicTag_2
+inside WST contructor, about to loop over files
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_TuneCP5.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_TuneCP5.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_TuneCP5.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_TuneCP5.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root opened workspace named: tagsDumper/cms_hgg_13TeV
+inside WST contructor, done loop over files
+[INFO] Opened files OK!
+[INFO] Got mass variable 0x3cc5fa0
+[INFO] start looping through nProcs 1 to book rooPlots 
+[INFO] on proc TTH start looping through nCats 4 to book RooPlots 
+[INFO] start looping through nCats 4 to get datasets 
+ [INFO] skipping TTHLeptonicTag_0
+ [INFO] skipping TTHLeptonicTag_1
+[INFO] on cat TTHLeptonicTag_2 start looping through procs  1 to get datasets 
+[INFO] got roorealvars from ws ? mass 0x3cc5fa0 dz 0x117e1fa0
+[WSTFileWrapper] Uh oh, never got a good RooAbsData with name TTH_125_13TeV_TTHLeptonicTag_2
+[INFO] got dataset data0 ? 0now make empty clones 
+[INFO] but it is a null pointer! extit 

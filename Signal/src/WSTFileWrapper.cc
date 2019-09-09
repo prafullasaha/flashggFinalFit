@@ -68,7 +68,7 @@ std::pair<std::string,std::string> WSTFileWrapper::convertTemplatedName(std::str
   std::map<std::string,std::string> tpMap;
   tpMap["GG2H"] = "ggh";
   tpMap["VBF"] = "vbf";
-  tpMap["TTH"] = "tth";
+  tpMap["TTH"] = "TTH";
   tpMap["QQ2HLNU"] = "wh";
   tpMap["QQ2HLL"] = "zh";
   tpMap["WH2HQQ"] = "wh";
@@ -76,6 +76,7 @@ std::pair<std::string,std::string> WSTFileWrapper::convertTemplatedName(std::str
   tpMap["testBBH"] = "bbh";
   tpMap["testTHW"] = "th";
   tpMap["testTHQ"] = "th";
+  tpMap["THQ"] = "THQ";
   for( std::map<std::string,std::string>::iterator it = tpMap.begin(); it != tpMap.end(); it++ ) {
     if( theDataName.BeginsWith(it->first) ) { 
       theProcName = it->first;

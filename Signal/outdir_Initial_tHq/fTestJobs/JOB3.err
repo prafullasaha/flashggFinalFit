@@ -1,0 +1,19 @@
+Error in <TSystem::ExpandFileName>: input: $HOME/.root.mimes, output: $HOME/.root.mimes
+Warning in <TClassTable::Add>: class RooPowerLaw already in TClassTable
+Warning in <TClassTable::Add>: class RooDoubleCBFast already in TClassTable
+Warning in <TClassTable::Add>: class LCRooChi2Var already in TClassTable
+Warning in <TClassTable::Add>: class LCRooAddition already in TClassTable
+Error in <TCling::RegisterModule>: cannot find dictionary module RootDict_rdict.pcm
+Warning in <TClassTable::Add>: class Packager already in TClassTable
+Warning in <TClassTable::Add>: class WSTFileWrapper already in TClassTable
+Warning in <TClassTable::Add>: class LinearInterp already in TClassTable
+Warning in <TClassTable::Add>: class InitialFit already in TClassTable
+Warning in <TClassTable::Add>: class RooGaussBern2D already in TClassTable
+Warning in <TClassTable::Add>: class SimultaneousFit already in TClassTable
+Warning in <TClassTable::Add>: class Normalization_8TeV already in TClassTable
+Warning in <TClassTable::Add>: class FinalModelConstruction already in TClassTable
+Error in <TCling::RegisterModule>: cannot find dictionary module RootDict_rdict.pcm
+Info in <TCanvas::Print>: pdf file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/rv_TTH_THQLeptonicTag.pdf has been created
+Info in <TCanvas::Print>: png file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/rv_TTH_THQLeptonicTag.png has been created
+Info in <TCanvas::Print>: pdf file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/wv_TTH_THQLeptonicTag.pdf has been created
+Info in <TCanvas::Print>: png file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/wv_TTH_THQLeptonicTag.png has been created
