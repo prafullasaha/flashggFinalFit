@@ -1,7 +1,10 @@
-/pool/condor/dir_24535
-[INFO] datfilename_	/afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTestJobs/outputs/config_7.dat
-[INFO] filename_	/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_TuneCP5.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_TuneCP5.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
- [INFO] considering only TTHLeptonicTag_2
+PREPARING TO RUN 
+[INFO] Masses to skip... 
+	
+[INFO] Masses to process... 
+	120 125 130 
+[INFO] Using functional form: Sum of N Gaussians 
+[INFO] Using fitting strategy: Simultaneous Signal Fitting (Simultaneous fit of all mass points, where functional form parameters are themselves functions of MH) 
 inside WST contructor, about to loop over files
 [WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root
 [WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root opened workspace named: tagsDumper/cms_hgg_13TeV
@@ -16,15 +19,12 @@ inside WST contructor, about to loop over files
 [WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
 [WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root opened workspace named: tagsDumper/cms_hgg_13TeV
 inside WST contructor, done loop over files
-[INFO] Opened files OK!
-[INFO] Got mass variable 0x393ed70
-[INFO] start looping through nProcs 1 to book rooPlots 
-[INFO] on proc THQ start looping through nCats 4 to book RooPlots 
-[INFO] start looping through nCats 4 to get datasets 
- [INFO] skipping TTHLeptonicTag_0
- [INFO] skipping TTHLeptonicTag_1
-[INFO] on cat TTHLeptonicTag_2 start looping through procs  1 to get datasets 
-[INFO] got roorealvars from ws ? mass 0x393ed70 dz 0x1145ad90
-[WSTFileWrapper] Uh oh, never got a good RooAbsData with name THQ_125_13TeV_TTHLeptonicTag_2
-[INFO] got dataset data0 ? 0now make empty clones 
-[INFO] but it is a null pointer! extit 
+-----------------------------------------------------------------
+[INFO] Running fits for proc:TTH - cat:THQLeptonicTag with nGausRV:4 nGausWV:3
+-----------------------------------------------------------------
+[WSTFileWrapper] Got non-zero RooAbsData from /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root with name TTH_120_13TeV_THQLeptonicTag
+[INFO] too few entries to use for fits in WV! nEntries 25 sumEntries 0.00599347userSkipWV 0
+[ERROR] could not find the index of the category GG2H, UntaggedTag_2you wished to look up. Exit!
+FAIL
+/afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal
+RM RUN 

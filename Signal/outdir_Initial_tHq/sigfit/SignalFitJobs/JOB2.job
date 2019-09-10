@@ -1,0 +1,9 @@
++JobFlavour = "workday"
+
+executable  = outdir_Initial_tHq/sigfit/SignalFitJobs/sub2.sh
+output  = outdir_Initial_tHq/sigfit/SignalFitJobs/Job2.out
+error  = outdir_Initial_tHq/sigfit/SignalFitJobs/Job2.err
+log  = outdir_Initial_tHq/sigfit/SignalFitJobs/Job2_htc.log
+
+max_retries = 1
+queue 1

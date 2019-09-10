@@ -1,4 +1,4 @@
-/pool/condor/dir_3419
+/pool/condor/dir_17215
 [INFO] datfilename_	/afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTestJobs/outputs/config_1.dat
 [INFO] filename_	/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_TuneCP5.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_TuneCP5.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
  [INFO] considering only TTHLeptonicTag_0
@@ -17,14 +17,14 @@ inside WST contructor, about to loop over files
 [WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root opened workspace named: tagsDumper/cms_hgg_13TeV
 inside WST contructor, done loop over files
 [INFO] Opened files OK!
-[INFO] Got mass variable 0x3113f30
+[INFO] Got mass variable 0x3b70be0
 [INFO] start looping through nProcs 1 to book rooPlots 
-[INFO] on proc TTH start looping through nCats 4 to book RooPlots 
-[INFO] start looping through nCats 4 to get datasets 
+[INFO] on proc TTH start looping through nCats 3 to book RooPlots 
+[INFO] start looping through nCats 3 to get datasets 
 [INFO] on cat TTHLeptonicTag_0 start looping through procs  1 to get datasets 
-[INFO] got roorealvars from ws ? mass 0x3113f30 dz 0x10c30100
+[INFO] got roorealvars from ws ? mass 0x3b70be0 dz 0x1168da40
 [WSTFileWrapper] Got non-zero RooAbsData from /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root with name TTH_125_13TeV_TTHLeptonicTag_0
-[INFO] got dataset data0 ? 0x313cd14now make empty clones 
+[INFO] got dataset data0 ? 0x3b999c4now make empty clones 
 [INFO] and it looks like this : RooDataSet::TTH_125_13TeV_TTHLeptonicTag_0[CMS_hgg_mass,dZ,centralObjectWeight,vtxprob,ptbal,ptasym,logspt2,p2conv,nconv,vtxmva,vtxdz,vtx_x,vtx_y,vtx_z,dipho_sumpt,dipho_cosphi,dipho_mass,dipho_pt,dipho_phi,dipho_eta,dipho_e,dipho_PtoM,cosphi,sigmaMrvoM,sigmaMwvoM,weight:weight] = 19057 entries (1.99953 weighted)
 [INFO] Workspace contains : 
 RooDataSet::THQ_120_13TeV_VHMetTag_pdfWeights[centralObjectWeight,pdfWeight_0,pdfWeight_1,pdfWeight_2,pdfWeight_3,pdfWeight_4,pdfWeight_5,pdfWeight_6,pdfWeight_7,pdfWeight_8,pdfWeight_9,pdfWeight_10,pdfWeight_11,pdfWeight_12,pdfWeight_13,pdfWeight_14,pdfWeight_15,pdfWeight_16,pdfWeight_17,pdfWeight_18,pdfWeight_19,pdfWeight_20,pdfWeight_21,pdfWeight_22,pdfWeight_23,pdfWeight_24,pdfWeight_25,pdfWeight_26,pdfWeight_27,pdfWeight_28,pdfWeight_29,pdfWeight_30,pdfWeight_31,pdfWeight_32,pdfWeight_33,pdfWeight_34,pdfWeight_35,pdfWeight_36,pdfWeight_37,pdfWeight_38,pdfWeight_39,pdfWeight_40,pdfWeight_41,pdfWeight_42,pdfWeight_43,pdfWeight_44,pdfWeight_45,pdfWeight_46,pdfWeight_47,pdfWeight_48,pdfWeight_49,pdfWeight_50,pdfWeight_51,pdfWeight_52,pdfWeight_53,pdfWeight_54,pdfWeight_55,pdfWeight_56,pdfWeight_57,scaleWeight_0,scaleWeight_1,scaleWeight_2,scaleWeight_3,scaleWeight_4,scaleWeight_5,scaleWeight_6,scaleWeight_7,scaleWeight_8,alphaSWeight_0,alphaSWeight_1,weight,numW,weight:sumW] = 3 entries (0 weighted)
@@ -198,13 +198,13 @@ RooDataSet::TTH_130_13TeV_TTHLeptonicTag_1[CMS_hgg_mass,dZ,centralObjectWeight,v
 RooDataSet::TTH_130_13TeV_UntaggedTag_0[CMS_hgg_mass,dZ,centralObjectWeight,vtxprob,ptbal,ptasym,logspt2,p2conv,nconv,vtxmva,vtxdz,vtx_x,vtx_y,vtx_z,dipho_sumpt,dipho_cosphi,dipho_mass,dipho_pt,dipho_phi,dipho_eta,dipho_e,dipho_PtoM,cosphi,sigmaMrvoM,sigmaMwvoM,weight:weight] = 0 entries (0 weighted)
 RooDataSet::TTH_130_13TeV_VHLeptonicLooseTag[CMS_hgg_mass,dZ,centralObjectWeight,vtxprob,ptbal,ptasym,logspt2,p2conv,nconv,vtxmva,vtxdz,vtx_x,vtx_y,vtx_z,dipho_sumpt,dipho_cosphi,dipho_mass,dipho_pt,dipho_phi,dipho_eta,dipho_e,dipho_PtoM,cosphi,sigmaMrvoM,sigmaMwvoM,weight:weight] = 0 entries (0 weighted)
 RooDataSet::TTH_130_13TeV_UntaggedTag_1[CMS_hgg_mass,dZ,centralObjectWeight,vtxprob,ptbal,ptasym,logspt2,p2conv,nconv,vtxmva,vtxdz,vtx_x,vtx_y,vtx_z,dipho_sumpt,dipho_cosphi,dipho_mass,dipho_pt,dipho_phi,dipho_eta,dipho_e,dipho_PtoM,cosphi,sigmaMrvoM,sigmaMwvoM,weight:weight] = 0 entries (0 weighted)
-[INFO] Retrieved combined RV/WV data TTH_125_13TeV_TTHLeptonicTag_0? 0x3141e74
+[INFO] Retrieved combined RV/WV data TTH_125_13TeV_TTHLeptonicTag_0? 0x3b9eb24
 [INFO] Retrieved unreduced dataRooDataSet::TTH_125_13TeV_TTHLeptonicTag_0[CMS_hgg_mass,dZ,centralObjectWeight,vtxprob,ptbal,ptasym,logspt2,p2conv,nconv,vtxmva,vtxdz,vtx_x,vtx_y,vtx_z,dipho_sumpt,dipho_cosphi,dipho_mass,dipho_pt,dipho_phi,dipho_eta,dipho_e,dipho_PtoM,cosphi,sigmaMrvoM,sigmaMwvoM,weight:weight] = 19057 entries (1.99953 weighted)
 [INFO] Retrieved reduced   dataRooDataSet::TTH_125_13TeV_TTHLeptonicTag_0[CMS_hgg_mass,dZ,weight:weight] = 19057 entries (1.99953 weighted)
 [INFO] Retrieved reducedRV dataRooDataSet::TTH_125_13TeV_TTHLeptonicTag_0[CMS_hgg_mass,dZ,weight:weight] = 19048 entries (1.99838 weighted)
 [INFO] Retrieved reducedWV dataRooDataSet::TTH_125_13TeV_TTHLeptonicTag_0[CMS_hgg_mass,dZ,weight:weight] = 9 entries (0.0011572 weighted)
-[#0] ERROR:InputArguments -- RooPlot::findObject(frame_CMS_hgg_mass_ed7e5f0) cannot find object <last>
-[#0] ERROR:InputArguments -- RooPlot::chiSquare(frame_CMS_hgg_mass_ed7e5f0) cannot find curve
+[#0] ERROR:InputArguments -- RooPlot::findObject(frame_CMS_hgg_mass_f7db2c0) cannot find object <last>
+[#0] ERROR:InputArguments -- RooPlot::chiSquare(frame_CMS_hgg_mass_f7db2c0) cannot find curve
 [INFO] 	 RV: proc TTH cat TTHLeptonicTag_0 order 1 diffinDof 3 prevNll 0 this Nll 0.00472844 myNll 0 chi2 -0.00945687 chi2_bis -1 prob_old 0, prob_new 0
 [INFO] 	 RV: proc TTH cat TTHLeptonicTag_0 order 2 diffinDof 3 prevNll 0.00472844 this Nll 0.0045097 myNll 0 chi2 0.000437463 chi2_bis 9.04972 prob_old 0.999998, prob_new 0.107097
 [INFO] 	 RV: proc TTH cat TTHLeptonicTag_0 order 3 diffinDof 3 prevNll 0.0045097 this Nll 0.00450927 myNll 0 chi2 8.63646e-07 chi2_bis 3.16092 prob_old 1, prob_new 0.923857
@@ -213,7 +213,6 @@ RooDataSet::TTH_130_13TeV_UntaggedTag_1[CMS_hgg_mass,dZ,centralObjectWeight,vtxp
 [INFO] 	 WV: proc TTH cat TTHLeptonicTag_0 order 2 diffinDof 3 prevNll 3.40945e-06 thosNll 1.13744e-05 myNll0 chi20 chi2 bis 1.02881 prob_old 1 prob_new 0.960209
 [INFO] 	 WV: proc TTH cat TTHLeptonicTag_0 order 3 diffinDof 3 prevNll 1.13744e-05 thosNll 1.25636e-05 myNll0 chi20 chi2 bis 0.97879 prob_old 1 prob_new 0.998379
  [INFO] skipping TTHLeptonicTag_1
- [INFO] skipping TTHLeptonicTag_2
  [INFO] skipping THQLeptonicTag
 13 TeV
 13 TeV

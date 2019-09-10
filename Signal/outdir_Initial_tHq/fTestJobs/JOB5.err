@@ -13,7 +13,7 @@ Warning in <TClassTable::Add>: class SimultaneousFit already in TClassTable
 Warning in <TClassTable::Add>: class Normalization_8TeV already in TClassTable
 Warning in <TClassTable::Add>: class FinalModelConstruction already in TClassTable
 Error in <TCling::RegisterModule>: cannot find dictionary module RootDict_rdict.pcm
-Info in <TCanvas::Print>: pdf file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/rv_THQ_TTHLeptonicTag_1.pdf has been created
-Info in <TCanvas::Print>: png file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/rv_THQ_TTHLeptonicTag_1.png has been created
-Info in <TCanvas::Print>: pdf file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/wv_THQ_TTHLeptonicTag_1.pdf has been created
-Info in <TCanvas::Print>: png file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/wv_THQ_TTHLeptonicTag_1.png has been created
+Info in <TCanvas::Print>: pdf file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/rv_THQ_THQLeptonicTag.pdf has been created
+Info in <TCanvas::Print>: png file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/rv_THQ_THQLeptonicTag.png has been created
+Info in <TCanvas::Print>: pdf file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/wv_THQ_THQLeptonicTag.pdf has been created
+Info in <TCanvas::Print>: png file /afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal/outdir_Initial_tHq/fTest/wv_THQ_THQLeptonicTag.png has been created

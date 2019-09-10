@@ -1,0 +1,30 @@
+PREPARING TO RUN 
+[INFO] Masses to skip... 
+	
+[INFO] Masses to process... 
+	120 125 130 
+[INFO] Using functional form: Sum of N Gaussians 
+[INFO] Using fitting strategy: Simultaneous Signal Fitting (Simultaneous fit of all mass points, where functional form parameters are themselves functions of MH) 
+inside WST contructor, about to loop over files
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_TuneCP5.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_TuneCP5.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_TuneCP5.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_TuneCP5.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root opened workspace named: tagsDumper/cms_hgg_13TeV
+[WSTFileWrapper] successfully opened this file: /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root
+[WSTFileWrapper] on file /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root opened workspace named: tagsDumper/cms_hgg_13TeV
+inside WST contructor, done loop over files
+-----------------------------------------------------------------
+[INFO] Running fits for proc:TTH - cat:TTHLeptonicTag_1 with nGausRV:4 nGausWV:3
+-----------------------------------------------------------------
+[WSTFileWrapper] Got non-zero RooAbsData from /afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root with name TTH_120_13TeV_TTHLeptonicTag_1
+[INFO] too few entries to use for fits in WV! nEntries 13 sumEntries 0.00414056userSkipWV 0
+[ERROR] could not find the index of the category GG2H, UntaggedTag_2you wished to look up. Exit!
+FAIL
+/afs/cern.ch/work/p/prsaha/public/flashgg_FinalFit/CMSSW_8_1_0/src/flashggFinalFit/Signal
+RM RUN 
