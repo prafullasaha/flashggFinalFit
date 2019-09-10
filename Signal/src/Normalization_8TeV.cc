@@ -48,6 +48,7 @@ int Normalization_8TeV::Init(int sqrtS){
         XSectionMap_testBBH[mH]	= valXSbbH;
         XSectionMap_testTHQ[mH]	= 0.074;
         XSectionMap_testTHW[mH]	= 0.015;
+	XSectionMap_THQ[mH] = 0.074;
 	
     }
 
@@ -184,7 +185,9 @@ TGraph * Normalization_8TeV::GetSigmaGraph(TString process)
 		XSectionMap = &XSectionMap_testTHQ;
 	} else if ( process.Contains("testTHW") ) {
 		XSectionMap = &XSectionMap_testTHW;
-	} else {
+	} else if ( process.Contains("THQ") ) {
+                XSectionMap = &XSectionMap_THQ;
+        } else {
 		std::cout << "[WARNING] Warning ggh, vbf, wh, zh, wzh, tth or grav or STXS proc not found in histname!!!!" << std::endl;
 		//exit(1);
 	}
@@ -267,7 +270,9 @@ double Normalization_8TeV::GetXsection(double mass, TString HistName) {
 		XSectionMap = &XSectionMap_testTHQ;
 	} else if (HistName.Contains("testTHW")) {
 		XSectionMap = &XSectionMap_testTHW;
-	} else {
+	} else if (HistName.Contains("THQ")) {
+                XSectionMap = &XSectionMap_THQ;
+        } else {
 		std::cout << "[WARNING] Warning ggh, vbf, wh, zh, wzh, tth or grav or STXS proc not found in " << HistName << std::endl;
 		//exit(1);
 	}
