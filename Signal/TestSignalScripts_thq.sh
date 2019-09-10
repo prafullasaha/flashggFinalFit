@@ -19,7 +19,7 @@ PROCS="TTH,THQ"
 #PROCS="GG2H,VBF,TTH,QQ2HLL,ZH2HQQ"
 echo "Procs are $PROCS"
 #CATS="UntaggedTag_0,UntaggedTag_1,UntaggedTag_2,UntaggedTag_3,VBFTag_0,VBFTag_1,VBFTag_2,TTHHadronicTag,TTHLeptonicTag,ZHLeptonicTag,WHLeptonicTag,VHLeptonicLooseTag,VHHadronicTag,VHMetTag"
-CATS="TTHLeptonicTag_0,TTHLeptonicTag_1,TTHLeptonicTag_2,THQLeptonicTag"
+CATS="TTHLeptonicTag_0,TTHLeptonicTag_1,THQLeptonicTag"
 
 echo "Cats are $CATS"
 INTLUMI=41.5
@@ -54,7 +54,7 @@ echo "Masslist is $MASSLIST"
 #./runSignalScripts.sh -i $FILE -p $PROCS -f $CATS --ext $EXT --intLumi $INTLUMI --batch $BATCH --massList $MASSLIST --bs $BSWIDTH \
 #                        --smears $SMEARS --scales $SCALES --scalesCorr $SCALESCORR --scalesGlobal $SCALESGLOBAL --useSSF 1 --useDCB_1G 0 --calcPhoSystOnly
 ./runSignalScripts.sh -i $FILE -p $PROCS -f $CATS --ext $EXT --intLumi $INTLUMI --batch $BATCH --massList $MASSLIST --bs $BSWIDTH \
-                        --smears $SMEARS --scales $SCALES --scalesCorr $SCALESCORR --scalesGlobal $SCALESGLOBAL --useSSF 1 --useDCB_1G 0 
+                        --smears $SMEARS --scales $SCALES --scalesCorr $SCALESCORR --scalesGlobal $SCALESGLOBAL --useSSF 1 --useDCB_1G 0 --sigFitOnly 
 
 
 
