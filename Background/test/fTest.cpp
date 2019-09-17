@@ -607,7 +607,7 @@ int main(int argc, char* argv[]){
   string outDir;
   string outfilename;
   bool is2011=false;
-  bool verbose=false;
+  bool verbose=true;
   bool saveMultiPdf=false;
 	int isFlashgg_ =1;
 string flashggCatsStr_;

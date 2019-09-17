@@ -104,6 +104,9 @@ if [[ $BATCH == "LSF" ]]; then
 DEFAULTQUEUE=1nh
 BATCHQUERY=bjobs
 fi
+if [[ $BATCH == "HTCONDOR" ]]; then
+DEFAULTQUEUE=hep.q
+fi
 
 ####################################################
 ################## PSEUDODATAONLY ###################
