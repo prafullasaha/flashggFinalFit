@@ -5,25 +5,25 @@
 #FILE="/eos/user/p/prsaha/flashggFinalFit_inputs/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_THQ.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_THQ.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_THQ.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root"
 #FILE="/eos/user/p/prsaha/flashggFinalFit_inputs/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_TuneCP5.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_TuneCP5.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_tthjet/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/eos/user/p/prsaha/flashggFinalFit_inputs/result_tthjet/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root"
 #FILE="/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_tth/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_tth/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_tth/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_ggh/output_GluGluHToGG_M120_13TeV_amcatnloFXFX_pythia8_GG2H.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_ggh/output_GluGluHToGG_M125_13TeV_amcatnloFXFX_pythia8_GG2H.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_ggh/output_GluGluHToGG_M125_13TeV_amcatnloFXFX_pythia8_GG2H.root"
-FILE="/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_thq/output_THQ_ctcvcp_HToGG_M120_13TeV-madgraph-pythia8_TuneCP5_THQ.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_thq/output_THQ_ctcvcp_HToGG_M125_13TeV-madgraph-pythia8_TuneCP5_THQ.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_thq/output_THQ_ctcvcp_HToGG_M130_13TeV-madgraph-pythia8_TuneCP5_THQ.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_tth/output_ttHJetToGG_M120_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_tth/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_tth/output_ttHJetToGG_M130_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root"
+FILE="/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_ggh/output_GluGluHToGG_M120_13TeV_amcatnloFXFX_pythia8_GG2H.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_ggh/output_GluGluHToGG_M125_13TeV_amcatnloFXFX_pythia8_GG2H.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_ggh/output_GluGluHToGG_M130_13TeV_amcatnloFXFX_pythia8_GG2H.root"
 ##########################################################################################################################################################
 
 #EXT="Test_HTCondor"
 #EXT="Test_EtScales_Mass_All_Update2Cat"
 #EXT="Test_EtScales_Mass_All_LegendaryCat"
-EXT="Initial_tHq"
+EXT="Initial_test"
 echo "Ext is $EXT"
 
 OUTDIR="outdir_$EXT"
-PROCS="THQ,TTH"
-#PROCS="GG2H,TTH"
+
+PROCS="GG2H"
 #PROCS="GG2H,VBF,TTH,QQ2HLNU,WH2HQQ"
 #PROCS="GG2H,VBF,TTH,QQ2HLL,ZH2HQQ"
 echo "Procs are $PROCS"
 #CATS="UntaggedTag_0,UntaggedTag_1,UntaggedTag_2,UntaggedTag_3,VBFTag_0,VBFTag_1,VBFTag_2,TTHHadronicTag,TTHLeptonicTag,ZHLeptonicTag,WHLeptonicTag,VHLeptonicLooseTag,VHHadronicTag,VHMetTag"
-#CATS="UntaggedTag_0,UntaggedTag_1,UntaggedTag_2,UntaggedTag_3,TTHLeptonicTag_0,TTHLeptonicTag_1"
+CATS="UntaggedTag_0,UntaggedTag_1,UntaggedTag_2,UntaggedTag_3"
 #CATS="TTHLeptonicTag_0,TTHLeptonicTag_1"
-CATS="TTHLeptonicTag_0,TTHLeptonicTag_1,THQLeptonicTag"
+
 echo "Cats are $CATS"
 INTLUMI=41.5
 echo "Intlumi is $INTLUMI"
@@ -60,7 +60,8 @@ echo "Masslist is $MASSLIST"
 #./runSignalScripts.sh -i $FILE -p $PROCS -f $CATS --ext $EXT --intLumi $INTLUMI --batch $BATCH --massList $MASSLIST --bs $BSWIDTH \
 #                        --smears $SMEARS --scales $SCALES --scalesCorr $SCALESCORR --scalesGlobal $SCALESGLOBAL --useSSF 1 --useDCB_1G 0 --calcPhoSystOnly
 ./runSignalScripts.sh -i $FILE -p $PROCS -f $CATS --ext $EXT --intLumi $INTLUMI --batch $BATCH --massList $MASSLIST --bs $BSWIDTH \
-                        --smears $SMEARS --scales $SCALES --scalesCorr $SCALESCORR --scalesGlobal $SCALESGLOBAL --useSSF 1 --useDCB_1G 0
+                        --smears $SMEARS --scales $SCALES --scalesCorr $SCALESCORR --scalesGlobal $SCALESGLOBAL --useSSF 1 --useDCB_1G 0 
+#--fTestOnly
 ############################################################## Package Output ##########################################################
 #    ls $PWD/$OUTDIR/CMS-HGG_sigfit_${EXT}_*.root > out.txt
 #    echo "ls ../Signal/$OUTDIR/CMS-HGG_sigfit_${EXT}_*.root > out.txt"

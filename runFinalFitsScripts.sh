@@ -133,6 +133,13 @@ DEFAULTQUEUE=1nh
 #DEFAULTQUEUE=hepmedium.q
 BATCHOPTION=" --batch $BATCH"
 fi
+if [[ $BATCH == "HTCONDOR" ]]; then
+DEFAULTQUEUE="hep.q"
+#DEFAULTQUEUE=hepmedium.q
+BATCHOPTION=" --batch $BATCH"
+fi
+
+
 
 echo "[INFO] INTLUMI $INTLUMI"
 
