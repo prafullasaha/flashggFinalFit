@@ -6,7 +6,7 @@ FILE125="/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/
 #FILE125="/eos/user/p/prsaha/flashggFinalFit_inputs/result_tthjet/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root"
 #FILE125="/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result/result_ggh/output_GluGluHToGG_M125_13TeV_amcatnloFXFX_pythia8_GG2H.root"
 #FILE125="/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_ggh/output_GluGluHToGG_M125_13TeV_amcatnloFXFX_pythia8_GG2H.root,/afs/cern.ch/work/p/prsaha/public/flashgg_slc7/CMSSW_9_4_9/src/flashgg/Systematics/test/result_WOsyst/result_tth/output_ttHJetToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8_TTH.root"
-EXT="Initial_thq"
+EXT="Initial_tHq"
 
 INTLUMI=41.5
 echo "Intlumi is $INTLUMI"
@@ -26,4 +26,4 @@ SCALES=""
 SMEARS=""
 #./makeParametricModelDatacardFLASHgg.py -i $FILE125 -o Datacard_13TeV_${EXT}.txt -p $PROCS -c $CATS --isMultiPdf
 
-./makeParametricModelDatacardFLASHgg_thq.py -i $FILE125 -o Datacard_13TeV_${EXT}.txt -p $PROCS -c $CATS --intLumi $INTLUMI --photonCatScales $SCALES --photonCatSmears $SMEARS --isMultiPdf --doSTXS
+./makeParametricModelDatacardFLASHgg.py -i $FILE125 -o Datacard_13TeV_${EXT}.txt -p $PROCS -c $CATS --intLumi $INTLUMI --photonCatScales $SCALES --photonCatSmears $SMEARS --isMultiPdf --doSTXS

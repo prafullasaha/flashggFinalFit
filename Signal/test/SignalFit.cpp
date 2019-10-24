@@ -103,12 +103,16 @@ float mcBeamSpotWidth_=5.14; //cm // the beamspot has a certain width in MC whic
 float dataBeamSpotWidth_=3.5; //cm
 //string referenceProc_="ggh";
 string referenceProc_="TTH";
+//string referenceProc_="GG2H";
 //string referenceProcWV_="ggh";
 string referenceProcWV_="TTH";
+//string referenceProcWV_="GG2H";
 //string referenceProcTTH_="tth";
 string referenceProcTTH_="TTH";
 string referenceTagWV_="TTHLeptonicTag_1";
 string referenceTagRV_="TTHLeptonicTag_1";
+//string referenceTagWV_="UntaggedTag_2";
+//string referenceTagRV_="UntaggedTag_2";
 vector<string> map_proc_;
 vector<string> map_cat_;
 vector<string> map_replacement_proc_RV_;
@@ -445,10 +449,13 @@ int main(int argc, char *argv[]){
   // need to make this configurable ?! -LC
   //referenceProc_="ggh";
   referenceProc_="TTH";
+//  referenceProc_="GG2H";
   //referenceProcTTH_="tth";
   referenceProcTTH_="TTH";
   referenceTagWV_="TTHLeptonicTag_1"; // histest stats WV is ggh Untagged 3. 
   referenceTagRV_="TTHLeptonicTag_1"; // fairly low resolution tag even for ggh, more approprioate as te default than re-using the original tag.
+//  referenceTagWV_="UntaggedTag_2";
+//  referenceTagRV_="UntaggedTag_2";
   // are WV which needs to borrow should be taken from here
   
   // isFlashgg should now be the only option.

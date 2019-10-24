@@ -1,7 +1,7 @@
 # NOTICE THAT TO PASS AN = SIGN IN A STRING USE \= e.g #sqrt{s}\=13TeV
 
 # ones I actually use - expected
-#method=mu:files=combineJobs13TeV_!EXT!/ExpMuScanStat/ExpMuScanStat.root,combineJobs13TeV_!EXT!/ExpMuScan/ExpMuScan.root:colors=2,4:styles=1,1:widths=2,2:names=stat only,syststat:text=!INTLUMI! fb^{-1} (13TeV):outname=expected_mu
+method=mu:files=combineJobs13TeV_!EXT!/ExpMuScanStat/ExpMuScanStat.root,combineJobs13TeV_!EXT!/ExpMuScan/ExpMuScan.root:colors=2,4:styles=1,1:widths=2,2:names=stat only,syststat:text=!INTLUMI! fb^{-1} (13TeV):outname=expected_mu
 
 # ones I actually use - observed
 #method=mu:files=combineJobs13TeV_!EXT!/MuScanProfileMH/MuScanProfileMH.root:colors=2:styles=1:widths=2:names=syststat:text=!INTLUMI! fb^{-1} (13TeV):outname=MuScanProfileMH

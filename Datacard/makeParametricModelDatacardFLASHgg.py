@@ -258,13 +258,13 @@ if options.doSTXS:
   fileDetails['ZH_had_hgg']    = [sigFile.replace('$PROC',"ZH2HQQ"),sigWS,'hggpdfsmrel_%dTeV_ZH2HQQ_$CHANNEL'%sqrts]
   fileDetails['bbH_hgg']       = [sigFile.replace('$PROC',"testBBH"),sigWS,'hggpdfsmrel_%dTeV_testBBH_$CHANNEL'%sqrts]
 #  fileDetails['tHq_hgg']       = [sigFile.replace('$PROC',"testTHQ"),sigWS,'hggpdfsmrel_%dTeV_testTHQ_$CHANNEL'%sqrts]
-  fileDetails['tHq_hgg']       = [sigFile.replace('$PROC',"thq"),sigWS,'hggpdfsmrel_%dTeV_thq_$CHANNEL'%sqrts]
+  fileDetails['tHq_hgg']       = [sigFile.replace('$PROC',"THQ"),sigWS,'hggpdfsmrel_%dTeV_THQ_$CHANNEL'%sqrts]
   fileDetails['tHW_hgg']       = [sigFile.replace('$PROC',"testTHW"),sigWS,'hggpdfsmrel_%dTeV_testTHW_$CHANNEL'%sqrts]
 else:
   fileDetails['ggH_hgg']       = [sigFile.replace('$PROC',"ggh"),sigWS,'hggpdfsmrel_%dTeV_ggh_$CHANNEL'%sqrts]
   fileDetails['qqH_hgg']       = [sigFile.replace('$PROC',"vbf"),sigWS,'hggpdfsmrel_%dTeV_vbf_$CHANNEL'%sqrts]
   fileDetails['ttH_hgg']       = [sigFile.replace('$PROC',"tth"),sigWS,'hggpdfsmrel_%dTeV_tth_$CHANNEL'%sqrts]
-  fileDetails['tHq_hgg']       = [sigFile.replace('$PROC',"thq"),sigWS,'hggpdfsmrel_%dTeV_thq_$CHANNEL'%sqrts]
+  fileDetails['tHq_hgg']       = [sigFile.replace('$PROC',"THQ"),sigWS,'hggpdfsmrel_%dTeV_THQ_$CHANNEL'%sqrts]
   if splitVH:
     fileDetails['WH_hgg']      =  [sigFile.replace('$PROC',"wh"),sigWS,'hggpdfsmrel_%dTeV_wh_$CHANNEL'%sqrts]
     fileDetails['ZH_hgg']      =  [sigFile.replace('$PROC',"zh"),sigWS,'hggpdfsmrel_%dTeV_zh_$CHANNEL'%sqrts]
