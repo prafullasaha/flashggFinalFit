@@ -23,6 +23,15 @@ globalReplacementMap["example"]["catRVMap"] = od()
 globalReplacementMap["example"]["catRVMap"]["Untagged_Tag0"] = "Untagged_Tag0"
 globalReplacementMap["example"]["catRVMap"]["VBF_Tag0"] = "VBF_Tag0"
 
+#Tprime Analysis
+globalReplacementMap['Tprime'] = od()
+globalReplacementMap['Tprime']['procWV'] = "THQ"
+globalReplacementMap['Tprime']['catWV'] = "THQLeptonicTag"
+globalReplacementMap['Tprime']['procRVMap'] = od()
+globalReplacementMap["Tprime"]["procRVMap"]["THQLeptonicTag"] = "THQ"
+globalReplacementMap["Tprime"]["catRVMap"] = od()
+globalReplacementMap["Tprime"]["catRVMap"]["THQLeptonicTag"] = "THQ"
+
 
 # STXS analysis
 globalReplacementMap['STXS'] = od()

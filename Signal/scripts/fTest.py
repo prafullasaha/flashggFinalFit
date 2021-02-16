@@ -55,6 +55,7 @@ nominalWSFileName = glob.glob("%s/output*"%(opt.inputWSDir))[0]
 f0 = ROOT.TFile(nominalWSFileName,"read")
 inputWS0 = f0.Get(inputWSName__)
 xvar = inputWS0.var(opt.xvar)
+xvar.setBinning(ROOT.RooUniformBinning(100,180,320))
 xvarFit = xvar.Clone()
 dZ = inputWS0.var("dZ")
 aset = ROOT.RooArgSet(xvar,dZ)

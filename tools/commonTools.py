@@ -18,7 +18,7 @@ def extractWSFileNames( _inputWSDir ):
   if not os.path.isdir(_inputWSDir):
     print " --> [ERROR] No such directory (%s)"
     return False
-  return glob.glob("%s/output_*.root"%_inputWSDir)
+  return glob.glob("%s/output_*Tprime700*.root"%_inputWSDir)
 
 def extractListOfProcs( _listOfWSFileNames ):
   procs = []
